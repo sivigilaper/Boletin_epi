@@ -78,7 +78,7 @@ casos_sem2<-table(mary$cod_eve,mary$semana)
 \Large \textbf{Ana Yolima Sánchez Gutiérrez } \\[0.5cm] 
 Secretaria de Salud Pública y Seguridad Social \\[1cm]
 \HRule\\[1cm]
-{\huge\bfseries Boletín Epidemiológico Pereira Semana epidemiológica 48: Alertas Tempranas }\\[0.3cm] 
+{\huge\bfseries Boletín Epidemiológico Pereira Semana epidemiológica 49: Alertas Tempranas }\\[0.3cm] 
 \HRule\\[1cm]
 \begin{minipage}{0.5\textwidth}
 		\begin{flushleft}
@@ -145,7 +145,7 @@ Secretaria de Salud Pública y Seguridad Social \\[1cm]
 	\end{minipage}
 
 \vfill
-Pereira, 10 de Diciembre 2021
+Pereira, 17 de Diciembre 2021
 
 \end{centering}
 \newpage
