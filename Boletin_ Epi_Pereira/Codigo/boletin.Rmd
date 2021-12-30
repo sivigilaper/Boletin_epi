@@ -78,7 +78,7 @@ casos_sem2<-table(mary$cod_eve,mary$semana)
 \Large \textbf{Ana Yolima Sánchez Gutiérrez } \\[0.5cm] 
 Secretaria de Salud Pública y Seguridad Social \\[1cm]
 \HRule\\[1cm]
-{\huge\bfseries Boletín Epidemiológico Pereira Semana epidemiológica 50: Alertas Tempranas }\\[0.3cm] 
+{\huge\bfseries Boletín Epidemiológico Pereira Semana epidemiológica 51: Alertas Tempranas }\\[0.3cm] 
 \HRule\\[1cm]
 \begin{minipage}{0.5\textwidth}
 		\begin{flushleft}
@@ -145,7 +145,7 @@ Secretaria de Salud Pública y Seguridad Social \\[1cm]
 	\end{minipage}
 
 \vfill
-Pereira, 22 de Diciembre 2021
+Pereira, 29 de Diciembre 2021
 
 \end{centering}
 \newpage
@@ -179,7 +179,7 @@ Hospitalización Sala| `r sum(histoira[1:ncol(casos_sem),"ira_hosp"])`| `r sum(i
 Hospitalizacion UCI |`r sum(histoira[1:ncol(casos_sem),"ira_uci"])`|`r sum(ira2018[1:ncol(casos_sem),"c_uci"])`|`r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`|
 Consulta Externa-Urgencias|`r sum(histoira[1:ncol(casos_sem),"ira_ext"])`|`r sum(ira2018[1:ncol(casos_sem),"c_ext"])`| `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`|
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para las ultimas semana estable dentro de esperado. (Figura 2).
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para las ultimas semanas un incremento sostenido. (Figura 2).
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2021", fig.height=3.3, fig.width=7.5}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,100), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
