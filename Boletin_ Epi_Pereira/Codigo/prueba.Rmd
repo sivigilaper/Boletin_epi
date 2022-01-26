@@ -1,6 +1,6 @@
 ---
 title: "**Boletin Epidemiologico Municipio de Pereira**"
-subtitle: "Alertas Tempranas Semana Epidemiologica 2 de 2022"
+subtitle: "Alertas Tempranas Semana Epidemiologica 3 de 2022"
 header-includes:
     - \usepackage{fancyhdr}   # paquetes de Latex
     - \usepackage{supertabular}
@@ -66,20 +66,32 @@ write_excel_csv(diarreas, file = "/cloud/project/Boletin_ Epi_Pereira/Datos/eda2
 ira2018 <- read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls")
 eda<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/eda.xlsx")
 eda2018<-read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/eda2018.xls")
-epi1<- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/epi1.xlsx")
-epi2<- read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi2.csv")
-#epi3<- read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv")
-# epi3_1 <- epi3 %>% 
-#   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
-#            cod_eve=="650" | cod_eve=="670" | cod_eve=="330")
-# epi1 <-add_row(epi1,epi3_1)
-# epi3_2 <- epi3 %>%
-#   filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591")
-# epi2 <-add_row(epi2,epi3_2)
+epi1<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi1.csv")
+epi2<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi2.csv")
+epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv")
+
+epi3 <- epi3 %>% 
+  mutate(cod_dpto_o= as.character(cod_dpto_o)) %>% 
+  mutate(cod_dpto_r= as.numeric(cod_dpto_r)) %>% 
+  mutate(fecha_nto_= as.numeric(fecha_nto_)) %>% 
+  mutate(tel_dil_f_= as.numeric(tel_dil_f_))
+  
+  
+
+
+epi3_1 <- epi3 %>% 
+  filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
+            cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
+  filter(as.numeric(semana)<=3)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+epi1 <-add_row(epi1,epi3_1)
+ epi3_2 <- epi3 %>%
+   filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
+   filter(as.numeric(semana)<=3)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+ epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=2)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=3)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=2)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=3)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 # /CirGarGen/
@@ -101,7 +113,7 @@ abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,3200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```     
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumentos relativos de $30 \%$  y $50\%$ en sala general y urgencias, respetivamente.
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumentos relativos de $8.3 \%$  y $70\%$ en sala general y urgencias, respetivamente.
 
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica  `r ncol(casos_sem)`**
@@ -192,8 +204,8 @@ En la semana epidemiológica `r ncol(casos_sem)` de 2022 se  notificaron  `r cas
 
 |**Evento**   | **Observado** |**Esperado**  | **Valor p**|
 ----------|:-----------------:|:-----------:|:-----------:|
-Int. suicida | `r casos_sem2["356",ncol(casos_sem2)] ` | `r round(as.numeric(histo[11,ncol(casos_sem2)+1]),digits=0) `|
-`r round(dpois(casos_sem2["356",ncol(casos_sem2)], as.numeric(histo[11,ncol(casos_sem2)+1])), digits=2) ` |
+Int. suicida | `r casos_sem["356",ncol(casos_sem2)] ` | `r round(as.numeric(histo[11,ncol(casos_sem)+1]),digits=0) `|
+`r round(dpois(casos_sem["356",ncol(casos_sem)], as.numeric(histo[11,ncol(casos_sem)+1])), digits=2) ` |
 ETA | 0 | 0 | 0|
 Hepatitis A | 0 | `r round(as.numeric(histo[8,ncol(casos_sem2)+1]),digits=0) ` | `r round(dpois(0, as.numeric(histo[8,ncol(casos_sem2)+1])),digits=2)` |
 Lepra |0 | `r round(as.numeric(histo[12,ncol(casos_sem2)+1]),digits=0) ` | `r round(dpois(0, as.numeric(histo[12,ncol(casos_sem2)+1])),digits=2)` |
@@ -212,7 +224,7 @@ Sifilis congénita | 0 | `r round(as.numeric(histo[23,ncol(casos_sem)+1]), digit
 
 
 ## Agresiones por animales potencialmente transmisores de rabia
-En la semana epidemiológica `r ncol(casos_sem2) ` de 2022 se notificaron al Sivigila  `r casos_sem2["300",ncol(casos_sem2)] ` casos de agresiones por animales potencialmente transmisores de rabia , con un acumulado hasta el momento de `r sum(casos_sem2["300",1:ncol(casos_sem2)]) `  casos.
+En la semana epidemiológica `r ncol(casos_sem) ` de 2022 se notificaron al Sivigila  `r casos_sem["300",ncol(casos_sem)] ` casos de agresiones por animales potencialmente transmisores de rabia , con un acumulado hasta el momento de `r sum(casos_sem["300",1:ncol(casos_sem)]) `  casos.
 
 
 ## Tuberculosis 
@@ -232,7 +244,7 @@ Para esta semana  se notificaron al Sivigila `r casos_sem["750", ncol(casos_sem)
 Entre los tipos de  cáncer objeto de vigilancia en salud pública se encuentra  cáncer de mama y cuello uterino. De este evento esta semana se notificaron `r casos_sem["155", ncol(casos_sem)]` casos (figura 1), con un acumulado hasta el momento de `r sum(casos_sem["155",1:ncol(casos_sem)])`. En Cáncer en menor de 18 años  no se han reportado a la fecha  casos.
 
 ## Defectos congénitos y bajo peso al nacer 
-Para esta semana epidemiológica `r ncol(casos_sem) ` de 2022 se notificaron al sistema de vigilancia  0 casos de defecto congénito, y  `r casos_sem["110", ncol(casos_sem)]`  casos de bajo peso al nacer, siendo este último catalogado como de alta incidencia.  El total de casos ingresados hasta el momento son: 0 casos para defectos congénitos y `r sum(casos_sem["110",1:ncol(casos_sem)])` casos para bajo peso al nacer.
+Para esta semana epidemiológica `r ncol(casos_sem) ` de 2022 se notificaron al sistema de vigilancia  0 casos de defecto congénito, y  `r casos_sem2["110", ncol(casos_sem2)]`  casos de bajo peso al nacer, siendo este último catalogado como de alta incidencia.  El total de casos ingresados hasta el momento son: 0 casos para defectos congénitos y `r sum(casos_sem2["110",1:ncol(casos_sem2)])` casos para bajo peso al nacer.
 
 ## Inmunoprevenibles
 Frente al evento varicela, para esta semana epidemiológica se notificaron `r casos_sem["831", ncol(casos_sem)]` casos, con un acumulado de hasta el momento de `r sum(casos_sem["831",1:ncol(casos_sem)])`.

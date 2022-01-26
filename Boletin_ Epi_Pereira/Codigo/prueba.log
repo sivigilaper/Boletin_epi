@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.12)  19 JAN 2022 17:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.26)  26 JAN 2022 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -603,21 +603,21 @@ Package pdftex.def Info: municipio2020.png  used on input line 169.
  <./municipio2020.PNG> <./prueba_files/figure-latex/unnamed-chunk-1-1.pdf> <./p
 rueba_files/figure-latex/unnamed-chunk-2-1.pdf> <./prueba_files/figure-latex/un
 named-chunk-3-1.pdf>]
-<prueba_files/figure-latex/unnamed-chunk-4-1.pdf, id=49, 508.90125pt x 164.615p
+<prueba_files/figure-latex/unnamed-chunk-4-1.pdf, id=50, 508.90125pt x 164.615p
 t>
 File: prueba_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-4-1.pdf>
 Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-4-1.pdf  used 
 on input line 172.
 (pdftex.def)             Requested size: 335.58855pt x 108.55328pt.
-<prueba_files/figure-latex/unnamed-chunk-5-1.pdf, id=50, 508.90125pt x 164.615p
+<prueba_files/figure-latex/unnamed-chunk-5-1.pdf, id=51, 508.90125pt x 164.615p
 t>
 File: prueba_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-5-1.pdf>
 Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-5-1.pdf  used 
 on input line 187.
 (pdftex.def)             Requested size: 335.58855pt x 108.55328pt.
-<prueba_files/figure-latex/unnamed-chunk-7-1.pdf, id=51, 508.90125pt x 173.6487
+<prueba_files/figure-latex/unnamed-chunk-7-1.pdf, id=52, 508.90125pt x 173.6487
 4pt>
 File: prueba_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-7-1.pdf>
@@ -647,21 +647,22 @@ Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 328.
  ) 
 Here is how much of TeX's memory you used:
  13550 strings out of 481239
- 198062 string characters out of 5920377
- 487565 words of memory out of 5000000
+ 198058 string characters out of 5920377
+ 487566 words of memory out of 5000000
  28497 multiletter control sequences out of 15000+600000
  586990 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,15n,45p,784b,351s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
-ips/lm/lm-rm.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share
-/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm
-/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/
-fonts/type1/public/lm/lmri10.pfb>
-Output written on prueba.pdf (3 pages, 201755 bytes).
+ips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share
+/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm
+/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texm
+f/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12
+.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb>
+Output written on prueba.pdf (3 pages, 204359 bytes).
 PDF statistics:
- 175 PDF objects out of 1000 (max. 8388607)
- 143 compressed objects within 2 object streams
+ 180 PDF objects out of 1000 (max. 8388607)
+ 147 compressed objects within 2 object streams
  35 named destinations out of 1000 (max. 500000)
  12428 words of extra memory for PDF output out of 14400 (max. 10000000)
 
