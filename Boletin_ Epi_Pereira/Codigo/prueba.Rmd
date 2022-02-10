@@ -1,6 +1,6 @@
 ---
 title: "**Boletin Epidemiologico Municipio de Pereira**"
-subtitle: "Alertas Tempranas Semana Epidemiologica 4 de 2022"
+subtitle: "Alertas Tempranas Semana Epidemiologica 5 de 2022"
 header-includes:
     - \usepackage{fancyhdr}   # paquetes de Latex
     - \usepackage{supertabular}
@@ -76,16 +76,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=4)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=5)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
  epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=4)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=5)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
  epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=4)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=5)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=4)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=5)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 # /CirGarGen/
@@ -96,8 +96,8 @@ casos_sem2<-table(epi2$cod_eve,epi2$semana)
 
 ## Infección respiratoria aguda
 
-A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron  un total de `r sum(ira2018[1:ncol(casos_sem),"casos"])`  consultas por IRA  procedentes de los servicios de hospitalización en sala general, UCI, consulta externa y urgencias.
-El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica justo sobre el limite superior de lo esperado para esta semana.
+A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron  un total de `r format(sum(ira2018[1:ncol(casos_sem),"casos"]), scientific=F)`  consultas por IRA  procedentes de los servicios de hospitalización en sala general, UCI, consulta externa y urgencias.
+El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica justo por debajo del umbral estacional.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2022", fig.height=3.3, fig.width=7.5, fig.pos='h'}
 plot(ira$semana, ira$exito, type='l', ylim=c(1,4200), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "Canal endémico IRA - Pereira 2022")
@@ -107,19 +107,19 @@ abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,3200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```     
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumentos relativos de $12.4 \%$  y $67\%$ en sala general y urgencias, respetivamente.
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hpsitalización en sala general  de $13.1 \%$  y  disminucion en hospitalización en UCI $-78.3\%$ en sala general y urgencias, respetivamente.
 
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica  `r ncol(casos_sem)`**
 
 |**Servicio**   | **a Sem `r ncol(casos_sem)`/2021** |**a Sem `r ncol(casos_sem)`/2022**  | **Variacion (%)**|
 ----------|:-----------------:|:-----------:|:---------------------------:|
-Hospitalización Sala| `r sum(histoira[1:ncol(casos_sem),"ira_hosp"])`| `r sum(ira2018[1:ncol(casos_sem),"c_hosp"])`| `r round((sum(ira2018[1:ncol(casos_sem),"c_hosp"])- sum(histoira[1:ncol(casos_sem),"ira_hosp"]))/sum(histoira[1:ncol(casos_sem),"ira_hosp"])*100,digits=1)` |
+Hospitalización Sala| `r sum(histoira[1:ncol(casos_sem),"ira_hosp"])`| `r format(sum(ira2018[1:ncol(casos_sem),"c_hosp"]), scientific=F)`| `r round((sum(ira2018[1:ncol(casos_sem),"c_hosp"])- sum(histoira[1:ncol(casos_sem),"ira_hosp"]))/sum(histoira[1:ncol(casos_sem),"ira_hosp"])*100,digits=1)` |
 Hospitalizacion UCI |`r sum(histoira[1:ncol(casos_sem),"ira_uci"])`|`r sum(ira2018[1:ncol(casos_sem),"c_uci"])`|`r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`|
-Consulta Externa-Urgencias|`r sum(histoira[1:ncol(casos_sem),"ira_ext"])`|`r sum(ira2018[1:ncol(casos_sem),"c_ext"])`| `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`|
+Consulta Externa-Urgencias|`r sum(histoira[1:ncol(casos_sem),"ira_ext"])`|`r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`| `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`|
 
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para las ultimas semanas un incremento sostenido. (Figura 2).
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para las ultimas semanas una disminución sostenida. (Figura 2).
 
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2022", fig.height=3.3, fig.width=7.5}
@@ -140,7 +140,7 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,60, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.7)
 ```     
 
-En consulta externa y urgencias la notificación de infección respiratoria aguda muestra incremento para esta semana epidemiologica, sobre el umbral estacional.
+En consulta externa y urgencias la notificación de infección respiratoria aguda esta por debajo del umbral estacional  para esta semana epidemiologica.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico consulta externa y urgencias por IRA, Pereira 2022", fig.height=3.3, fig.width=7.5}
 plot(ira$semana, ira$icinfext, type='l', ylim=c(1,3700), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -192,11 +192,11 @@ legend(25,1400, c("IC inf 95%","Media", "IC sup 95%", "2022"), col=c("green","ye
 # Eventos de interes en salud pública
 
 ## Mortalidad materno-perinatal
-En la semana epidemiológica `r ncol(casos_sem)` de 2022 se  notificaron  0   muertes perinatales;  casos acumulados hasta el momento.
+En la semana epidemiológica `r ncol(casos_sem)` de 2022 se  notificaron  `r casos_sem["560",ncol(casos_sem)] `   muertes perinatales; `r sum(casos_sem["560",1:ncol(casos_sem)])`  casos acumulados hasta el momento.
 
 ```{r, echo=FALSE}
-#`r casos_sem["560",ncol(casos_sem)]`
-#`r sum(casos_sem["560",1:ncol(casos_sem)])` 
+#
+#
 ```
 
 **Tabla 3. Comparación historica de eventos de baja incidencia , semana epidemiológica  `r ncol(casos_sem)`**
@@ -227,29 +227,28 @@ En la semana epidemiológica `r ncol(casos_sem) ` de 2022 se notificaron al Sivi
 
 
 ## Tuberculosis 
-Se  notificaron al sistema de vigilancia para esta semana 0 casos de tuberculosis sensible, con un acumulado en el sivigila de  0  casos  para TB sensible.
+Se  notificaron al sistema de vigilancia para esta semana `r casos_sem2["813",ncol(casos_sem2)] ` casos de tuberculosis sensible, con un acumulado en el sivigila de  `r sum(casos_sem2["813",1:ncol(casos_sem2)]) `  casos  para TB sensible.
 
 ```{r, echo=FALSE}
-#`r casos_sem2["813",ncol(casos_sem2)] `
-#`r sum(casos_sem2["813",1:ncol(casos_sem2)]) `
-
+# 
+#
 ```
 
 ## VIH/SIDA
 Se han notificado  `r casos_sem2["850",ncol(casos_sem2)] ` casos de VIH/SIDA, con un acumulado en el sivigila de `r sum(casos_sem2["850",1:ncol(casos_sem2)]) ` casos.
 
 ## Sìfilis gestacional y congénita 
-Para esta semana  se notificaron al Sivigila `r casos_sem["750", ncol(casos_sem)] ` casos de sìfilis gestacional, y  casos  de sìfilis congénita hasta el momento se han notificado 0 casos.
+Para esta semana  se notificaron al Sivigila `r casos_sem["750", ncol(casos_sem)] ` casos de sìfilis gestacional, y  casos  de sìfilis congénita hasta el momento se han notificado `r casos_sem["740", ncol(casos_sem)] `  casos.
 
 ```{r, echo=FALSE}
-#`r casos_sem["740", ncol(casos_sem)] ` 
+#
 ```
 
 ## Cáncer  
 Entre los tipos de  cáncer objeto de vigilancia en salud pública se encuentra  cáncer de mama y cuello uterino. De este evento esta semana se notificaron `r casos_sem["155", ncol(casos_sem)]` casos (figura 1), con un acumulado hasta el momento de `r sum(casos_sem["155",1:ncol(casos_sem)])`. En Cáncer en menor de 18 años  no se han reportado a la fecha  casos.
 
 ## Defectos congénitos y bajo peso al nacer 
-Para esta semana epidemiológica `r ncol(casos_sem) ` de 2022 se notificaron al sistema de vigilancia  0 casos de defecto congénito, y  `r casos_sem2["110", ncol(casos_sem2)]`  casos de bajo peso al nacer, siendo este último catalogado como de alta incidencia.  El total de casos ingresados hasta el momento son: 0 casos para defectos congénitos y `r sum(casos_sem2["110",1:ncol(casos_sem2)])` casos para bajo peso al nacer.
+Para esta semana epidemiológica `r ncol(casos_sem) ` de 2022 se notificaron al sistema de vigilancia  `r casos_sem["215", ncol(casos_sem)]`  casos de defecto congénito, y  `r casos_sem2["110", ncol(casos_sem2)]`  casos de bajo peso al nacer, siendo este último catalogado como de alta incidencia.  El total de casos ingresados hasta el momento son: `r sum(casos_sem["215",1:ncol(casos_sem)])` casos para defectos congénitos y `r sum(casos_sem2["110",1:ncol(casos_sem2)])` casos para bajo peso al nacer.
 
 ## Inmunoprevenibles
 Frente al evento varicela, para esta semana epidemiológica se notificaron `r casos_sem["831", ncol(casos_sem)]` casos, con un acumulado de hasta el momento de `r sum(casos_sem["831",1:ncol(casos_sem)])`.
