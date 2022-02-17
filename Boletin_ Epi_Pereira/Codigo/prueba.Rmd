@@ -1,6 +1,6 @@
 ---
 title: "**Boletin Epidemiologico Municipio de Pereira**"
-subtitle: "Alertas Tempranas Semana Epidemiologica 5 de 2022"
+subtitle: "Alertas Tempranas Semana Epidemiologica 6 de 2022"
 header-includes:
     - \usepackage{fancyhdr}   # paquetes de Latex
     - \usepackage{supertabular}
@@ -34,8 +34,8 @@ histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
 dengue2018 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/dengue2018.xlsx")
 histoira<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo_ira.xlsx")
 ira<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/ira.xlsx")
-evento_995<- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/evento 995.xls")
-evento_998 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/evento 998.xls")
+evento_995<- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/995 XLS.xlsx")
+evento_998 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/998 XLS.xlsx")
 ###################################################
 evento_995<-evento_995 %>%
   filter(ajuste!="6") %>%
@@ -76,16 +76,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=5)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=6)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
  epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=5)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=6)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
  epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=5)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=6)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=5)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=6)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 # /CirGarGen/
@@ -245,7 +245,7 @@ Para esta semana  se notificaron al Sivigila `r casos_sem["750", ncol(casos_sem)
 ```
 
 ## Cáncer  
-Entre los tipos de  cáncer objeto de vigilancia en salud pública se encuentra  cáncer de mama y cuello uterino. De este evento esta semana se notificaron `r casos_sem["155", ncol(casos_sem)]` casos (figura 1), con un acumulado hasta el momento de `r sum(casos_sem["155",1:ncol(casos_sem)])`. En Cáncer en menor de 18 años  no se han reportado a la fecha  casos.
+Entre los tipos de  cáncer objeto de vigilancia en salud pública se encuentra  cáncer de mama y cuello uterino. De este evento esta semana se notificaron `r casos_sem["155", ncol(casos_sem)]` casos (figura 1), con un acumulado hasta el momento de `r sum(casos_sem["155",1:ncol(casos_sem)])`. En Cáncer en menor de 18 años  se han reportado a la fecha `r sum(casos_sem["115",1:ncol(casos_sem)])` casos.
 
 ## Defectos congénitos y bajo peso al nacer 
 Para esta semana epidemiológica `r ncol(casos_sem) ` de 2022 se notificaron al sistema de vigilancia  `r casos_sem["215", ncol(casos_sem)]`  casos de defecto congénito, y  `r casos_sem2["110", ncol(casos_sem2)]`  casos de bajo peso al nacer, siendo este último catalogado como de alta incidencia.  El total de casos ingresados hasta el momento son: `r sum(casos_sem["215",1:ncol(casos_sem)])` casos para defectos congénitos y `r sum(casos_sem2["110",1:ncol(casos_sem2)])` casos para bajo peso al nacer.
