@@ -1,6 +1,6 @@
 ---
 title: "**Boletin Epidemiologico Municipio de Pereira**"
-subtitle: "Alertas Tempranas Semana Epidemiologica 6 de 2022"
+subtitle: "Alertas Tempranas Semana Epidemiologica 7 de 2022"
 header-includes:
     - \usepackage{fancyhdr}   # paquetes de Latex
     - \usepackage{supertabular}
@@ -34,8 +34,8 @@ histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
 dengue2018 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/dengue2018.xlsx")
 histoira<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo_ira.xlsx")
 ira<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/ira.xlsx")
-evento_995<- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/995 XLS.xlsx")
-evento_998 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/998 XLS.xlsx")
+evento_995<- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/evento 995.xlsx")
+evento_998 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/evento 998.xlsx")
 ###################################################
 evento_995<-evento_995 %>%
   filter(ajuste!="6") %>%
@@ -76,18 +76,21 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=6)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=7)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
  epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=6)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=7)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
  epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=6)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=7)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=6)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=7)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
+
+casos2022 <- add_row(epi1, epi2)
+saveRDS(casos2022,"/cloud/project/Boletin_ Epi_Pereira/Datos/casos2022.rds")
 # /CirGarGen/
 # /cont_jmestrada/
 ```
@@ -107,7 +110,7 @@ abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,3200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```     
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hpsitalización en sala general  de $13.1 \%$  y  disminucion en hospitalización en UCI $-78.3\%$ en sala general y urgencias, respetivamente.
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hpsitalización en sala general  de $13.5 \%$  y  disminucion en hospitalización en UCI $-74.5\%$ en sala general y urgencias, respetivamente.
 
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica  `r ncol(casos_sem)`**
