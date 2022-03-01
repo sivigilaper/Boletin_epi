@@ -1,10 +1,8 @@
 ---
 title: "COVE"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
-    
+subtitle: "Secretaria de Salud Pública y Seguridad Social de Pereira"
+author: "Jorge M. Estrada Alvarez"
+output: powerpoint_presentation
 ---
 
 ```{r setup, include=FALSE}
@@ -28,46 +26,34 @@ ira2018<-read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls")
 eda<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/eda.xlsx")
 eda2018<-read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/eda2018.xls")
 histoira<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo_ira.xlsx")
-```
-
-```{r}
 actual <- table(casos2022$cod_eve,casos2022$semana)
 anterior_resi <- table(resi_anterior$cod_eve, resi_anterior$semana)
 anterior_proce <- table(proce_anterior$cod_eve, proce_anterior$semana)
 ```
 
----
 
-# General 
-Column 
------------------------------------------------------------------
+## **Comportamientos eventos notificados Pereira**
 
-### **Comportamientos eventos notificados Pereira**
-
-```{r}
-casos2022 %>% tabyl(nom_eve) %>% adorn_pct_formatting() %>% arrange(desc(n)) %>% filter() %>%  flextable::flextable()
+```{r, echo=FALSE}
+casos2022 %>% tabyl(nom_eve) %>% adorn_pct_formatting() %>% arrange(desc(n)) %>% filter(n>20) %>%  flextable::flextable()
 ```
 
+## Evento de interes en salud pública 
+:::::: {.columns}
+:::{.column}
 
-
-# EISP 1
-
-Column 
------------------------------------------------------------------
-
-### **Evento 1**
-
-```{r}
+```{r, echo=FALSE}
 plot(actual["300",], type = "l", lwd=3 ,col="red", xlim = c(1,53), ylim = c(0,70), xlab = "Semana", ylab = "Casos", main = "Agresiones probablemente rabicas", cex=0.7)
 lines(anterior_proce["300",], type = "l", lwd=5)
 legend(5,65, c("2021","2022"),col=c("black","red"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
 text(15, 70, "Variación relativa", cex = 1.2)
 text(15,64, round((sum(actual["300",1:ncol(actual)])-sum(anterior_proce["300",1:ncol(actual)]))/ sum(anterior_proce["300",1:ncol(actual)])*100, digits=1), col = "red")
 ```
+:::
 
-### **Evento 2**
+:::{.column}
 
-```{r, fig.width=7}
+```{r, echo=FALSE}
 plot(actual["356",], type = "l", lwd=3 ,col="red", xlim = c(1,52), ylim = c(0,70), xlab = "Semana", ylab = "Casos", main = "Intento suicida")
 lines(anterior_resi["356",], type = "l", lwd=6)
 legend(5,65, c("2021","2022"),col=c("black","red"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
@@ -75,21 +61,26 @@ text(15, 70, "Variación relativa")
 text(15,64, round((sum(actual["356",1:ncol(actual)])-sum(anterior_resi["356",1:ncol(actual)]))/ sum(anterior_resi["356",1:ncol(actual)])*100, digits=1), col = "red")
 ```
 
-Column
----------------------------------------------------------------
-### **Evento 3**
+:::
+::::::
 
-```{r}
+
+## Evento de interes en salud pública 2
+:::::: {.columns}
+:::{.column}
+
+```{r, echo=FALSE}
 plot(actual["850",], type = "l", lwd=3 ,col="red", xlim = c(1,52), ylim = c(0,50), xlab = "Semana", ylab = "Casos", main="VIH/SIDA")
 lines(anterior_resi["850",], type = "l", lwd=6)
 legend(5,35, c("2021","2022"),col=c("black","red"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
 text(15, 45, "Variación relativa", cex = 1.2)
 text(15,40, round((sum(actual["850",1:ncol(actual)])-sum(anterior_resi["850",1:ncol(actual)]))/ sum(anterior_resi["850",1:ncol(actual)])*100, digits=1), col = "red", cex = 1.2)
 ```
+:::
 
-### **Evento 4**
+:::{.column}
 
-```{r}
+```{r, echo=FALSE}
 plot(actual["813",], type = "l", lwd=3 ,col="red", xlim = c(1,52), ylim = c(0,50), xlab = "Semana", ylab = "Casos", main = "Tuberculosis")
 lines(anterior_resi["813",], type = "l", lwd=6)
 legend(5,35, c("2021","2022"),col=c("black","red"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
@@ -97,13 +88,14 @@ text(15, 45, "Variación relativa")
 text(15,40, round((sum(actual["813",1:ncol(actual)])-sum(anterior_resi["813",1:ncol(actual)]))/ sum(anterior_resi["813",1:ncol(actual)])*100, digits=1), col = "red")
 ```
 
-# EISP 2
+:::
+::::::
 
-Column 
------------------------------------------------------------------
-### **Evento 5**
+## Evento de interes en salud pública 3
+:::::: {.columns}
+:::{.column}
 
-```{r, fig.width=7}
+```{r, echo=FALSE}
 plot(actual["155",], type = "l", lwd=3 ,col="red", xlim = c(1,52), ylim = c(0,70), xlab = "Semana", ylab = "Casos", main = "Cancer de mama y cuello uterino")
 lines(anterior_resi["155",], type = "l", lwd=5)
 legend(5,65, c("2020","2021"),col=c("black","red"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
@@ -111,10 +103,11 @@ text(15, 70, "Variación relativa")
 text(15,64, round((sum(actual["155",1:ncol(actual)])-sum(anterior_resi["155",1:ncol(actual)]))/sum(anterior_resi["155",1:ncol(actual)])*100, digits=1), col = "red")
 
 ```
+:::
 
-### **Evento 6**
+:::{.column}
 
-```{r}
+```{r, echo=FALSE}
 plot(actual["831",], type = "l", lwd=3 ,col="red", xlim = c(1,52), ylim = c(0,70), xlab = "Semana", ylab = "Casos", main = "Varicela")
 lines(anterior_resi["831",], type = "l", lwd=6)
 legend(5,65, c("2020","2021"),col=c("black","red"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
@@ -122,48 +115,35 @@ text(15, 70, "Variación relativa")
 text(15,64, round((sum(actual["831",1:ncol(actual)])-sum(anterior_resi["831",1:ncol(actual)]))/ sum(anterior_resi["831",1:ncol(actual)])*100, digits=1), col = "red")
 ```
 
-Column
----------------------------------------------------------------
-### **Evento 7**
+:::
+::::::
 
-```{r}
-plot(actual["110",], type = "l", lwd=3 ,col="red", xlim = c(1,52), ylim = c(0,50), xlab = "Semana", ylab = "Casos", main = "Bajo peso al nacer a termino")
-lines(anterior_resi["110",], type = "l", lwd=6)
-legend(5,35, c("2020","2021"),col=c("black","red"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
-text(15, 45, "Variación relativa")
-text(15,40, round((sum(actual["110",1:ncol(actual)])-sum(anterior_resi["110",1:ncol(actual)]))/ sum(anterior_resi["110",1:ncol(actual)])*100, digits=1), col = "red")
-```
+## Canal endemico general IRA
 
-# Eventos Trazadores 1
-
-Column 
------------------------------------------------------------------
-### **Canal endémico general IRA**
-
-```{r, fig.width=8}
+```{r, echo=FALSE}
 plot(ira$semana, ira$exito, type='l', ylim=c(1,2700), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "Canal endémico IRA - Pereira 2021")
 lines(ira$alerta, col="red",lwd=3, cex=0.7)
 lines(ira2018$casos, col="black", lwd=3, cex=0.7, type = "p")
 abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,2750, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2021"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
-
 ```
 
-### **Canal endémico Hospitalizaciones sala general por IRA**
+## Canal endemico IRA (Hospitalización SALA - UCI)
+:::::: {.columns}
+:::{.column}
 
-```{r, fig.width=8}
+```{r, echo=FALSE}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,100), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(ira$icsuphosp, col="red",lwd=3, cex=0.7)
 abline(44,0,44, col="yellow", lwd=3)
 lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,2750, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2021"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
 ```
+:::
 
-Column
----------------------------------------------------------------
-### **Canal endémico Hoospitalizaciones por IRA en UCI**
+:::{.column}
 
-```{r, fig.width=8}
+```{r, echo=FALSE}
 plot(ira$semana, ira$icinfuci, type='l', ylim=c(1,35), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(ira$icsupuci, col="red",lwd=3, cex=0.7)
 abline(4,0,4, col="yellow", lwd=3)
@@ -171,9 +151,12 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(35,20, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2021"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
 ```
 
-### **Canal endémico IRA en Consulta externa - Urgencias**
+:::
+::::::
 
-```{r, fig.width=8}
+## **Canal endémico IRA en Consulta externa - Urgencias**
+
+```{r, echo=FALSE}
 plot(ira$semana, ira$icinfext, type='l', ylim=c(1,2700), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(ira$icsupext, col="red",lwd=3, cex=0.7)
 abline(1504,0,1504, col="yellow", lwd=3)
@@ -181,14 +164,10 @@ lines(ira2018$c_ext, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,2800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2021"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=1)
 ```
 
-# Eventos Trazadores 2
 
-Column
------------------------------------------------------------------
+## **Canal endémico EDA**
 
-### **Canal endémico EDA**
-
-```{r, fig.width=8}
+```{r, echo=FALSE}
 plot(eda$semana, eda$exito, type='l', ylim=c(0,1500), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", main = "")
 lines(eda$alerta, col="red",lwd=2)
 abline(683,0,683, col="yellow", lwd=3)
@@ -197,11 +176,9 @@ legend(25,1400, c("IC inf 95%","Media", "IC sup 95%", "2021"), col=c("green","ye
 ```
 
 
-Column
---------------------------------------------------------------
-### **Canal endémico Dengue**
+## **Canal endémico Dengue**
 
-```{r, fig.width=8}
+```{r, echo=FALSE}
 plot(canalend$semana, canalend$exito, type='l', ylim=c(0,50), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(canalend$alerta, col="red",lwd=2, cex=0.7)
 lines(canalend$media, col="yellow",lwd=2, cex=0.7)
