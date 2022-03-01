@@ -1,6 +1,6 @@
 ---
 title: "**Boletin Epidemiologico Municipio de Pereira**"
-subtitle: "Alertas Tempranas Semana Epidemiologica 7 de 2022"
+subtitle: "Alertas Tempranas Semana Epidemiologica 8 de 2022"
 header-includes:
     - \usepackage{fancyhdr}   # paquetes de Latex
     - \usepackage{supertabular}
@@ -27,8 +27,8 @@ fontsize: 9pt # tamaño de la fuente
 knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(ggplot2)
-library("RColorBrewer")
-library("tidyverse")
+library(RColorBrewer)
+library(tidyverse)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
 dengue2018 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/dengue2018.xlsx")
@@ -76,16 +76,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=7)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=8)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
  epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=7)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=8)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
  epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=7)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=8)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=7)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=8)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 
@@ -100,7 +100,7 @@ saveRDS(casos2022,"/cloud/project/Boletin_ Epi_Pereira/Datos/casos2022.rds")
 ## Infección respiratoria aguda
 
 A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron  un total de `r format(sum(ira2018[1:ncol(casos_sem),"casos"]), scientific=F)`  consultas por IRA  procedentes de los servicios de hospitalización en sala general, UCI, consulta externa y urgencias.
-El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica justo por debajo del umbral estacional.
+El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica  por encima del limite superior.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2022", fig.height=3.3, fig.width=7.5, fig.pos='h'}
 plot(ira$semana, ira$exito, type='l', ylim=c(1,4200), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "Canal endémico IRA - Pereira 2022")
@@ -110,7 +110,7 @@ abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,3200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```     
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hpsitalización en sala general  de $13.5 \%$  y  disminucion en hospitalización en UCI $-74.5\%$ en sala general y urgencias, respetivamente.
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general  de $14.2 \%$  y  disminucion en hospitalización en UCI $-75\%$.
 
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica  `r ncol(casos_sem)`**
@@ -143,7 +143,7 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,60, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.7)
 ```     
 
-En consulta externa y urgencias la notificación de infección respiratoria aguda esta por debajo del umbral estacional  para esta semana epidemiologica.
+En consulta externa y urgencias la notificación de infección respiratoria aguda ha estado en forma variable no completando dos semanas seguidas por encima de limite superior. Se registra un aumento relativo de $108.9\%$ en relación al año inmediatamente anterior.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico consulta externa y urgencias por IRA, Pereira 2022", fig.height=3.3, fig.width=7.5}
 plot(ira$semana, ira$icinfext, type='l', ylim=c(1,3700), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -269,6 +269,26 @@ Frente al evento varicela, para esta semana epidemiológica se notificaron `r ca
 # La circulación para virus respiratorios detectados por muestras en pacientes que asisten a diferentes instituciones de salud del municipio. Predominada por Rhinovirus y Enterovirus . Un segundo lugar en frecuencias de aislamientos se encuentra el virus sincitial respiratorio. 
 ```
 
+## Virus nuevo (COVID-19)
+
+```{r,echo=FALSE, warning=FALSE}
+covid <- epi1 %>% group_by(ajuste_) %>% count()
+```
+
+Para este evento desde el año 2020 que inicio la pandemia se han registrado 69788 casos confirmados para el municipio de Pereira, significando esto alrededor de mas de 1500 muertes por esta causa relacionadas. Durante este año 2022, se han notificado a semana epidemiologica  `r ncol(casos_sem) `   al sistema de vigilancia SIVIGILA un total de `r sum(casos_sem["346",1:ncol(casos_sem)]) ` casos entre probables y confirmados. con una proporcion de confirmación de   `r round(covid[covid$ajuste_=="3","n"]/sum(covid[,"n"])*100, digits=2) `%, permaneciendo como probables  `r round(covid[covid$ajuste_=="0","n"]/sum(covid[,"n"])*100, digits=2) `%.
+
+```{r, echo=FALSE, warning=FALSE, fig.height=3 , fig.width=7, fig.cap="Notificacion semanal COVID-19, Pereira 2022"}
+ggplot(epi1 %>% filter(cod_eve=="346" & ajuste_!="7"))+
+  geom_bar(aes(x=semana, fill=ajuste_), position = "dodge")+ theme_bw()+
+  xlab("Semana/epidemiologica")+
+  ylab("Casos notificados")+
+  coord_cartesian(xlim = c(1,26))+
+  labs(fill = "Tipo de caso")+
+  scale_fill_hue(labels = c("Probable", "Confirmado Lab", "Nexo Epidemiologico"))
+
+```
+
+Como se observa en la grafica la notificacion presneta dismunución en numero de casos segun avanza el año epidemiologico en seguimiento, algunas razones para esto es la disminución de la transmisión producto de una superación de un cuarto pico epidemico por el que el pais acaba de pasar. Otra de las razones posibles en la disminucion es el cambio lineamientos en el uso de pruebas diagnosticas para infección por SARS-Cov-2, implicando lo anterior un cambio el deteccion de la enfermedad para la vigilancia. 
 \newpage
 *Jorge Mario Estrada alvarez MSc. Epi*
 
