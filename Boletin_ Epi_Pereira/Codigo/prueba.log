@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.3.24)  6 APR 2022 21:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.4.12)  13 APR 2022 19:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -407,7 +407,7 @@ File: babel.def 2020/02/14 3.40 Babel common definitions
 Package babel Info: Importing data for spanish
 (babel)             from babel-es.ini. Reported on input line 80.
 Package babel Info: \l@spanish = using hyphenrules for spanish
-(babel)             (\language28) on input line 80.
+(babel)             (\language77) on input line 80.
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
@@ -674,7 +674,7 @@ Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 340.
 Here is how much of TeX's memory you used:
  14251 strings out of 481239
  209517 string characters out of 5920377
- 512214 words of memory out of 5000000
+ 512209 words of memory out of 5000000
  29164 multiletter control sequences out of 15000+600000
  586821 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -687,7 +687,7 @@ f/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmm
 i10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fon
 ts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb
 >
-Output written on prueba.pdf (6 pages, 221765 bytes).
+Output written on prueba.pdf (6 pages, 221914 bytes).
 PDF statistics:
  232 PDF objects out of 1000 (max. 8388607)
  192 compressed objects within 2 object streams
