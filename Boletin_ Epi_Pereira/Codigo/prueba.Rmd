@@ -1,6 +1,6 @@
 ---
 title: "**Boletin Epidemiologico Municipio de Pereira**"
-subtitle: "Alertas Tempranas Semana Epidemiologica 14 de 2022"
+subtitle: "Alertas Tempranas Semana Epidemiologica 15 de 2022"
 lang: es
 header-includes:
 - \usepackage{graphicx}
@@ -79,16 +79,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=14)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=15)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=14)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=15)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=14)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=15)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=14)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=15)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 
@@ -102,7 +102,7 @@ saveRDS(casos2022,"/cloud/project/Boletin_ Epi_Pereira/Datos/casos2022.rds")
 
 ## Infección respiratoria aguda {style="color:black"}
 
-A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total de `r format(sum(ira2018[1:ncol(casos_sem),"casos"]), scientific=F)` consultas por IRA procedentes de los servicios de hospitalización en sala general, UCI, consulta externa y urgencias. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por debajo del limite inferior.
+A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total de `r format(sum(ira2018[1:ncol(casos_sem),"casos"]), scientific=F)` consultas por IRA procedentes de los servicios de hospitalización en sala general, UCI, consulta externa y urgencias. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por debajo del limite inferior, pero con un leve incremento con relacion a la semana inmediatamente anterior.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2022", fig.height=3, fig.width=7, fig.pos='h'}
 plot(ira$semana, ira$exito, type='l', ylim=c(1,4200), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -112,7 +112,7 @@ abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,3200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $22.9 \%$ y disminucion en hospitalización en UCI $-69.7\%$.
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $14.3.9 \%$ y consulta externa ($54.6 \%$) y disminucion en hospitalización en UCI $-72.3\%$.
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica `r ncol(casos_sem)`**
 
@@ -122,7 +122,7 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana una disminución en la notificación. (Figura 2).
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana de aumento en la notificación. (Figura 2).
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2022", fig.height=3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,100), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -132,7 +132,7 @@ lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,2750, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), se ubica por debajo del umbral estacional.
+De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), se ubica por debajo del umbral estacional pero con incrementos para la ultima semana epidemiologica informada.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en UCI , Pereira 2022", fig.height=3, fig.width=7}
 plot(ira$semana, ira$icinfuci, type='l', ylim=c(1,60), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
