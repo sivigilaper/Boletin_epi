@@ -15,7 +15,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 21 - 2022} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 22 - 2022} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -87,16 +87,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=21)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=22)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=21)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=22)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=21)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=22)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=21)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=22)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 
@@ -125,7 +125,7 @@ abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,3200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $24.4\%$ y consulta externa ($27.8 \%$) y disminucion en hospitalización en UCI $-77.3\%$.
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $26.9\%$ y consulta externa ($26 \%$) y disminucion en hospitalización en UCI $-78.8\%$.
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica `r ncol(casos_sem)`**
 
@@ -180,7 +180,7 @@ evento_995  %>%
       porcentaje = "% de Hosp. UCI") %>% 
   flextable::bg(j = 4, i = ~ porcentaje>= 15, part = "body", bg = "orange") 
 ```
-La hospitaizacion en UCI por IRA, tiene una aparición mas comun entre menores de 1 año, donde el 20%  de las hospitalizaciones en UCI para esta semana se dio en los menores de 1 año.
+La hospitaizacion en UCI por IRA, tiene una aparición mas comun entre menores de 1 año, donde el 25%  de las hospitalizaciones en UCI para esta semana se dio en los menores de 1 año.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en UCI , Pereira 2022", fig.height=3, fig.width=7}
 plot(ira$semana, ira$icinfuci, type='l', ylim=c(1,25), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -189,7 +189,7 @@ abline(4,0,4, col="yellow", lwd=3)
 lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,25, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitaliación de causa infección respiratoria se da en los menores e iguales de 4 años ocupando mas del 25% de las hospitalizaciones reportadas para esta semana epidemiologica.
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitaliación de causa infección respiratoria se da en los menores e iguales de 4 años ocupando el 25% de las hospitalizaciones reportadas para esta semana epidemiologica.
 
 \newpage
 ```{r,echo=FALSE, warning=FALSE}
@@ -237,7 +237,7 @@ legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c
 ```
 En cuanto a la edad, en la consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 15% en los menores de 4 años, situación comun para este grupo edad. el grupo de 2 a 4 años concentra el 19% de las consultas por IRA del total de consultas para ese grupo de edad. Comportamiento similar ocurre en los menores de 1 año y del año.
 
-Se registran incrementos importantes en las hospitalizaciones por IRA, especialmente en sala de cuidados intensivos con una concentracion en menores de 5 años. Se alerta sobre una temporada de pico de enfermedad respitoria para el municipio, con una mayor gravedad indicada por el incremento en la hospitalización  en sala general.
+Se registran incrementos importantes en las hospitalizaciones por IRA, con una concentración en menores de 5 años. Se alerta sobre una temporada de pico de enfermedad respitoria para el municipio, con una mayor gravedad indicada por el incremento en la hospitalización  en sala general.
 
 ```{r, echo=FALSE, warning=FALSE}
 con_tot <- evento_995  %>% 
@@ -309,7 +309,7 @@ filmarray %>%
   adorn_percentages() %>% 
   pivot_longer(cols = c("Negativo","Positivo"), names_to = "resultado") %>% 
   ggplot(aes(x = semana, y = value, fill = resultado))+ geom_col(color="black")+
-  scale_x_continuous(limits = c(0,26), breaks = seq(1,26,1))+
+  scale_x_continuous(limits = c(0,35), breaks = seq(1,35,1))+
   labs(x = "Semana epidemiologica",
        y = "Proporción")+ theme_minimal()
 ```
@@ -320,9 +320,9 @@ La circulación viral es multiple para virus comunmente conocidos como etiologia
 
 \\
 
-Su comportamiento temporal (semana epidemiologica), predominan el Rhinovirus y Enterovirus, con algunas semanas de aparición de Virus Sincitial Respiratorio (VSR), como principal etiologia de la infección respiratoria aguda en los menores de 2 años. Para el nivel nacional se reportan cirulación en igual proporcion para estos microorganismos, adicionandole VSR, el cual para el municipio se registra de baja circulación.
+Su comportamiento temporal (semana epidemiologica), predominan el Rhinovirus y Virus Sincitial Respiratorio (VSR). Se dientifica una aumento en las ultimas semanas en aislamientos respiratorios por paneles virales para VSR y adicinoalmente los que ya venia relacionados la Rhinovirus.
 
-Se debe intrepretar con cautaela los resultados mostrados en cuanto a circulación viral del municipio, pues es obtenida de muestras en pacientes consultantes a servicios de urgencias y no como parte de la vigilancia centinela de virus respiratorios del Instituto Nacional de Salud (bajo muestreo sistematico), ya que en el departamento (municipio de Pereira) no hay UPGD centinelas para esta estrategia.
+Se debe intrepretar con cautaela los resultados mostrados en cuanto a circulación viral del municipio, pues es obtenida de muestras en pacientes consultantes a servicios de urgencias y no como parte de la vigilancia centinela de virus respiratorios del Instituto Nacional de Salud (bajo muestreo sistematico en servicios ambulatoirios), ya que en el departamento (municipio de Pereira) no hay UPGD centinelas para esta estrategia.
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=2.2 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2022, Periodo III"}
 aislamiento %>% 
@@ -342,7 +342,7 @@ aislamiento %>%
   ggplot(aes(x = semana, y = Aislamientos,
              fill = factor(viral, levels = c("Otras","Adenovirus","Enterovirus","Rhinovirus", "VSR","Influenza A","metaneumovirus","SARS-CoV-2"))))+
            geom_col()+
-           scale_x_continuous(limits = c(0,26), breaks = seq(1,26,1))+
+           scale_x_continuous(limits = c(0,35), breaks = seq(1,35,1))+
            labs(x = "Semana epidemiologica", y = "n Aislamientos")+ theme_minimal()+
     theme(legend.title = element_blank())
 ```
