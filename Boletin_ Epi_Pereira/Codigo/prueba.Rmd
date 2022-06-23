@@ -15,7 +15,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 23 - 2022} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 24 - 2022} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -87,16 +87,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=23)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=24)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=23)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=24)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=23)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=24)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=23)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=24)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 
@@ -115,7 +115,7 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por encima del umbral estacional, con un comportamiento de incremento para las ultimas tres semanas epidemiologicas.
+A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por encima del limite superior esperado, con un comportamiento de incremento para las ultimas tres semanas epidemiologicas.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2022", fig.height=3, fig.width=7, fig.pos='h'}
 plot(ira$semana, ira$exito, type='l', ylim=c(1,4200), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -125,7 +125,7 @@ abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,3200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $29.3\%$ y consulta externa ($26.1 \%$) y disminucion en hospitalización en UCI $-79.1\%$.
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $25.5\%$ y consulta externa ($26.6 \%$) y disminucion en hospitalización en UCI $-79.1\%$.
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica `r ncol(casos_sem)`**
 
@@ -135,7 +135,7 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana de aumento (Figura 2) ubicandose por encima del umbral estacional justo sobre el limite superior esperado. Con una proporción acumulada de hospitalizacion por IRA de `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana de aumento (Figura 2) ubicandose justo sobre sobre el limite superior esperado. Con una proporción acumulada de hospitalizacion por IRA de `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2022", fig.height=3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,100), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -145,7 +145,7 @@ lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,2750, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), se ubica por debajo del umbral estacional con una disminución sostenida en las ultimas tres semanas epidemiologicas informadas. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
+De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), se ubica por debajo del umbral estacional. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
 
 ```{r, echo=FALSE, warning=FALSE}
 uci_tot <- evento_995  %>% 
@@ -180,7 +180,7 @@ evento_995  %>%
       porcentaje = "% de Hosp. UCI") %>% 
   flextable::bg(j = 4, i = ~ porcentaje>= 15, part = "body", bg = "orange") 
 ```
-La hospitaizacion en UCI por IRA, tiene una aparición mas comun entre menores de 1 año, donde el 25%  de las hospitalizaciones en UCI para esta semana se dio en los menores de 1 año.
+La hospitaizacion en UCI por IRA, tiene una aparición mas comun entre menores de 1 año, donde el 100% de   de las hospitalizaciones en UCI para esta semana se dio en los menores de 1 año.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en UCI , Pereira 2022", fig.height=3, fig.width=7}
 plot(ira$semana, ira$icinfuci, type='l', ylim=c(1,25), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -305,7 +305,7 @@ microorg <- aislamiento %>%
 
 ```
 
-```{r, echo=FALSE, warning=FALSE, fig.height=2 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2022, Periodo III"}
+```{r, echo=FALSE, warning=FALSE, fig.height=2 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2022"}
 filmarray %>% 
   group_by(semana) %>% 
   tabyl(semana, resultado) %>% 
