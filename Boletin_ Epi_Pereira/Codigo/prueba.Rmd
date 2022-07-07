@@ -15,7 +15,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 25 - 2022} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 26 - 2022} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -87,16 +87,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=25)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=26)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=25)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=26)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=25)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=26)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=25)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=26)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 
@@ -115,7 +115,7 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por encima del limite superior esperado, con un comportamiento de incremento para las ultimas tres semanas epidemiologicas.
+A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por debajo del limite superior esperado, a expensas de permanecer por encima del limete superior el canal endemico de hospitalizaciones por IRA en sala general.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2022", fig.height=3, fig.width=7, fig.pos='h'}
 plot(ira$semana, ira$exito, type='l', ylim=c(1,4200), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -125,7 +125,7 @@ abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,3200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $24.6\%$ y consulta externa ($24.5 \%$) y disminucion en hospitalización en UCI $-80.6\%$.
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $30.4\%$ y consulta externa ($23.6 \%$) y disminucion en hospitalización en UCI $-80.1\%$.
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica `r ncol(casos_sem)`**
 
@@ -135,7 +135,7 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana de aumento (Figura 2) ubicandose justo sobre sobre el limite superior esperado. Con una proporción acumulada de hospitalizacion por IRA de `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana de aumento (Figura 2) ubicandose por encima del limite superior esperado. Con una proporción acumulada de hospitalizacion por IRA de `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2022", fig.height=3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,100), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -145,7 +145,7 @@ lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,2750, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), se ubica por debajo del umbral estacional. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
+De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), se ubica pronunciadamente por encima del umbral estacional. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
 
 ```{r, echo=FALSE, warning=FALSE}
 uci_tot <- evento_995  %>% 
@@ -180,7 +180,9 @@ evento_995  %>%
       porcentaje = "% de Hosp. UCI") %>% 
   flextable::bg(j = 4, i = ~ porcentaje>= 15, part = "body", bg = "orange") 
 ```
-La hospitaizacion en UCI por IRA, se reporta de 0% para esta semana epidemiologica.
+
+\newpage
+La hospitaizacion en UCI por IRA, se reporta 100% para esta semana epidemiologica en menores de 1 año
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en UCI , Pereira 2022", fig.height=3, fig.width=7}
 plot(ira$semana, ira$icinfuci, type='l', ylim=c(1,25), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -189,7 +191,8 @@ abline(4,0,4, col="yellow", lwd=3)
 lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,25, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en los menores e iguales de 4 años. Ocupando el 53% especificamente en los menores de 1 año, con un incremento en relacion a lo reportado en la semana epidemiologica anterior (40%).
+
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en los menores e iguales de 4 años. Ocupando el 46.2% especificamente en los menores de 1 año, e incremento a 52% en el grupo de 2 a 4 años.
 
 ```{r,echo=FALSE, warning=FALSE}
 hosp_tot <- evento_995  %>% 
@@ -277,6 +280,7 @@ evento_995  %>%
 ```
 
 ## Circulación virus respiratorios
+
 ```{r, echo=FALSE, warning=FALSE}
 filmarray <- filmarray %>% 
   mutate(fec_muestra = guess_dates(FECHA, modern_excel = TRUE))
@@ -316,17 +320,18 @@ filmarray %>%
   labs(x = "Semana epidemiologica",
        y = "Proporción")+ theme_minimal()
 ```
+\newpage
+Como coadyuvante a la estrategia de vigilancia de la infección respiratoria aguda se recolectan resultados de pruebas realizadas para el diagnostico etiologico viral en las diferentes instituciones de salud con capacidad diagnostica, principalmente a traves de paneles respiratorios virales de tecnologia filmarray. 
+Para el periodo epidemiologico actual se han procesado `r nrow(filmarray) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**.
 
-Como coadyuvante a la estrategia de vigilancia de la infección respiratoria aguda se recolectan resultados de pruebas realizadas para el diagnostico etiologico viral en las diferentes instituciones de salud con capacidad diagnostica, principalmente a traves de paneles respiratorios virales de tecnologia filmarray. Para el periodo epidemiologico actual se han procesado `r nrow(filmarray) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**.
-
-La circulación viral es multiple para virus comunmente conocidos como etiologia viral de la infección respiratoria aguda, pricipalmente se observa en circulación en una mayor proporción  Rhinovirus con un `r microorg[microorg$value=="Rhinovirus",3]`% de los aislamientos (n= `r  microorg[microorg$value=="Rhinovirus",2]`), seguido por Enterovirus con `r microorg[microorg$value=="Enterovirus",3]`% (n= `r  microorg[microorg$value=="Enterovirus",2]`) y Adenovirus `r microorg[microorg$value=="Adenovirus",3]`% (n= `r  microorg[microorg$value=="Adenovirus",2]`) (**Figura 6**).
+La circulación viral es multiple para virus comunmente conocidos como etiologia viral de la infección respiratoria aguda, pricipalmente se observa en circulación en una mayor proporción  Rhinovirus con un `r microorg[microorg$value=="Rhinovirus",3]`% de los aislamientos (n= `r  microorg[microorg$value=="Rhinovirus",2]`), seguido por Enterovirus con `r microorg[microorg$value=="Enterovirus",3]`% (n= `r  microorg[microorg$value=="Enterovirus",2]`) y Adenovirus `r microorg[microorg$value=="Adenovirus",3]`% (n= `r  microorg[microorg$value=="Adenovirus",2]`) (**Figura 6**). Aislamientos de inlfuenza surgen en las ultimas tres semanas epidemiologicas, lo que podria tener una responsabilidad importante en el incrmento en la hospitalizacion en IRA en sala general, especialmente en menores de 4 años.
 
 
 Su comportamiento temporal (semana epidemiologica), predominan el Rhinovirus y Virus Sincitial Respiratorio (VSR). Se dientifica una aumento en las ultimas semanas en aislamientos respiratorios por paneles virales para VSR y adicionalmente los que ya venian relacionados a Rhinovirus.
 
 Se debe intrepretar con cautaela los resultados mostrados en cuanto a circulación viral del municipio, pues es obtenida de muestras en pacientes consultantes a servicios de urgencias y no como parte de la vigilancia centinela de virus respiratorios del Instituto Nacional de Salud (bajo muestreo sistematico en servicios ambulatoirios), ya que en el departamento (municipio de Pereira) no hay UPGD centinelas para esta estrategia.
 
-```{r, echo=FALSE, warning=FALSE, fig.height=2.2 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2022"}
+```{r, echo=FALSE, warning=FALSE, fig.height=3.2 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2022"}
 aislamiento %>% 
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                                          value == "Rhinovirus"~ "Rhinovirus",
@@ -338,15 +343,17 @@ aislamiento %>%
                                          value == "Influenza A" ~ "Influenza A",
                                          value == "Respiratory Syncytial Virus"~ "VSR",
                                          value == "Virus Sincitial Respiratorio"~ "VSR",
-                                         value == "SARS-CoV-2"~"SARS-CoV-2")) %>%
+                                         value == "SARS-CoV-2"~"SARS-CoV-2",
+                                         value == "Parainfluenza Virus" | value == "Parainfluenza Virus 1" | value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>%
   replace_na(list(viral = "Otras")) %>% 
   group_by(semana, viral) %>% summarise(Aislamientos = n(), .groups = "keep") %>% 
   ggplot(aes(x = semana, y = Aislamientos,
-             fill = factor(viral, levels = c("Otras","Adenovirus","Enterovirus","Rhinovirus", "VSR","Influenza A","metaneumovirus","SARS-CoV-2"))))+
+             fill = factor(viral, levels = c("Otras","Adenovirus","Enterovirus","Rhinovirus", "VSR","Influenza A","metaneumovirus","SARS-CoV-2","Parainfluenza Virus (1,2,3)"))))+
            geom_col()+
-           scale_x_continuous(limits = c(0,35), breaks = seq(1,35,1))+
+           scale_x_continuous(limits = c(0,30), breaks = seq(1,30,1))+
            labs(x = "Semana epidemiologica", y = "n Aislamientos")+ theme_minimal()+
-    theme(legend.title = element_blank())
+    theme(legend.title = element_blank(), legend.position = "bottom")+
+  scale_fill_brewer(palette= "Set1")
 ```
 
 ## Enfermedades transmitidas por vectores
