@@ -15,7 +15,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 30 - 2022} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 31 - 2022} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -89,16 +89,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=30)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=31)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=30)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=31)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=30)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=31)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=30)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=31)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 casos2022 <- add_row(epi1, epi2)
@@ -116,7 +116,7 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por encima del limite superior esperado.
+A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por debajo del umbral estacional, con una reduccin en el numero de consultas desde hace tres semanas epidemiologicas.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2022", fig.height=3, fig.width=7, fig.pos='h'}
 plot(ira$semana, ira$exito, type='l', ylim=c(1,4200), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -136,7 +136,7 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana de disminución (Figura 2) ubicandose por encima del umbral estacional. Con una proporción acumulada de hospitalizacion por IRA de `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana de disminución (Figura 2) ubicandose discretamente por encima del umbral estacional. Con una proporción acumulada de hospitalizacion por IRA de `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2022", fig.height=3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,100), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -193,7 +193,7 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,25, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
 
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en los menores e iguales de 4 años. Ocupando el 17.1.2% especificamente en los menores de 1 año, 24% para los de 1 a 4 años de edad. Con relación a la semana epidemiologica inmediatamente anterior se identifico una disminucion en casos hospitalizados para estos rangos de edad.
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en los menores e iguales de 4 años. Ocupando el 44% especificamente en los menores de 1 año, 44% para los de 1 año edad.
 
 ```{r,echo=FALSE, warning=FALSE}
 hosp_tot <- evento_995  %>% 
@@ -244,7 +244,7 @@ legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c
 
 En cuanto a la edad, en la consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 15% en los menores de 4 años, situación comun para este grupo edad. el grupo de 2 a 4 años concentra el 15.5.6% de las consultas por IRA del total de consultas para ese grupo de edad. Comportamiento similar ocurre en los menores de 1 año y del año.
 
-Persiste un canal endemico general para IRA por encima del nivel superior esperado, a expensas de incrementos en las consultas externas y urgencias, especialmente en menores de 4 años. Las hospitalizaziones por IRA en sala general registran para esta semana epidemiologica una importante reducción en todos los grupos de edad
+El canal endemico general para IRA sobre un umbral estacional, con disminuciones del número de consultas en hospitalización, urgencias, consulta externa. hospitalización UCI ha permanecido en limites inferiores del canal.
 
 ```{r, echo=FALSE, warning=FALSE}
 con_tot <- evento_995  %>% 
@@ -460,7 +460,7 @@ ggplot(epi1 %>% filter(cod_eve=="346" & ajuste_!="7"))+
 
 ```
 
-Como se observa en la grafica la notificacion presenta dismunución en numero de casos segun avanza el año epidemiologico en seguimiento, algunas razones para esto es la disminución de la transmisión producto de una superación de un cuarto pico epidemico por el que el pais acaba de pasar. Otra de las razones posibles en la disminucion es el cambio lineamientos en el uso de pruebas diagnosticas para infección por SARS-Cov-2, implicando lo anterior un cambio el deteccion de la enfermedad para la vigilancia.
+Como se observa en la grafica la notificación presenta dismunución en numero de casos segun avanza el año epidemiologico en seguimiento, algunas razones para esto es la disminución de la transmisión producto de una superación de un cuarto pico epidemico por el que el pais acaba de pasar. Otra de las razones posibles en la disminucion es el cambio lineamientos en el uso de pruebas diagnosticas para infección por SARS-Cov-2, implicando lo anterior un cambio el deteccion de la enfermedad para la vigilancia.
 
 # Vigilancia intensificada de exantematicas
 
@@ -474,7 +474,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:30, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:31, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
@@ -483,44 +483,44 @@ varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr
 #
 m1 <- ggplot(varicela_ajus %>% 
          filter(sexo_=="M" & gr_edad=="0-9"), aes(x = as.numeric(semana), y = casos))+
-  geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 7, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
+  geom_point(size = 1)+
+  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = " Hombres", subtitle = "0 a 9 años")+
   theme_linedraw()
 
 ## 10 a 19 años 
 m2 <- ggplot(varicela_ajus %>% 
          filter(sexo_=="M" & gr_edad=="10 a 19"), aes(x = as.numeric(semana), y = casos))+
-  geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 5, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
+  geom_point(size = 1)+
+  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = "10 a 19 años")+
   theme_linedraw()
 
 # de 20 a 40 años
 m3 <- ggplot(varicela_ajus %>% 
          filter(sexo_=="M" & gr_edad=="20 a 40"), aes(x = as.numeric(semana), y = casos))+
-  geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 7, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
+  geom_point(size = 1)+
+  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = "20 a 40 años")+
   theme_linedraw()
 
 ## mayores a 40 años 
 m4 <- ggplot(varicela_ajus %>% 
          filter(sexo_=="M" & gr_edad=="Mayores a 40"), aes(x = as.numeric(semana), y = casos))+
-  geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(1,10))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 6, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
+  geom_point(size = 1)+
+  coord_cartesian(xlim = c(1,52), y = c(1,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = "40 y mas años")+
   theme_linedraw()
 
@@ -532,44 +532,44 @@ Ante la emergencia en salud publica internacional declarada por OMS por brote mu
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Comportamiento de varicela para Mujeres por grupos de edad, Pereira 2022"}
 m11 <- ggplot(varicela_ajus %>% 
          filter(sexo_=="F" & gr_edad=="0-9"), aes(x = as.numeric(semana), y = casos))+
-  geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 7, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
+  geom_point(size = 1)+
+  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = "Mujeres", subtitle = "0 a 9 años")+
   theme_linedraw()
 
 ## 10 a 19 años 
 m22 <- ggplot(varicela_ajus %>% 
          filter(sexo_=="F" & gr_edad=="10 a 19"), aes(x = as.numeric(semana), y = casos))+
-  geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 5, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
+  geom_point(size = 1)+
+  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = "10 a 19 años")+
   theme_linedraw()
 
 # de 20 a 40 años
 m33 <- ggplot(varicela_ajus %>% 
          filter(sexo_=="F" & gr_edad=="20 a 40"), aes(x = as.numeric(semana), y = casos))+
-  geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 7, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
+  geom_point(size = 1)+
+  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = "20 a 40 años")+
   theme_linedraw()
 
 ## mayores a 40 años 
 m44 <- ggplot(varicela_ajus %>% 
          filter(sexo_=="F" & gr_edad=="Mayores a 40"), aes(x = as.numeric(semana), y = casos))+
-  geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(1,10))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 6, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
+  geom_point(size = 1)+
+  coord_cartesian(xlim = c(1,52), y = c(1,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = "40 y mas años")+
   theme_linedraw()
 
@@ -580,7 +580,7 @@ plot_grid(m11,m22,m33,m44)
 
 ## Viruela Simica
 
-A semana epidemiologica `r ncol(casos_sem)` se confirma un primer caso de viruela simica en un hombre joven, el cual no es claro aun la fuente de infección, con un unico antecedente de viaje en los ultimos 21 dias a la ciudad de Bogota.
+A semana epidemiologica `r ncol(casos_sem)` se han reportado cuatro (n=4)  casos probables de los cuales se tiene confirmación en dos casos (n=2), un caso (n=1) descartado y 1 pendiente de resultado.
 
 
 \newpage
