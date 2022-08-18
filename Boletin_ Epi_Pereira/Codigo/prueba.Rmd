@@ -15,7 +15,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 31 - 2022} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 32 - 2022} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -39,6 +39,8 @@ library(janitor)
 library(gtsummary)
 library(lubridate)
 library(cowplot)
+library(gt)
+library(incidence)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
 dengue2018 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/dengue2018.xlsx")
@@ -49,6 +51,9 @@ evento_998 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/evento 998.x
 varicela <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/evento 831 datos basicos.xlsx")
 filmarray <- read_sheet("https://docs.google.com/spreadsheets/d/1W9bwlXzatRVZKkwsaVo2i91fs_RcpSAQ77Ks99ykyRc/edit#gid=1377944694", sheet = "Muestras2022")
 saveRDS(filmarray,"/cloud/project/Boletin_ Epi_Pereira/Datos/filmarray.rds")
+viruela <- read_sheet("https://docs.google.com/spreadsheets/d/1KLou92VRu8r5buo6jG9DaERPpApAo1_FnN5n3SymIS0/edit#gid=966374205", sheet = "casos") %>% 
+  clean_names()
+saveRDS(viruela,"/cloud/project/Boletin_ Epi_Pereira/Datos/viruela.rds")
 ###################################################
 evento_995<-evento_995 %>%
   filter(ajuste!="6") %>%
@@ -89,16 +94,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=31)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=32)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=31)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=32)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=31)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=32)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=31)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=32)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 casos2022 <- add_row(epi1, epi2)
@@ -464,6 +469,8 @@ Como se observa en la grafica la notificación presenta dismunución en numero d
 
 # Vigilancia intensificada de exantematicas
 
+## Vigilancia Viruela
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Comportamiento de varicela para Hombres por grupos de edad, Pereira 2022"}
 ####################################################################################################
 varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
@@ -474,7 +481,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:31, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:32, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
@@ -504,7 +511,7 @@ m2 <- ggplot(varicela_ajus %>%
 
 # de 20 a 40 años
 m3 <- ggplot(varicela_ajus %>% 
-         filter(sexo_=="M" & gr_edad=="20 a 40"), aes(x = as.numeric(semana), y = casos))+
+         filter(sexo_=="M" & gr_edad=="20 a 40"), aes(x = semana, y = casos))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 7, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
@@ -515,12 +522,12 @@ m3 <- ggplot(varicela_ajus %>%
 
 ## mayores a 40 años 
 m4 <- ggplot(varicela_ajus %>% 
-         filter(sexo_=="M" & gr_edad=="Mayores a 40"), aes(x = as.numeric(semana), y = casos))+
+         filter(sexo_=="M" & gr_edad=="Mayores a 40"), aes(x = semana, y = casos))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
   geom_abline(intercept = 6, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
   geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(1,10))+
+  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = "40 y mas años")+
   theme_linedraw()
 
@@ -569,7 +576,7 @@ m44 <- ggplot(varicela_ajus %>%
   geom_abline(intercept = 6, slope = 0, color = "red", size = 1)+
   geom_abline(intercept = 2, slope = 0, color = "yellow", size = 1)+
   geom_point(size = 1)+
-  coord_cartesian(xlim = c(1,52), y = c(1,10))+
+  coord_cartesian(xlim = c(1,52), y = c(0,10))+
   labs(x= "Semana epidemiologica", y = "Casos", title = "40 y mas años")+
   theme_linedraw()
 
@@ -578,10 +585,23 @@ plot_grid(m11,m22,m33,m44)
 
 
 
-## Viruela Simica
+## Brote multi-pais Viruela Simica (Pereira)
 
-A semana epidemiologica `r ncol(casos_sem)` se han reportado cuatro (n=4)  casos probables de los cuales se tiene confirmación en dos casos (n=2), un caso (n=1) descartado y 1 pendiente de resultado.
+A semana epidemiologica `r ncol(casos_sem)` se han reportado `r nrow(viruela) `  alertas al sistema de vigilancia que corresponden a casos probables de los cuales se tiene confirmación en dos casos (n= `r table(viruela$clasificacion_final_del_caso)[2] `),  (n= `r table(viruela$clasificacion_final_del_caso)[1]`) descartado y `r table(viruela$clasificacion_final_del_caso)[3]` pendiente de resultado. Algunas de los caracteristicas demograficas de casos probables y confirmados se muestran acontinuación:
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+viruela %>% select(caso, edad, sexo, clasificacion_final_del_caso) %>% 
+  gt() %>% cols_label(caso = "Caso", edad = "Edad", sexo = "Sexo", clasificacion_final_del_caso = "Clasificación") %>% 
+  tab_header(title = "Caracteristicas demograficas de casos notificados, Pereira 2022")
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.height=3.2 , fig.width=8}
+viruela_curva <- viruela %>% 
+  filter(clasificacion_final_del_caso!="NEGATIVO")
+plot(incidence(as.Date(viruela_curva$fis), groups = viruela_curva$clasificacion_final_del_caso, first_date = "2022-07-10"))+
+  coord_cartesian(ylim = c(0,4))+ labs(title = "Curva epidemica casos viruela simica", x = "Fecha inicio de sintomas", y = "Casos")+ scale_x_date(date_breaks = "3 day", date_labels = "%d %b")+
+  theme(legend.position = "bottom", axis.text.x = element_text(angle = 45))
+```
 
 \newpage
 
