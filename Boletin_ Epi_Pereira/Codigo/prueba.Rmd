@@ -15,7 +15,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 33 - 2022} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 34 - 2022} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -94,16 +94,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=33)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=34)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=33)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=34)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=33)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=34)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=33)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=34)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 casos2022 <- add_row(epi1, epi2)
@@ -141,7 +141,7 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana de aumento (Figura 2) ubicandose  por encima del limite superior esperado. Con una proporción acumulada de hospitalizacion por IRA de `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general muestra un comportamiento para la ultima semana de aumento (Figura 2) ubicandose  cercano al limite superior esperado. Con una proporción acumulada de hospitalizacion por IRA de `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2022", fig.height=3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,100), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -151,7 +151,7 @@ lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,2750, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), se ubica por encima del umbral estacional. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
+De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), muestra un incremento puntual en las hospitalizaciones en UCI por IRA. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
 
 ```{r, echo=FALSE, warning=FALSE}
 uci_tot <- evento_995  %>% 
@@ -198,7 +198,7 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,25, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
 
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en los menores e iguales de 4 años. Ocupando el 38.9% especificamente en los menores de 1 año, 27.4% para los de 2 a 4 años edad.
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en los menores e iguales de 4 años. Ocupando el 36% especificamente en los menores de 1 año, 16% para los de 2 a 4 años edad.
 
 ```{r,echo=FALSE, warning=FALSE}
 hosp_tot <- evento_995  %>% 
@@ -247,7 +247,7 @@ legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c
 
 \newpage
 
-En cuanto a la edad, en la consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 15% en los menores de 4 años, situación comun para este grupo edad. el grupo de 2 a 4 años concentra el 15.5.6% de las consultas por IRA del total de consultas para ese grupo de edad. Comportamiento similar ocurre en los menores de 1 año y del año.
+En cuanto a la edad, en la consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 15% en los menores de 4 años, situación comun para este grupo edad.
 
 El canal endemico general para IRA sobre un umbral estacional, con disminuciones del número de consultas en hospitalización, urgencias, consulta externa. hospitalización UCI ha permanecido en limites inferiores del canal.
 
