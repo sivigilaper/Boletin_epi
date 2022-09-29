@@ -15,7 +15,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 37 - 2022} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 38 - 2022} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -95,16 +95,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=37)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=38)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=37)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=38)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=37)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=38)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=36)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=38)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 casos2022 <- add_row(epi1, epi2)
@@ -122,7 +122,7 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por encima del umbral estacional, sobre el limite superior esperado.
+A semana epidemiológica `r ncol(casos_sem)` de 2022 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por encima del limite superior esperado consecutivamente tres semanas epidemiologicas, mostrando un pico estacional para esta temporada de lluvias.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2022", fig.height=3, fig.width=7, fig.pos='h'}
 plot(ira$semana, ira$exito, type='l', ylim=c(1,4200), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -152,7 +152,7 @@ lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,2750, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), muestra una disminución puntual en las hospitalizaciones en UCI por IRA. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
+De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (UCI) (figura 3), muestra un acercamiento a un umbral estacional en las hospitalizaciones en UCI por IRA. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
 
 ```{r, echo=FALSE, warning=FALSE}
 uci_tot <- evento_995  %>% 
@@ -198,7 +198,7 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,25, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
 
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en los menores e iguales de 4 años. Ocupando el 21,7% especificamente en los menores de 1 año, 28.6% para los de 2 a 4 años edad.
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en el grupo de edad de 2 a 4 años ocupando el 38,3%  y en los menores de 1 año 25%.
 
 ```{r,echo=FALSE, warning=FALSE}
 hosp_tot <- evento_995  %>% 
@@ -247,9 +247,9 @@ legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c
 
 \newpage
 
-En cuanto a la edad, en la consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 15% en los menores de 4 años, situación comun para este grupo edad.
+En cuanto a la edad, en la consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 15% en los menores de 4 años, con una mayor concentracion de la consulta por IRA entre los menores de 2 a 4 años.
 
-El canal endemico general para IRA sobre un umbral estacional, con incremento en hospitalización en sala general por IRA.
+El canal endemico general para IRA sobre un umbral estacional y con tendencia al incremento para la ultima semana epidemiologica reportada.
 
 ```{r, echo=FALSE, warning=FALSE}
 con_tot <- evento_995  %>% 
@@ -459,13 +459,12 @@ ggplot(epi1 %>% filter(cod_eve=="346" & ajuste_!="7"))+
   geom_bar(aes(x=as.numeric(semana), fill=ajuste_), position = "dodge")+ theme_bw()+
   xlab("Semana/epidemiologica")+
   ylab("Casos notificados")+
-  coord_cartesian(xlim = c(1,26))+
+  coord_cartesian(xlim = c(1,40))+
   labs(fill = "Tipo de caso")+
   scale_fill_hue(labels = c("Probable", "Confirmado Lab", "Nexo Epidemiologico"))
 
 ```
-
-Como se observa en la grafica la notificación presenta dismunución en numero de casos segun avanza el año epidemiologico en seguimiento, algunas razones para esto es la disminución de la transmisión producto de una superación de un cuarto pico epidemico por el que el pais acaba de pasar. Otra de las razones posibles en la disminucion es el cambio lineamientos en el uso de pruebas diagnosticas para infección por SARS-Cov-2, implicando lo anterior un cambio el deteccion de la enfermedad para la vigilancia.
+ Se observa una disminucion en la notificación de casos para las ultimas semana epidemiologicas, que correlacionado con la notificacion de IRA colectiva, el pico podria atribuirse a otros virus respiratorios, principalmente como lo muestra el seguimiento a aislamientos por film array. Esto virus serian Rhinovirus/Enterovirus, 
 
 # Vigilancia intensificada de exantematicas
 
@@ -481,7 +480,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:37, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:38, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
@@ -587,7 +586,7 @@ plot_grid(m11,m22,m33,m44)
 
 ## Brote multi-pais Viruela Simica (Pereira)
 
-A semana epidemiologica `r ncol(casos_sem)` se han reportado `r nrow(viruela) `  alertas al sistema de vigilancia que corresponden a casos probables de los cuales se tiene confirmación en cinco casos (n= `r table(viruela$clasificacion_final_del_caso)[2] `),  (n= `r table(viruela$clasificacion_final_del_caso)[1]`) descartado y `r table(viruela$clasificacion_final_del_caso)[3]` pendiente de resultado. Algunas de los caracteristicas demograficas de casos probables y confirmados se muestran acontinuación:
+A semana epidemiologica `r ncol(casos_sem)` se han reportado `r nrow(viruela) `  alertas al sistema de vigilancia que corresponden a casos probables de los cuales se tiene confirmación en nueve casos (n= `r table(viruela$clasificacion_final_del_caso)[2] `),  (n= `r table(viruela$clasificacion_final_del_caso)[1]`) descartado y `r table(viruela$clasificacion_final_del_caso)[3]` pendiente de resultado. Algunas de los caracteristicas demograficas de casos probables y confirmados se muestran acontinuación:
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 viruela %>% select(caso, edad, sexo, clasificacion_final_del_caso) %>% 
