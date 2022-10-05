@@ -15,7 +15,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 38 - 2022} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 39 - 2022} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -95,16 +95,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=38)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=39)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=38)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=39)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=38)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=39)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=38)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=39)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 casos2022 <- add_row(epi1, epi2)
@@ -132,7 +132,7 @@ abline(1300,0,1300, col="yellow", lwd=3)
 legend(25,3200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $31.5\%$ y consulta externa ($29.5 \%$) y disminucion en hospitalización en UCI $-77.\%$.
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en la hospitalización IRA en UCI, pero con aumento relativo para hospitalización en sala general de $35.7\%$ y consulta externa ($32.8 \%$) y disminucion en hospitalización en UCI $-75.6\%$.
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica `r ncol(casos_sem)`**
 
@@ -198,7 +198,7 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,25, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
 
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en el grupo de edad de 2 a 4 años ocupando el 38,3%  y en los menores de 1 año 25%.
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en el grupo de edad de 2 a 4 años ocupando el 28,9%  y en los menores de 1 año 35%.
 
 ```{r,echo=FALSE, warning=FALSE}
 hosp_tot <- evento_995  %>% 
@@ -315,16 +315,18 @@ microorg <- aislamiento %>%
 
 ```
 
-```{r, echo=FALSE, warning=FALSE, fig.height=2 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2022"}
+```{r, echo=FALSE, warning=FALSE, fig.height=3 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2022"}
 filmarray %>% 
   group_by(semana) %>% 
   tabyl(semana, resultado) %>% 
   adorn_percentages() %>% 
   pivot_longer(cols = c("Negativo","Positivo"), names_to = "resultado") %>% 
   ggplot(aes(x = semana, y = value, fill = resultado))+ geom_col(color="black")+
-  scale_x_continuous(limits = c(0,35), breaks = seq(1,35,1))+
+  scale_x_continuous(limits = c(0,45), breaks = seq(1,45,1))+
   labs(x = "Semana epidemiologica",
-       y = "Proporción")+ theme_minimal()
+       y = "Proporción",
+       fill = "Resultado")+ theme_minimal()+
+  theme(legend.position = "top")
 ```
 \newpage
 Como coadyuvante a la estrategia de vigilancia de la infección respiratoria aguda se recolectan resultados de pruebas realizadas para el diagnostico etiologico viral en las diferentes instituciones de salud con capacidad diagnostica, principalmente a traves de paneles respiratorios virales de tecnologia filmarray. 
@@ -356,7 +358,7 @@ aislamiento %>%
   ggplot(aes(x = semana, y = Aislamientos,
              fill = factor(viral, levels = c("Otras","Adenovirus","Enterovirus","Rhinovirus", "VSR","Influenza A","metaneumovirus","SARS-CoV-2","Parainfluenza Virus (1,2,3)"))))+
            geom_col()+
-           scale_x_continuous(limits = c(0,35), breaks = seq(1,35,1))+
+           scale_x_continuous(limits = c(0,45), breaks = seq(1,45,1))+
            labs(x = "Semana epidemiologica", y = "n Aislamientos")+ theme_minimal()+
     theme(legend.title = element_blank(), legend.position = "bottom")+
   scale_fill_brewer(palette= "Set1")
@@ -459,7 +461,7 @@ ggplot(epi1 %>% filter(cod_eve=="346" & ajuste_!="7"))+
   geom_bar(aes(x=as.numeric(semana), fill=ajuste_), position = "dodge")+ theme_bw()+
   xlab("Semana/epidemiologica")+
   ylab("Casos notificados")+
-  coord_cartesian(xlim = c(1,40))+
+  coord_cartesian(xlim = c(1,45))+
   labs(fill = "Tipo de caso")+
   scale_fill_hue(labels = c("Probable", "Confirmado Lab", "Nexo Epidemiologico"))
 
@@ -480,7 +482,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:38, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:39, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
