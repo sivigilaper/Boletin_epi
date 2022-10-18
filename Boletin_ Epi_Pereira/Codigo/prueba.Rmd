@@ -15,7 +15,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 39 - 2022} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 40 - 2022} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -95,16 +95,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=39)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=40)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=39)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=40)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=39)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=40)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=39)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=40)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 casos_sem<-table(epi1$cod_eve,epi1$semana)
 casos_sem2<-table(epi2$cod_eve,epi2$semana)
 casos2022 <- add_row(epi1, epi2)
@@ -198,7 +198,7 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,25, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
 
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en el grupo de edad de 2 a 4 años ocupando el 28,9%  y en los menores de 1 año 35%.
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa infección respiratoria se da en el grupo de edad de 2 a 4 años ocupando el 27,7%  y en los menores de 1 año 34.1%.
 
 ```{r,echo=FALSE, warning=FALSE}
 hosp_tot <- evento_995  %>% 
@@ -247,9 +247,9 @@ legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2022"), col=c
 
 \newpage
 
-En cuanto a la edad, en la consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 15% en los menores de 4 años, con una mayor concentracion de la consulta por IRA entre los menores de 2 a 4 años.
+En cuanto a la edad, en la consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 15% en los menores de 4 años, con una mayor concentración de la consulta por IRA entre los menores de 2 a 4 años.
 
-El canal endemico general para IRA sobre un umbral estacional y con tendencia al incremento para la ultima semana epidemiologica reportada.
+El canal endemico general para IRA sobre un umbral estacional y con tendencia a disminución para la ultima semana epidemiologica reportada.
 
 ```{r, echo=FALSE, warning=FALSE}
 con_tot <- evento_995  %>% 
@@ -482,7 +482,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:39, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:40, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
@@ -591,19 +591,26 @@ plot_grid(m11,m22,m33,m44)
 A semana epidemiologica `r ncol(casos_sem)` se han reportado `r nrow(viruela) `  alertas al sistema de vigilancia que corresponden a casos probables de los cuales se tiene confirmación en nueve casos (n= `r table(viruela$clasificacion_final_del_caso)[2] `),  (n= `r table(viruela$clasificacion_final_del_caso)[1]`) descartado y `r table(viruela$clasificacion_final_del_caso)[3]` pendiente de resultado. Algunas de los caracteristicas demograficas de casos probables y confirmados se muestran acontinuación:
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-viruela %>% select(caso, edad, sexo, clasificacion_final_del_caso) %>% 
-  filter(clasificacion_final_del_caso=="POSITIVO") %>% 
+viruela %>% filter(clasificacion_final_del_caso=="POSITIVO") %>% 
+  select(edad, sexo, orientacion) %>% 
+  
+  tbl_summary(label = list(edad~"Edad",
+                           sexo~"Sexo",
+                           orientacion~"Orientación sexual"),
+              missing_text = "No reportado") %>% 
+  modify_header(label = "Variable") %>% 
+  as_tibble() %>% 
   #gt() %>% cols_label(caso = "Caso", edad = "Edad", sexo = "Sexo", clasificacion_final_del_caso = "Clasificación") %>% 
   #tab_header(title = "Caracteristicas demograficas de casos notificados, Pereira 2022") %>% 
   flextable() %>% 
-  flextable::bg(j = 4, i = ~ clasificacion_final_del_caso== "POSITIVO", part = "body", bg = "red") 
+  flextable::autofit()
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.height=3.2 , fig.width=8}
 viruela_curva <- viruela %>% 
   filter(clasificacion_final_del_caso!="NEGATIVO")
-plot(incidence(as.Date(viruela_curva$fis), groups = viruela_curva$clasificacion_final_del_caso, first_date = "2022-07-10"), color = "red")+
-  coord_cartesian(ylim = c(0,4))+ labs(title = "Curva epidemica casos viruela simica", x = "Fecha inicio de sintomas", y = "Casos")+ scale_x_date(date_breaks = "7 day", date_labels = "%d %b")+
+plot(incidence(as.Date(viruela_curva$fis), groups = viruela_curva$clasificacion_final_del_caso, first_date = "2022-07-10"), border = "black")+ theme_classic()+
+  coord_cartesian(ylim = c(0,4))+ labs(title = "Curva epidemica casos viruela simica", x = "Fecha inicio de sintomas", y = "Casos")+ scale_x_date(date_breaks = "10 day", date_labels = "%d %b")+
   theme(legend.position = "bottom", axis.text.x = element_text(angle = 45))
 ```
 
