@@ -99,14 +99,14 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=11)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=12)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=11)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=12)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=11)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=12)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
   filter(as.numeric(semana)<=11)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <- epi1 %>% mutate(semana = as.numeric(semana))
@@ -129,7 +129,7 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por debajo del umbral estacional, con un incremento ocurrido en la semana inmediatamente anterior.
+A semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica sobre del umbral estacional, consecutivamente para las ultimas tres semanas.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2023", fig.height=3.3, fig.width=7, fig.pos='h'}
 plot(ira$semana, ira$icinftotal, type='l', ylim=c(1,4000), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -149,7 +149,7 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general se encuentra por debajo del umbral estacional (Figura 2), se registro un incremento en las dos semanas anteriores. La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general se encuentra sobre del umbral estacional (Figura 2), se registro un incremento en las dos semanas anteriores. La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2023", fig.height=3.3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,170), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -255,7 +255,7 @@ legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2023"), col=c
 
 \newpage
 
-En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 10% en los de un año y menos, con una mayor concentración de la consulta por IRA entre los de 2 a 4 años. El canal endemico general para IRA bajo un umbral estacional, con leves incrementos en semanas anteriores.
+En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 10% en los de un año y menos, con una mayor concentración de la consulta por IRA entre los de 2 a 4 años. El canal endemico general para IRA sobre un umbral estacional, con leves incrementos en semanas anteriores.
 
 ```{r, echo=FALSE, warning=FALSE}
 con_tot <- evento_995  %>% 
@@ -343,27 +343,33 @@ A periodo epidemiologico 2 de 2023 `r nrow(filmarray) ` muestras en el municipio
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 aislamiento %>% 
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
+                           value == "enterovirus" ~ "Enterovirus",
                            value == "Rhinovirus"~ "Rhinovirus",
                            value == "Rinovirus"~ "Rhinovirus",
                            value == "metaneumovirus" ~ "metaneumovirus",
                            value == "Metaneumovirus" ~ "metaneumovirus",
                            value == "Metapneumovirus" ~ "metaneumovirus",
+                           value == "metapneumovirus"~ "metaneumovirus",
+                           value == "Human metapneumovirus"~ "metaneumovirus",
+                           value == "Influenza A/H1-2009"~ "Influenza AH1N1",
                            value == "Adenovirus" ~ "Adenovirus",
                            value == "Influenza A" ~ "Influenza A",
                            value == "Respiratory Syncytial Virus"~ "VSR",
                            value == "Virus Sincitial Respiratorio"~ "VSR",
                            value == "SARS-CoV-2"~"SARS-CoV-2",
+                           value == "Coronavirus SARS Cov 2"~"SARS-CoV-2",
+                           value == "Influenza B"~"Influenza B",
                            value == "Parainfluenza Virus" | value == "Parainfluenza Virus 1" | 
                              value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | 
                              value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>% 
   filter(is.na(viral)==FALSE) %>% 
   group_by(viral) %>% 
   summarise(n = n(),
-            prevalencia = round(n/633*100,1),
-            IC95inf = round(binom::binom.agresti.coull(n,633)[,5]*100,2),
-            sup = round(binom::binom.agresti.coull(n,633)[,6]*100,2)) %>% 
+            prevalencia = round(n/nrow(filmarray)*100,1),
+            IC95inf = round(binom::binom.agresti.coull(n,nrow(filmarray))[,5]*100,2),
+            sup = round(binom::binom.agresti.coull(n,nrow(filmarray))[,6]*100,2)) %>% 
   arrange(desc(n)) %>%
-  filter(n>=1) %>% 
+  #filter(n>=1) %>% 
   flextable::flextable() %>% 
   flextable::autofit() %>% 
   flextable::set_header_labels(
@@ -391,21 +397,27 @@ Sin embargo permite para la vigilancia de virus respiratorios establecer la exis
 ```{r, echo=FALSE, warning=FALSE, fig.height=3.2 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2022"}
 aislamiento %>% 
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
-                                         value == "Rhinovirus"~ "Rhinovirus",
-                                         value == "Rinovirus"~ "Rhinovirus",
-                                         value == "metaneumovirus" ~ "metaneumovirus",
-                                         value == "Metaneumovirus" ~ "metaneumovirus",
-                                         value == "Metapneumovirus" ~ "metaneumovirus",
-                                         value == "Adenovirus" ~ "Adenovirus",
-                                         value == "Influenza A" ~ "Influenza A",
-                                         value == "Respiratory Syncytial Virus"~ "VSR",
-                                         value == "Virus Sincitial Respiratorio"~ "VSR",
-                                         value == "SARS-CoV-2"~"SARS-CoV-2",
-                                         value == "Parainfluenza Virus" | value == "Parainfluenza Virus 1" | value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>%
+                           value == "enterovirus" ~ "Enterovirus",
+                           value == "Rhinovirus"~ "Rhinovirus",
+                           value == "Rinovirus"~ "Rhinovirus",
+                           value == "metaneumovirus" ~ "metaneumovirus",
+                           value == "Metaneumovirus" ~ "metaneumovirus",
+                           value == "Metapneumovirus" ~ "metaneumovirus",
+                           value == "metapneumovirus"~ "metaneumovirus",
+                           value == "Human metapneumovirus"~ "metaneumovirus",
+                           value == "Influenza A/H1-2009"~ "Influenza AH1N1",
+                           value == "Adenovirus" ~ "Adenovirus",
+                           value == "Influenza A" ~ "Influenza A",
+                           value == "Respiratory Syncytial Virus"~ "VSR",
+                           value == "Virus Sincitial Respiratorio"~ "VSR",
+                           value == "SARS-CoV-2"~"SARS-CoV-2",
+                           value == "Coronavirus SARS Cov 2"~"SARS-CoV-2",
+                           value == "Influenza B"~"Influenza B",
+                           value == "Parainfluenza Virus" | value == "Parainfluenza Virus 1" | value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>%
   replace_na(list(viral = "Otras")) %>% 
   group_by(semana, viral) %>% summarise(Aislamientos = n(), .groups = "keep") %>% 
   ggplot(aes(x = semana, y = Aislamientos,
-             fill = factor(viral, levels = c("Otras","Adenovirus","Enterovirus","Rhinovirus", "VSR","Influenza A","metaneumovirus","SARS-CoV-2","Parainfluenza Virus (1,2,3)"))))+
+             fill = factor(viral, levels = c("Otras","Adenovirus","Enterovirus","Rhinovirus", "VSR","Influenza B","SARS-CoV-2","metaneumovirus","Parainfluenza Virus (1,2,3)", "Influenza AH1N1"))))+
            geom_col()+
            scale_x_continuous(limits = c(0,53), breaks = seq(1,52,1))+
            labs(x = "Semana epidemiologica", y = "n Aislamientos")+ theme_minimal()+
@@ -446,7 +458,6 @@ lines(eda2018$semana,eda2018$casos, col="black",lwd=2, cex=0.7)
 legend(25,1400, c("IC inf 95%","Media", "IC sup 95%", "2023"), col=c("green","yellow","red","black"), lty = c(1,1), lwd = c(1,1), bty="n", cex=0.5)
 ```
 
-\newpage
 
 # Eventos de interes en salud pública
 
@@ -538,7 +549,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:11, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:12, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
@@ -660,7 +671,7 @@ viruela %>% filter(clasificacion_final_del_caso=="POSITIVO") %>%
   flextable::autofit() %>% 
   flextable::set_header_labels(
       Variable = " ",
-      `**N = 39**` = "Casos") %>% 
+      `**N = 38**` = "Casos") %>% 
   flextable::align(j = c(2), align = "center", part = "all" )
 ```
 
