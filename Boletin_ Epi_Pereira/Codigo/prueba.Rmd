@@ -14,7 +14,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 14 - 2023} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 15 - 2023} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -52,10 +52,13 @@ evento_998 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/evento 998.x
 #evento_346 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/db346.xlsx") 
 #evento_346 <- evento_346 %>% filter(ajuste_=="0" | ajuste_=="3" | ajuste_=="4" | ajuste_=="5" | ajuste_=="7", nmun_proce == "PEREIRA", semana <= 5)   #### CAMBIAR CADA SEMANA 
 
-
 varicela <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/evento 831 datos basicos.xlsx")
-filmarray <- read_sheet("https://docs.google.com/spreadsheets/d/1W9bwlXzatRVZKkwsaVo2i91fs_RcpSAQ77Ks99ykyRc/edit#gid=1910681332", sheet = "Muestras2023")
-saveRDS(filmarray,"/cloud/project/Boletin_ Epi_Pereira/Datos/filmarray.rds")
+c_viral <- readRDS("/cloud/project/Boletin_ Epi_Pereira/Datos/c_viral.rds")
+filmarray <- read_sheet("https://docs.google.com/spreadsheets/d/1W9bwlXzatRVZKkwsaVo2i91fs_RcpSAQ77Ks99ykyRc/edit#gid=1910681332", sheet = "Muestras2023") %>% 
+  mutate(`N IDENTIFICACION` = as.character(`N IDENTIFICACION`))
+filmarray2 <- add_case(filmarray,c_viral)
+saveRDS(filmarray2,"/cloud/project/Boletin_ Epi_Pereira/Datos/filmarray2.rds")
+aislamiento2 <- readRDS("/cloud/project/Boletin_ Epi_Pereira/Datos/aislamiento2.rds")
 viruela <- read_sheet("https://docs.google.com/spreadsheets/d/1KLou92VRu8r5buo6jG9DaERPpApAo1_FnN5n3SymIS0/edit#gid=966374205", sheet = "casos") %>% 
   clean_names()
 saveRDS(viruela,"/cloud/project/Boletin_ Epi_Pereira/Datos/viruela.rds")
@@ -99,16 +102,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=14)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=15)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=14)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=15)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=14)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=15)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=14)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=15)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <- epi1 %>% mutate(semana = as.numeric(semana))
 epi2 <- epi2 %>% mutate(semana = as.numeric(semana))
 casos_sem<-table(epi1$cod_eve,epi1$semana)
@@ -205,7 +208,7 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(8,15, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2023"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
 
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa de infección respiratoria se da en el grupo de edad menores a un año y el grupo de 2 a 4 años.
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa de infección respiratoria se da en el grupo de edad menores a un año y el grupo de 1 año.
 
 ```{r,echo=FALSE, warning=FALSE}
 hosp_tot <- evento_995  %>% 
@@ -295,20 +298,27 @@ evento_995  %>%
 ## Circulación virus respiratorios
 
 ```{r, echo=FALSE, warning=FALSE}
-filmarray <- filmarray %>% 
+filmarray2 <- filmarray2 %>% 
   mutate(fec_muestra = guess_dates(FECHA, modern_excel = TRUE))
-filmarray <- filmarray %>% 
+filmarray2 <- filmarray2 %>% 
   mutate(resultado = case_when(RESULTADO == "NONE"~"Negativo",
                                RESULTADO != "NONE"~"Positivo")) %>% 
   mutate(semana = epiweek(fec_muestra))
+
 aislamientos <- filmarray %>% 
   filter(RESULTADO != "NONE") %>% 
   separate(col = RESULTADO, into = c("m1","m2","m3","m4","m5","m6"), sep = ",")
+
 aislamiento <- aislamientos %>% pivot_longer(cols = starts_with("m"), names_to = "microorganismo") %>% 
   filter(!is.na(value)) %>%
-  mutate(value = str_squish(value))
+  mutate(value = str_squish(value)) %>% 
+  add_case(aislamiento2) %>% 
+  mutate(semana = epiweek(FECHA))
 
-positivo <- filmarray %>% 
+write_csv(aislamiento, "/cloud/project/Boletin_ Epi_Pereira/Datos/aislamientos_2023.csv")
+  
+
+positivo <- filmarray2 %>% 
   group_by(resultado) %>% 
   summarise(n=n()) %>% 
   adorn_percentages(denominator = "col") %>% 
@@ -323,8 +333,8 @@ microorg <- aislamiento %>%
 ```
 
 
-```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2022"}
-filmarray %>% 
+```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2023"}
+filmarray2 %>% 
   group_by(semana) %>% 
   tabyl(semana, resultado) %>% 
   adorn_percentages() %>% 
@@ -337,7 +347,7 @@ filmarray %>%
   theme(legend.position = "top", axis.text.x = element_text(size = 6))
 ```
 \newpage
-A periodo epidemiologico 4 de 2023 `r nrow(filmarray) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para lo corrido del año son:
+A periodo epidemiologico 4 de 2023 `r nrow(filmarray2) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para lo corrido del año son:
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -346,12 +356,15 @@ aislamiento %>%
                            value == "enterovirus" ~ "Enterovirus",
                            value == "Rhinovirus"~ "Rhinovirus",
                            value == "Rinovirus"~ "Rhinovirus",
+                           value == "Human Rhinovirus/Enterovirus"~"Rhinovirus",
                            value == "metaneumovirus" ~ "metaneumovirus",
                            value == "Metaneumovirus" ~ "metaneumovirus",
                            value == "Metapneumovirus" ~ "metaneumovirus",
                            value == "metapneumovirus"~ "metaneumovirus",
                            value == "Human metapneumovirus"~ "metaneumovirus",
+                           value == "Human Metapneumovirus"~ "metaneumovirus",
                            value == "Influenza A/H1-2009"~ "Influenza AH1N1",
+                           value == "Influenza A H1-2009"~"Influenza AH1N1",
                            value == "Adenovirus" ~ "Adenovirus",
                            value == "Influenza A" ~ "Influenza A",
                            value == "Respiratory Syncytial Virus"~ "VSR",
@@ -365,9 +378,9 @@ aislamiento %>%
   filter(is.na(viral)==FALSE) %>% 
   group_by(viral) %>% 
   summarise(n = n(),
-            prevalencia = round(n/nrow(filmarray)*100,1),
-            IC95inf = round(binom::binom.agresti.coull(n,nrow(filmarray))[,5]*100,2),
-            sup = round(binom::binom.agresti.coull(n,nrow(filmarray))[,6]*100,2)) %>% 
+            prevalencia = round(n/nrow(filmarray2)*100,1),
+            IC95inf = round(binom::binom.agresti.coull(n,nrow(filmarray2))[,5]*100,2),
+            sup = round(binom::binom.agresti.coull(n,nrow(filmarray2))[,6]*100,2)) %>% 
   arrange(desc(n)) %>%
   #filter(n>=1) %>% 
   flextable::flextable() %>% 
@@ -379,9 +392,7 @@ aislamiento %>%
       IC95inf = "IC95% inf",
       sup = "IC95% sup") %>% 
   flextable::align(j = c(2:5), align = "center", part = "all" )
-
 ```
-
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
 # `r microorg[microorg$value=="Rhinovirus",3]`% de los aislamientos (n= `r  microorg[microorg$value=="Rhinovirus",2]`), seguido por Enterovirus con `r microorg[microorg$value=="Enterovirus",3]`% (n= `r  microorg[microorg$value=="Enterovirus",2]`) y Adenovirus `r microorg[microorg$value=="Adenovirus",3]`% (n= `r  microorg[microorg$value=="Adenovirus",2]`) (**Figura 6**). Aislamientos de inlfuenza surgen en las ultimas tres semanas epidemiologicas, lo que podria tener una responsabilidad importante en el incrmento en la hospitalizacion en IRA en sala general, especialmente en menores de 4 años.
@@ -400,12 +411,15 @@ aislamiento %>%
                            value == "enterovirus" ~ "Enterovirus",
                            value == "Rhinovirus"~ "Rhinovirus",
                            value == "Rinovirus"~ "Rhinovirus",
+                           value == "Human Rhinovirus/Enterovirus"~"Rhinovirus",
                            value == "metaneumovirus" ~ "metaneumovirus",
                            value == "Metaneumovirus" ~ "metaneumovirus",
                            value == "Metapneumovirus" ~ "metaneumovirus",
                            value == "metapneumovirus"~ "metaneumovirus",
                            value == "Human metapneumovirus"~ "metaneumovirus",
+                           value == "Human Metapneumovirus"~ "metaneumovirus",
                            value == "Influenza A/H1-2009"~ "Influenza AH1N1",
+                           value == "Influenza A H1-2009"~"Influenza AH1N1",
                            value == "Adenovirus" ~ "Adenovirus",
                            value == "Influenza A" ~ "Influenza A",
                            value == "Respiratory Syncytial Virus"~ "VSR",
@@ -413,9 +427,12 @@ aislamiento %>%
                            value == "SARS-CoV-2"~"SARS-CoV-2",
                            value == "Coronavirus SARS Cov 2"~"SARS-CoV-2",
                            value == "Influenza B"~"Influenza B",
-                           value == "Parainfluenza Virus" | value == "Parainfluenza Virus 1" | value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>%
+                           value == "Parainfluenza Virus" | value == "Parainfluenza Virus 1" | 
+                             value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | 
+                             value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>%
   replace_na(list(viral = "Otras")) %>% 
-  group_by(semana, viral) %>% summarise(Aislamientos = n(), .groups = "keep") %>% 
+  group_by(semana, viral) %>% 
+  summarise(Aislamientos = n(), .groups = "keep") %>% 
   ggplot(aes(x = semana, y = Aislamientos,
              fill = factor(viral, levels = c("Otras","Adenovirus","Enterovirus","Rhinovirus", "VSR","Influenza B","SARS-CoV-2","metaneumovirus","Parainfluenza Virus (1,2,3)", "Influenza AH1N1"))))+
            geom_col()+
@@ -549,7 +566,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:14, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:15, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
