@@ -14,7 +14,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 15 - 2023} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 16 - 2023} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -102,16 +102,16 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
 epi3_1 <- epi3 %>% 
   filter(cod_eve=="346" | cod_eve=="100" |cod_eve=="300" | cod_eve=="365" |cod_eve=="455" |
             cod_eve=="650" | cod_eve=="670" | cod_eve=="330") %>% 
-  filter(as.numeric(semana)<=15)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=16)      # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <-add_row(epi1,epi3_1)
 epi3_2 <- epi3 %>%
    filter(cod_eve=="110" | cod_eve=="113" | cod_eve=="591") %>% 
-   filter(as.numeric(semana)<=15)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+   filter(as.numeric(semana)<=16)       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2 <-add_row(epi2,epi3_2)
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=15)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=16)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=15)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=16)   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
 epi1 <- epi1 %>% mutate(semana = as.numeric(semana))
 epi2 <- epi2 %>% mutate(semana = as.numeric(semana))
 casos_sem<-table(epi1$cod_eve,epi1$semana)
@@ -405,7 +405,7 @@ Cabe resaltar que las estimaciones presentadas corresponden a muestras recolecta
 
 Sin embargo permite para la vigilancia de virus respiratorios establecer la existencia de microorganismos dentro de nuestra población causantes de pico estacionarios de infección respiratoria aguda como los producidos en meses de junio-julio y octubre-noviembre de cada año.
 
-```{r, echo=FALSE, warning=FALSE, fig.height=3.2 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2022"}
+```{r, echo=FALSE, warning=FALSE, fig.height=3.2 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2023"}
 aislamiento %>% 
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                            value == "enterovirus" ~ "Enterovirus",
@@ -566,7 +566,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:15, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:16, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
