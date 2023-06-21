@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.4.22)  27 APR 2022 19:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.4.26)  21 JUN 2023 16:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -188,14 +188,219 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-) (/usr/share/texlive/texmf-dist/tex/latex/xurl/xurl.sty
-Package: xurl 2020/01/24 v 0.09 modify URL breaks
-(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip17
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)) (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bookmark.sty
-Package: bookmark 2019/12/03 v1.28 PDF bookmarks (HO)
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count190
+\Gm@cntv=\count191
+\c@Gm@tempcnt=\count192
+\Gm@bindingoffset=\dimen145
+\Gm@wd@mp=\dimen146
+\Gm@odd@mp=\dimen147
+\Gm@even@mp=\dimen148
+\Gm@layoutwidth=\dimen149
+\Gm@layoutheight=\dimen150
+\Gm@layouthoffset=\dimen151
+\Gm@layoutvoffset=\dimen152
+\Gm@dimlist=\toks23
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip53
+\LTright=\skip54
+\LTpre=\skip55
+\LTpost=\skip56
+\LTchunksize=\count193
+\LTcapwidth=\dimen153
+\LT@head=\box47
+\LT@firsthead=\box48
+\LT@foot=\box49
+\LT@lastfoot=\box50
+\LT@cols=\count194
+\LT@rows=\count195
+\c@LT@tables=\count196
+\c@LT@chunks=\count197
+\LT@p@ftn=\toks24
+) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen154
+\lightrulewidth=\dimen155
+\cmidrulewidth=\dimen156
+\belowrulesep=\dimen157
+\belowbottomsep=\dimen158
+\aboverulesep=\dimen159
+\abovetopsep=\dimen160
+\cmidrulesep=\dimen161
+\cmidrulekern=\dimen162
+\defaultaddspace=\dimen163
+\@cmidla=\count198
+\@cmidlb=\count199
+\@aboverulesep=\dimen164
+\@belowrulesep=\dimen165
+\@thisruleclass=\count266
+\@lastruleclass=\count267
+\@thisrulewidth=\dimen166
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen167
+\ar@mcellbox=\box51
+\extrarowheight=\dimen168
+\NC@list=\toks25
+\extratabsurround=\skip57
+\backup@length=\skip58
+\ar@cellbox=\box52
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count268
+\calc@Bcount=\count269
+\calc@Adimen=\dimen169
+\calc@Bdimen=\dimen170
+\calc@Askip=\skip59
+\calc@Bskip=\skip60
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count270
+\calc@Cskip=\skip61
+) (/usr/share/texlive/texmf-dist/tex/latex/footnotehyper/footnotehyper.sty
+Package: footnotehyper 2019/11/07 v1.1a hyperref aware footnote.sty (JFB)
+\FNH@notes=\box53
+\FNH@width=\dimen171
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+)
+\Gin@req@height=\dimen172
+\Gin@req@width=\dimen173
+) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2020/02/14 3.40 The Babel package
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2020/02/14 3.40 Babel switching mechanism
+)
+Package babel Info: You haven't specified a language. I'll use 'nil'
+(babel)             as the main language. Reported on input line 572.
+(/usr/share/texlive/texmf-dist/tex/generic/babel/nil.ldf
+Language: nil 2020/02/14 3.40 Nil language
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2020/02/14 3.40 Babel common definitions
+\babel@savecnt=\count271
+\U@D=\dimen174
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count272
+)
+\l@nil=\language85
+))
+\everypar=\toks26
+(/usr/share/texlive/texmf-dist/tex/generic/babel/locale/es/babel-spanish.tex)
+Package babel Info: Importing data for spanish
+(babel)             from babel-es.ini. Reported on input line 72.
+Package babel Info: \l@spanish = using hyphenrules for spanish
+(babel)             (\language18) on input line 72.
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
+s
+\f@nch@headwidth=\skip62
+\f@nch@O@elh=\skip63
+\f@nch@O@erh=\skip64
+\f@nch@O@olh=\skip65
+\f@nch@O@orh=\skip66
+\f@nch@O@elf=\skip67
+\f@nch@O@erf=\skip68
+\f@nch@O@olf=\skip69
+\f@nch@O@orf=\skip70
+) (/usr/share/texlive/texmf-dist/tex/latex/sttools/floatpag.sty
+Package: floatpag 2012/05/29 v1.1 Different pagestyles on float pages
+Package: floatpag 1999/04/29 FLOAT PAGESTYLE
+) (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
+\multirow@colwidth=\skip71
+\multirow@cntb=\count273
+\multirow@dima=\skip72
+\bigstrutjot=\dimen175
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
+\c@tracingmulticols=\count274
+\mult@box=\box54
+\multicol@leftmargin=\dimen176
+\c@unbalance=\count275
+\c@collectmore=\count276
+\doublecol@number=\count277
+\multicoltolerance=\count278
+\multicolpretolerance=\count279
+\full@width=\dimen177
+\page@free=\dimen178
+\premulticols=\dimen179
+\postmulticols=\dimen180
+\multicolsep=\skip73
+\multicolbaselineskip=\skip74
+\partial@page=\box55
+\last@line=\box56
+\maxbalancingoverflow=\dimen181
+\mult@rightbox=\box57
+\mult@grightbox=\box58
+\mult@gfirstbox=\box59
+\mult@firstbox=\box60
+\@tempa=\box61
+\@tempa=\box62
+\@tempa=\box63
+\@tempa=\box64
+\@tempa=\box65
+\@tempa=\box66
+\@tempa=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\@tempa=\box97
+\c@minrows=\count280
+\c@columnbadness=\count281
+\c@finalcolumnbadness=\count282
+\last@try=\dimen182
+\multicolovershoot=\dimen183
+\multicolundershoot=\dimen184
+\mult@nat@firstbox=\box98
+\colbreak@box=\box99
+\mc@col@check@num=\count283
+) (/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+\everycr=\toks27
+\minrowclearance=\skip75
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/hhline.sty
+Package: hhline 2020/01/04 v2.04 Table rule package (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
 (/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
 Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
@@ -217,9 +422,9 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ) (/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
-\@linkdim=\dimen145
-\Hy@linkcounter=\count190
-\Hy@pagecounter=\count191
+\@linkdim=\dimen185
+\Hy@linkcounter=\count284
+\Hy@pagecounter=\count285
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -229,8 +434,8 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count192
-\pdfmajorversion=\count193
+\Hy@SavedSpaceFactor=\count286
+\pdfmajorversion=\count287
 Package hyperref Info: Option `unicode' set `true' on input line 4421.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2020/01/14 v7.00d Hyperref: PDF Unicode definition (HO)
@@ -244,18 +449,22 @@ Package hyperref Info: Plain pages OFF on input line 4562.
 Package hyperref Info: Backreferencing OFF on input line 4567.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4800.
-\c@Hy@tempcnt=\count194
+\c@Hy@tempcnt=\count288
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
 LaTeX Info: Redefining \url on input line 5159.
-\XeTeXLinkMargin=\dimen146
+\XeTeXLinkMargin=\dimen186
 (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count195
-\Field@Width=\dimen147
-\Fld@charsize=\dimen148
+\Fld@menulength=\count289
+\Field@Width=\dimen187
+\Fld@charsize=\dimen188
 Package hyperref Info: Hyper figures OFF on input line 6430.
 Package hyperref Info: Link nesting OFF on input line 6435.
 Package hyperref Info: Hyper index ON on input line 6438.
@@ -268,9 +477,9 @@ LaTeX Info: Redefining \pageref on input line 6504.
 (/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
 Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
 )
-\Hy@abspage=\count196
-\c@Item=\count197
-\c@Hfootnote=\count198
+\Hy@abspage=\count290
+\c@Item=\count291
+\c@Hfootnote=\count292
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -278,8 +487,8 @@ File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
 (/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
 Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
 )
-\Fld@listcount=\count199
-\c@bookmark@seq@number=\count266
+\Fld@listcount=\count293
+\c@bookmark@seq@number=\count294
 (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -288,145 +497,18 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
-\Hy@SectionHShift=\skip53
-) (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
+\Hy@SectionHShift=\skip76
+) (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bookmark.sty
+Package: bookmark 2019/12/03 v1.28 PDF bookmarks (HO)
+(/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2019/12/03 v1.28 bookmark driver for pdfTeX (HO)
-\BKM@id=\count267
-)) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
-Package: geometry 2020/01/02 v5.9 Page Geometry
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
-Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
-)
-\Gm@cnth=\count268
-\Gm@cntv=\count269
-\c@Gm@tempcnt=\count270
-\Gm@bindingoffset=\dimen149
-\Gm@wd@mp=\dimen150
-\Gm@odd@mp=\dimen151
-\Gm@even@mp=\dimen152
-\Gm@layoutwidth=\dimen153
-\Gm@layoutheight=\dimen154
-\Gm@layouthoffset=\dimen155
-\Gm@layoutvoffset=\dimen156
-\Gm@dimlist=\toks23
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip54
-\LTright=\skip55
-\LTpre=\skip56
-\LTpost=\skip57
-\LTchunksize=\count271
-\LTcapwidth=\dimen157
-\LT@head=\box47
-\LT@firsthead=\box48
-\LT@foot=\box49
-\LT@lastfoot=\box50
-\LT@cols=\count272
-\LT@rows=\count273
-\c@LT@tables=\count274
-\c@LT@chunks=\count275
-\LT@p@ftn=\toks24
-) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
-Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen158
-\lightrulewidth=\dimen159
-\cmidrulewidth=\dimen160
-\belowrulesep=\dimen161
-\belowbottomsep=\dimen162
-\aboverulesep=\dimen163
-\abovetopsep=\dimen164
-\cmidrulesep=\dimen165
-\cmidrulekern=\dimen166
-\defaultaddspace=\dimen167
-\@cmidla=\count276
-\@cmidlb=\count277
-\@aboverulesep=\dimen168
-\@belowrulesep=\dimen169
-\@thisruleclass=\count278
-\@lastruleclass=\count279
-\@thisrulewidth=\dimen170
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
-Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
-\col@sep=\dimen171
-\ar@mcellbox=\box51
-\extrarowheight=\dimen172
-\NC@list=\toks25
-\extratabsurround=\skip58
-\backup@length=\skip59
-\ar@cellbox=\box52
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count280
-\calc@Bcount=\count281
-\calc@Adimen=\dimen173
-\calc@Bdimen=\dimen174
-\calc@Askip=\skip60
-\calc@Bskip=\skip61
-LaTeX Info: Redefining \setlength on input line 80.
-LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count282
-\calc@Cskip=\skip62
-) (/usr/share/texlive/texmf-dist/tex/latex/footnotehyper/footnotehyper.sty
-Package: footnotehyper 2019/11/07 v1.1a hyperref aware footnote.sty (JFB)
-\FNH@notes=\box53
-\FNH@width=\dimen175
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
-)
-Package graphics Info: Driver file: pdftex.def on input line 105.
-)
-\Gin@req@height=\dimen176
-\Gin@req@width=\dimen177
-) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2020/02/14 3.40 The Babel package
-(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
-File: switch.def 2020/02/14 3.40 Babel switching mechanism
-)
-Package babel Info: You haven't specified a language. I'll use 'nil'
-(babel)             as the main language. Reported on input line 572.
-(/usr/share/texlive/texmf-dist/tex/generic/babel/nil.ldf
-Language: nil 2020/02/14 3.40 Nil language
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/02/14 3.40 Babel common definitions
-\babel@savecnt=\count283
-\U@D=\dimen178
-(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
-\bbl@readstream=\read2
-\bbl@dirlevel=\count284
-)
-\l@nil=\language85
-))
-\everypar=\toks26
-(/usr/share/texlive/texmf-dist/tex/generic/babel/locale/es/babel-spanish.tex)
-Package babel Info: Importing data for spanish
-(babel)             from babel-es.ini. Reported on input line 80.
-Package babel Info: \l@spanish = using hyphenrules for spanish
-(babel)             (\language52) on input line 80.
-(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
-s
-\f@nch@headwidth=\skip63
-\f@nch@O@elh=\skip64
-\f@nch@O@erh=\skip65
-\f@nch@O@olh=\skip66
-\f@nch@O@orh=\skip67
-\f@nch@O@elf=\skip68
-\f@nch@O@erf=\skip69
-\f@nch@O@olf=\skip70
-\f@nch@O@orf=\skip71
-) (/usr/share/texlive/texmf-dist/tex/latex/sttools/floatpag.sty
-Package: floatpag 2012/05/29 v1.1 Different pagestyles on float pages
-Package: floatpag 1999/04/29 FLOAT PAGESTYLE
+\BKM@id=\count295
+)) (/usr/share/texlive/texmf-dist/tex/latex/xurl/xurl.sty
+Package: xurl 2020/01/24 v 0.09 modify URL breaks
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count285
-\l__pdf_internal_box=\box54
+\l__kernel_color_stack_int=\count296
+\l__pdf_internal_box=\box100
 )
 
 LaTeX Warning: Unused global option(s):
@@ -469,17 +551,17 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 ) (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count286
-\scratchdimen=\dimen179
-\scratchbox=\box55
-\nofMPsegments=\count287
-\nofMParguments=\count288
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count289
-\MPscratchDim=\dimen180
-\MPnumerator=\count290
-\makeMPintoPDFobject=\count291
-\everyMPtoPDFconversion=\toks28
+\scratchcounter=\count297
+\scratchdimen=\dimen189
+\scratchbox=\box101
+\nofMPsegments=\count298
+\nofMParguments=\count299
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count300
+\MPscratchDim=\dimen190
+\MPnumerator=\count301
+\makeMPintoPDFobject=\count302
+\everyMPtoPDFconversion=\toks29
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -488,20 +570,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box56
-Package hyperref Info: Link coloring OFF on input line 112.
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
-(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
-Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
-Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-)
-\c@section@level=\count292
-)
-LaTeX Info: Redefining \ref on input line 112.
-LaTeX Info: Redefining \pageref on input line 112.
-LaTeX Info: Redefining \nameref on input line 112.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -511,14 +579,14 @@ LaTeX Info: Redefining \nameref on input line 112.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
 * h-part:(L,W,R)=(56.9055pt, 500.484pt, 56.9055pt)
-* v-part:(T,H,B)=(56.9055pt, 652.70622pt, 85.35826pt)
+* v-part:(T,H,B)=(85.35826pt, 624.25346pt, 85.35826pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
 * \textwidth=500.484pt
-* \textheight=652.70622pt
+* \textheight=624.25346pt
 * \oddsidemargin=-15.36449pt
 * \evensidemargin=-15.36449pt
-* \topmargin=-52.36449pt
+* \topmargin=-23.91173pt
 * \headheight=48.98866pt
 * \headsep=14.22636pt
 * \topskip=10.0pt
@@ -536,6 +604,20 @@ LaTeX Info: Redefining \nameref on input line 112.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+\AtBeginShipoutBox=\box102
+Package hyperref Info: Link coloring OFF on input line 112.
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count303
+)
+LaTeX Info: Redefining \ref on input line 112.
+LaTeX Info: Redefining \pageref on input line 112.
+LaTeX Info: Redefining \nameref on input line 112.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
 14.
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
@@ -586,120 +668,197 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \tf@toc=\write3
 \openout3 = `prueba.toc'.
 
-<prueba_files/figure-latex/unnamed-chunk-1-1.pdf, id=18, 472.76625pt x 148.555p
-t>
-File: prueba_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (type pdf)
-<use prueba_files/figure-latex/unnamed-chunk-1-1.pdf>
-Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-1-1.pdf  used 
-on input line 130.
-(pdftex.def)             Requested size: 472.77951pt x 148.55916pt.
-<municipio2020.png, id=19, 361.35pt x 124.96687pt>
-File: municipio2020.png Graphic file (type png)
-<use municipio2020.png>
-Package pdftex.def Info: municipio2020.png  used on input line 135.
-(pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
- <./municipio2020.PNG> <./prueba_files/figure-latex/unnamed-chunk-1-1.pdf>]
-<prueba_files/figure-latex/unnamed-chunk-2-1.pdf, id=56, 472.76625pt x 143.5362
-5pt>
+<prueba_files/figure-latex/unnamed-chunk-2-1.pdf, id=22, 472.76625pt x 173.6487
+4pt>
 File: prueba_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-2-1.pdf  used 
-on input line 165.
-(pdftex.def)             Requested size: 472.77951pt x 143.54027pt.
-<prueba_files/figure-latex/unnamed-chunk-3-1.pdf, id=57, 472.76625pt x 145.5437
-5pt>
+on input line 130.
+(pdftex.def)             Requested size: 472.77951pt x 173.65361pt.
+<prueba_files/figure-latex/unnamed-chunk-3-1.pdf, id=23, 472.76625pt x 164.615p
+t>
 File: prueba_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-3-1.pdf>
 Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-3-1.pdf  used 
-on input line 173.
-(pdftex.def)             Requested size: 472.77951pt x 145.54782pt.
-<prueba_files/figure-latex/unnamed-chunk-4-1.pdf, id=58, 472.76625pt x 143.5362
-5pt>
-File: prueba_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf)
-<use prueba_files/figure-latex/unnamed-chunk-4-1.pdf>
-Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-4-1.pdf  used 
-on input line 181.
-(pdftex.def)             Requested size: 472.77951pt x 143.54027pt.
-<prueba_files/figure-latex/unnamed-chunk-5-1.pdf, id=59, 472.76625pt x 143.5362
-5pt>
-File: prueba_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
-<use prueba_files/figure-latex/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-5-1.pdf  used 
-on input line 192.
-(pdftex.def)             Requested size: 472.77951pt x 143.54027pt.
+on input line 165.
+(pdftex.def)             Requested size: 472.77951pt x 164.61961pt.
+<municipio2020.png, id=24, 361.35pt x 124.96687pt>
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
-Package pdftex.def Info: municipio2020.png  used on input line 194.
+Package pdftex.def Info: municipio2020.png  used on input line 167.
+(pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+ <./municipio2020.PNG>]
+File: municipio2020.png Graphic file (type png)
+<use municipio2020.png>
+Package pdftex.def Info: municipio2020.png  used on input line 239.
 (pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
 [2 <./prueba_files/figure-latex/unnamed-chunk-2-1.pdf> <./prueba_files/figure-l
 atex/unnamed-chunk-3-1.pdf>]
-<prueba_files/figure-latex/unnamed-chunk-6-1.pdf, id=85, 472.76625pt x 152.57pt
->
-File: prueba_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
-<use prueba_files/figure-latex/unnamed-chunk-6-1.pdf>
-Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-6-1.pdf  used 
-on input line 224.
-(pdftex.def)             Requested size: 472.77951pt x 152.57428pt.
-
-Overfull \vbox (179.87395pt too high) has occurred while \output is active []
-
-File: municipio2020.png Graphic file (type png)
-<use municipio2020.png>
-Package pdftex.def Info: municipio2020.png  used on input line 264.
-(pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
-[3 <./prueba_files/figure-latex/unnamed-chunk-4-1.pdf> <./prueba_files/figure-l
-atex/unnamed-chunk-5-1.pdf> <./prueba_files/figure-latex/unnamed-chunk-6-1.pdf>
-]
-<prueba_files/figure-latex/unnamed-chunk-12-1.pdf, id=118, 493.845pt x 206.7725
+<prueba_files/figure-latex/unnamed-chunk-5-1.pdf, id=79, 472.76625pt x 166.6225
 pt>
-File: prueba_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pdf)
-<use prueba_files/figure-latex/unnamed-chunk-12-1.pdf>
-Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-12-1.pdf  used
- on input line 308.
-(pdftex.def)             Requested size: 493.84378pt x 206.77199pt.
+File: prueba_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-5-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-5-1.pdf  used 
+on input line 243.
+(pdftex.def)             Requested size: 472.77951pt x 166.62717pt.
+
+Overfull \hbox (13.3869pt too wide) in paragraph at lines 261--261
+ []|[]\T1/lmr/m/n/11 Hospitalizaciones 
+ []
+
+
+Overfull \hbox (3.62822pt too wide) in paragraph at lines 261--261
+ []|[]\T1/lmr/m/n/11 Hospitalizacion 
+ []
+
+
+Overfull \hbox (13.3869pt too wide) in paragraph at lines 269--269
+ []|[]\T1/lmr/m/n/11 Hospitalizaciones 
+ []
+
+
+Overfull \hbox (3.62822pt too wide) in paragraph at lines 269--269
+ []|[]\T1/lmr/m/n/11 Hospitalizacion 
+ []
+
+<prueba_files/figure-latex/unnamed-chunk-7-1.pdf, id=80, 472.76625pt x 173.6487
+4pt>
+File: prueba_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-7-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-7-1.pdf  used 
+on input line 323.
+(pdftex.def)             Requested size: 472.77951pt x 173.65361pt.
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
-Package pdftex.def Info: municipio2020.png  used on input line 313.
+Package pdftex.def Info: municipio2020.png  used on input line 327.
 (pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
-[4]
+[3 <./prueba_files/figure-latex/unnamed-chunk-5-1.pdf>]
+<prueba_files/figure-latex/unnamed-chunk-10-1.pdf, id=94, 495.8525pt x 166.6225
+pt>
+File: prueba_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-10-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-10-1.pdf  used
+ on input line 404.
+(pdftex.def)             Requested size: 495.85129pt x 166.62209pt.
+
+Overfull \vbox (14.70264pt too high) has occurred while \output is active []
+
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
-Package pdftex.def Info: municipio2020.png  used on input line 314.
+Package pdftex.def Info: municipio2020.png  used on input line 405.
 (pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
-[5 <./prueba_files/figure-latex/unnamed-chunk-12-1.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 340.
+[4 <./prueba_files/figure-latex/unnamed-chunk-7-1.pdf> <./prueba_files/figure-l
+atex/unnamed-chunk-10-1.pdf>]
+Overfull \hbox (18.0371pt too wide) in paragraph at lines 420--420
+ []|[]\T1/lmr/m/n/11 Aislamientos 
+ []
+
+
+Overfull \hbox (18.0371pt too wide) in paragraph at lines 428--428
+ []|[]\T1/lmr/m/n/11 Aislamientos 
+ []
+
+<prueba_files/figure-latex/unnamed-chunk-13-1.pdf, id=116, 499.8675pt x 214.802
+5pt>
+File: prueba_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-13-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-13-1.pdf  used
+ on input line 498.
+(pdftex.def)             Requested size: 499.87389pt x 214.80524pt.
+<prueba_files/figure-latex/unnamed-chunk-14-1.pdf, id=117, 472.76625pt x 143.53
+625pt>
+File: prueba_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-14-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-14-1.pdf  used
+ on input line 509.
+(pdftex.def)             Requested size: 472.77951pt x 143.54027pt.
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
-Package pdftex.def Info: municipio2020.png  used on input line 340.
+Package pdftex.def Info: municipio2020.png  used on input line 539.
 (pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
-[6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 340.
+[5] [6 <./prueba_files/figure-latex/unnamed-chunk-13-1.pdf> <./prueba_files/fig
+ure-latex/unnamed-chunk-14-1.pdf>]
+<prueba_files/figure-latex/unnamed-chunk-15-1.pdf, id=145, 472.76625pt x 152.57
+pt>
+File: prueba_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-15-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-15-1.pdf  used
+ on input line 541.
+(pdftex.def)             Requested size: 472.77951pt x 152.57428pt.
+File: municipio2020.png Graphic file (type png)
+<use municipio2020.png>
+Package pdftex.def Info: municipio2020.png  used on input line 594.
+(pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
+[7 <./prueba_files/figure-latex/unnamed-chunk-15-1.pdf>]
+<prueba_files/figure-latex/unnamed-chunk-18-1.pdf, id=165, 499.8675pt x 206.772
+5pt>
+File: prueba_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-18-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-18-1.pdf  used
+ on input line 625.
+(pdftex.def)             Requested size: 499.88152pt x 206.77829pt.
+<prueba_files/figure-latex/unnamed-chunk-19-1.pdf, id=166, 459.7175pt x 316.181
+24pt>
+File: prueba_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-19-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-19-1.pdf  used
+ on input line 637.
+(pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
+<prueba_files/figure-latex/unnamed-chunk-20-1.pdf, id=167, 459.7175pt x 316.181
+24pt>
+File: prueba_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-20-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-20-1.pdf  used
+ on input line 645.
+(pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
+File: municipio2020.png Graphic file (type png)
+<use municipio2020.png>
+Package pdftex.def Info: municipio2020.png  used on input line 728.
+(pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
+[8] [9 <./prueba_files/figure-latex/unnamed-chunk-18-1.pdf> <./prueba_files/fig
+ure-latex/unnamed-chunk-19-1.pdf>] [10 <./prueba_files/figure-latex/unnamed-chu
+nk-20-1.pdf>]
+<prueba_files/figure-latex/unnamed-chunk-22-1.pdf, id=213, 573.14125pt x 216.81
+pt>
+File: prueba_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file (type pdf)
+<use prueba_files/figure-latex/unnamed-chunk-22-1.pdf>
+Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-22-1.pdf  used
+ on input line 730.
+(pdftex.def)             Requested size: 500.49164pt x 189.32782pt.
+File: municipio2020.png Graphic file (type png)
+<use municipio2020.png>
+Package pdftex.def Info: municipio2020.png  used on input line 732.
+(pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
+[11 <./prueba_files/figure-latex/unnamed-chunk-22-1.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 758.
+File: municipio2020.png Graphic file (type png)
+<use municipio2020.png>
+Package pdftex.def Info: municipio2020.png  used on input line 758.
+(pdftex.def)             Requested size: 82.27066pt x 28.45193pt.
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 758.
 (./prueba.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 340.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 340.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 758.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 758.
  ) 
 Here is how much of TeX's memory you used:
- 14249 strings out of 481239
- 209495 string characters out of 5920377
- 513209 words of memory out of 5000000
- 29164 multiletter control sequences out of 15000+600000
- 586738 words of font info for 86 fonts, out of 8000000 for 9000
+ 14558 strings out of 481239
+ 215138 string characters out of 5920377
+ 525679 words of memory out of 5000000
+ 29424 multiletter control sequences out of 15000+600000
+ 590069 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,15n,45p,805b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
-ips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/s
-hare/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf/fonts/type1/public/lm
-/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texm
-f/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmm
-i10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fon
-ts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb
->
-Output written on prueba.pdf (6 pages, 223025 bytes).
+ 34i,15n,45p,1036b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/
+public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/s
+hare/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb>
+Output written on prueba.pdf (12 pages, 274926 bytes).
 PDF statistics:
- 232 PDF objects out of 1000 (max. 8388607)
- 192 compressed objects within 2 object streams
- 45 named destinations out of 1000 (max. 500000)
- 10393 words of extra memory for PDF output out of 12000 (max. 10000000)
+ 325 PDF objects out of 1000 (max. 8388607)
+ 265 compressed objects within 3 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 10450 words of extra memory for PDF output out of 12000 (max. 10000000)
 

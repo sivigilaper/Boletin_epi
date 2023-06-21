@@ -1,19 +1,19 @@
 \babel@toc {spanish}{}
 \contentsline {section}{\numberline {1}Eventos Trazadores}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Infección respiratoria aguda}{1}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Circulación virus respiratorios}{5}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Enfermedades transmitidas por vectores}{6}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.2}Circulación virus respiratorios}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Enfermedades transmitidas por vectores}{5}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Infección Diarreica Aguda}{7}{subsection.1.4}%
-\contentsline {section}{\numberline {2}Eventos de interes en salud pública}{8}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Mortalidad materno-perinatal}{8}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Agresiones por animales potencialmente transmisores de rabia}{8}{subsection.2.2}%
+\contentsline {section}{\numberline {2}Eventos de interes en salud pública}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Mortalidad materno-perinatal}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Agresiones por animales potencialmente transmisores de rabia}{7}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Tuberculosis}{8}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}VIH/SIDA}{8}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Sìfilis gestacional y congénita}{8}{subsection.2.5}%
 \contentsline {subsection}{\numberline {2.6}Cáncer}{8}{subsection.2.6}%
-\contentsline {subsection}{\numberline {2.7}Defectos congénitos y bajo peso al nacer}{9}{subsection.2.7}%
-\contentsline {subsection}{\numberline {2.8}Inmunoprevenibles}{9}{subsection.2.8}%
-\contentsline {subsection}{\numberline {2.9}Virus nuevo (COVID-19)}{9}{subsection.2.9}%
-\contentsline {section}{\numberline {3}Vigilancia intensificada de exantematicas}{9}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Vigilancia Viruela}{9}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Brote multi-pais Viruela Simica (Pereira)}{9}{subsection.3.2}%
+\contentsline {subsection}{\numberline {2.7}Defectos congénitos y bajo peso al nacer}{8}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Inmunoprevenibles}{8}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}Virus nuevo (COVID-19)}{8}{subsection.2.9}%
+\contentsline {section}{\numberline {3}Vigilancia intensificada de exantematicas}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Vigilancia Viruela}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Brote multi-pais Viruela Simica (Pereira)}{8}{subsection.3.2}%
