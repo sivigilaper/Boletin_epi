@@ -14,7 +14,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 24 - 2023} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 25 - 2023} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -78,6 +78,10 @@ infe<- evento_995 %>%
     c_hosp = sum(tot_irag),
     c_uci = sum(tot_irauci),
     c_ext = sum(tot_iraext))
+ ######### QUITAR PARA LA PROXIMA SEMANA  ######### QUITAR PARA LA PROXIMA SEMANA 
+infe[25,"c_hosp"] <- 52       
+infe[24,"c_hosp"] <- 60
+ ######### QUITAR PARA LA PROXIMA SEMANA  ######### QUITAR PARA LA PROXIMA SEMANA 
 write_excel_csv(infe, file = "/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls")
 ###################################################
 evento_998<-evento_998 %>%
@@ -102,15 +106,15 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
   mutate(across(everything(), as.character))
 
 epi3 <- epi3 %>% 
-  filter(as.numeric(semana)<=24) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=25) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=24) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=25) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=24) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=25) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana)) %>% 
   add_row(epi3)
 
@@ -135,7 +139,7 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica debajo del umbral estacional.
+A semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica sobre del umbral estacional.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2023", fig.height=3.3, fig.width=7, fig.pos='h'}
 plot(ira$semana, ira$icinftotal, type='l', ylim=c(1,4000), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -302,7 +306,7 @@ evento_995  %>%
 
 ```{r, echo=FALSE, warning=FALSE}
 filmarray2 <- filmarray2 %>% 
-  mutate(fec_muestra = guess_dates(FECHA, modern_excel = TRUE))
+  mutate(fec_muestra = ymd(FECHA))
 filmarray2 <- filmarray2 %>% 
   mutate(resultado = case_when(RESULTADO == "NONE"~"Negativo",
                                RESULTADO != "NONE"~"Positivo")) %>% 
@@ -569,7 +573,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:24, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:25, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
