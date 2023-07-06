@@ -14,7 +14,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 25 - 2023} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 26 - 2023} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -79,7 +79,7 @@ infe<- evento_995 %>%
     c_uci = sum(tot_irauci),
     c_ext = sum(tot_iraext))
  ######### QUITAR PARA LA PROXIMA SEMANA  ######### QUITAR PARA LA PROXIMA SEMANA 
-infe[25,"c_hosp"] <- 52       
+#infe[25,"c_hosp"] <- 52       
 infe[24,"c_hosp"] <- 60
  ######### QUITAR PARA LA PROXIMA SEMANA  ######### QUITAR PARA LA PROXIMA SEMANA 
 write_excel_csv(infe, file = "/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls")
@@ -106,15 +106,15 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
   mutate(across(everything(), as.character))
 
 epi3 <- epi3 %>% 
-  filter(as.numeric(semana)<=25) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=26) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=25) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=26) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=25) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=26) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana)) %>% 
   add_row(epi3)
 
@@ -139,7 +139,7 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica sobre del umbral estacional.
+A semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica debajo del umbral estacional.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2023", fig.height=3.3, fig.width=7, fig.pos='h'}
 plot(ira$semana, ira$icinftotal, type='l', ylim=c(1,4000), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -159,7 +159,7 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general para esta semana presenta comportamiento inusual, lo cual esta en verificación (Figura 2). La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general para esta semana presenta comportamiento dentro de lo esperado, en la semana 25 se presenta un comportamiento inusual verificado, el cual corresponde a dato incorrecto y este sera ajustado en proxima semana epidemiologica (Figura 2). La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2023", fig.height=3.3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,170), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -346,12 +346,14 @@ filmarray2 %>%
   tabyl(semana, resultado) %>% 
   adorn_percentages() %>% 
   pivot_longer(cols = c("Negativo","Positivo"), names_to = "resultado") %>% 
-  ggplot(aes(x = semana, y = value, fill = resultado))+ geom_col(color="black")+
+  ggplot(aes(x = semana, y = value, fill = resultado))+ geom_col()+
   scale_x_continuous(limits = c(0,53), breaks = seq(1,52,1))+
   labs(x = "Semana epidemiologica",
        y = "Proporción",
-       fill = "Resultado")+ theme_minimal()+
-  theme(legend.position = "top", axis.text.x = element_text(size = 6))
+       fill = "Resultado")+
+  theme_classic()+
+  theme(legend.position = "top", axis.text.x = element_text(size = 6), legend.text = element_text(size = 7), legend.title = element_text(size = 8))+
+  scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
 \newpage
 A periodo epidemiologico 5 de 2023 `r nrow(filmarray2) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para lo corrido del año son:
@@ -441,12 +443,13 @@ aislamiento %>%
   group_by(semana, viral) %>% 
   summarise(Aislamientos = n(), .groups = "keep") %>% 
   ggplot(aes(x = semana, y = Aislamientos,
-             fill = factor(viral, levels = c("Otras","Adenovirus","Enterovirus","Rhinovirus", "VSR","Influenza B","SARS-CoV-2","metaneumovirus","Parainfluenza Virus (1,2,3)", "Influenza AH1N1"))))+
+             fill = factor(viral, levels = c("Otras","Adenovirus","Enterovirus","Rhinovirus", "VSR","Influenza B","SARS-CoV-2","metaneumovirus","Parainfluenza Virus (1,2,3)", "Influenza AH1N1", "Influenza A"))))+
            geom_col()+
            scale_x_continuous(limits = c(0,53), breaks = seq(1,52,1))+
-           labs(x = "Semana epidemiologica", y = "Aislamientos (n)")+ theme_minimal()+
-    theme(legend.title = element_blank(), legend.position = "bottom", axis.text.x = element_text(size=6))+
-  scale_fill_brewer(palette= "Set1")
+           labs(x = "Semana epidemiologica", y = "Aislamientos (n)")+
+  theme_classic()+
+    theme(legend.title = element_blank(), legend.position = "bottom", axis.text.x = element_text(size=6), legend.text = element_text(size = 6))+
+  scale_fill_manual(values = c("#A6C7F0","#95CFA5","#4BA52F","#E43149","#A600F0","#5FA1D4","#9767BB","#EC702D","#4174AD","#6DBFBE","#ED70C3"))
 ```
 
 ## Enfermedades transmitidas por vectores
@@ -549,7 +552,7 @@ Durante este año 2023, se han notificado a semana epidemiologica `r ncol(casos_
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=3 , fig.width=7, fig.cap="Notificacion semanal COVID-19, Pereira 2023"}
 ggplot(casos2022 %>% filter(cod_eve == "346"))+
-  geom_bar(aes(x=as.numeric(semana)), fill = "blue" ,position = "dodge")+ theme_bw()+
+  geom_bar(aes(x=as.numeric(semana)), fill = "#70BEBD" ,position = "dodge")+ theme_classic()+
   xlab("Semana/epidemiologica")+
   ylab("Casos notificados")+
   scale_x_continuous(limits = c(0,52), breaks = seq(1,52,1))+
@@ -573,7 +576,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:25, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:26, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
