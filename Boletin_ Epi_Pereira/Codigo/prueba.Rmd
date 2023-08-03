@@ -14,7 +14,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 29 - 2023} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 30 - 2023} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -79,9 +79,6 @@ infe<- evento_995 %>%
     c_hosp = sum(tot_irag),
     c_uci = sum(tot_irauci),
     c_ext = sum(tot_iraext))
- ######### QUITAR PARA LA PROXIMA SEMANA  ######### QUITAR PARA LA PROXIMA SEMANA 
-#infe[24,"c_hosp"] <- 60
- ######### QUITAR PARA LA PROXIMA SEMANA  ######### QUITAR PARA LA PROXIMA SEMANA 
 write_excel_csv(infe, file = "/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls")
 ###################################################
 evento_998<-evento_998 %>%
@@ -106,15 +103,15 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
   mutate(across(everything(), as.character))
 
 epi3 <- epi3 %>% 
-  filter(as.numeric(semana)<=29) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=30) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=29) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=30) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=29) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=30) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana)) %>% 
   add_row(epi3)
 
@@ -252,7 +249,6 @@ evento_995  %>%
   flextable::align(j = c(2:4), align = "center", part = "all" )
 ```
 
-
 En consulta externa y urgencias se han reportado de manera acumulada `r format(sum(evento_995$tot_exturg), scientific = F)` de consultas, donde las consultas por infección respiratoria aguda ocupan el `r round(sum(evento_995$iraext)/sum(evento_995$tot_exturg)*100,digits=3)`%. 
 
 ```{r, echo=FALSE, fig.cap="Canal endémico consulta externa y urgencias por IRA, Pereira 2023", fig.height=3.3, fig.width=7}
@@ -372,7 +368,7 @@ filmarray2 %>%
   scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
 \newpage
-A periodo epidemiologico 7 de 2023 `r nrow(filmarray2) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para lo corrido del año son:
+A periodo epidemiologico 8 de 2023 `r nrow(filmarray2) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para lo corrido del año son:
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -605,9 +601,9 @@ ggplot(casos2022 %>% filter(cod_eve == "346"))+
 
 ```
 
-# Vigilancia intensificada de exantematicas
+# Vigilancia  de exantematica
 
-## Vigilancia Viruela
+## Vigilancia Varicela en distintos grupos poblacionales
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Comportamiento de varicela para Hombres por grupos de edad, Pereira 2023"}
 ####################################################################################################
@@ -619,7 +615,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:29, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:30, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
@@ -721,37 +717,40 @@ m44 <- ggplot(varicela_ajus %>%
 plot_grid(m11,m22,m33,m44)
 ```
 
-## Brote multi-pais Viruela Simica (Pereira)
 
-A semana epidemiologica `r ncol(casos_sem)` se han reportado `r nrow(viruela) `  alertas al sistema de vigilancia que corresponden a casos probables de los cuales se tiene confirmación en veintitres casos (n= `r table(viruela$clasificacion_final_del_caso)[2] `),  (n= `r table(viruela$clasificacion_final_del_caso)[1]`) descartado y `r table(viruela$clasificacion_final_del_caso)[3]` pendiente de resultado. Algunas de los caracteristicas demograficas de casos probables y confirmados se muestran acontinuación:
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-viruela %>% filter(clasificacion_final_del_caso=="POSITIVO") %>% 
-  select(edad, sexo, orientacion) %>% 
-  
-  tbl_summary(label = list(edad~"Edad",
-                           sexo~"Sexo",
-                           orientacion~"Orientación sexual"),
-              missing_text = "No reportado") %>% 
-  modify_header(label = "Variable") %>% 
-  as_tibble() %>% 
-  #gt() %>% cols_label(caso = "Caso", edad = "Edad", sexo = "Sexo", clasificacion_final_del_caso = "Clasificación") %>% 
-  #tab_header(title = "Caracteristicas demograficas de casos notificados, Pereira 2022-2023") %>% 
-  flextable() %>% 
-  flextable::autofit() %>% 
-  flextable::set_header_labels(
-      Variable = " ",
-      `**N = 38**` = "Casos") %>% 
-  flextable::align(j = c(2), align = "center", part = "all" )
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+# brote VIRUELA 2022
+# A semana epidemiologica `r ncol(casos_sem)` se han reportado `r nrow(viruela) `  alertas al sistema de vigilancia que corresponden a casos probables de los cuales se tiene confirmación en veintitres casos (n= `r table(viruela$clasificacion_final_del_caso)[2] `),  (n= `r table(viruela$clasificacion_final_del_caso)[1]`) descartado y `r table(viruela$clasificacion_final_del_caso)[3]` pendiente de resultado. Algunas de los caracteristicas demograficas de casos probables y confirmados se muestran acontinuación:
+# 
+# viruela %>% filter(clasificacion_final_del_caso=="POSITIVO") %>% 
+#   select(edad, sexo, orientacion) %>% 
+#   
+#   tbl_summary(label = list(edad~"Edad",
+#                            sexo~"Sexo",
+#                            orientacion~"Orientación sexual"),
+#               missing_text = "No reportado") %>% 
+#   modify_header(label = "Variable") %>% 
+#   as_tibble() %>% 
+#   #gt() %>% cols_label(caso = "Caso", edad = "Edad", sexo = "Sexo", clasificacion_final_del_caso = "Clasificación") %>% 
+#   #tab_header(title = "Caracteristicas demograficas de casos notificados, Pereira 2022-2023") %>% 
+#   flextable() %>% 
+#   flextable::autofit() %>% 
+#   flextable::set_header_labels(
+#       Variable = " ",
+#       `**N = 38**` = "Casos") %>% 
+#   flextable::align(j = c(2), align = "center", part = "all" )
+# 
+
+## curva epidemica viruela durante brote
+# viruela_curva <- viruela %>% 
+#   filter(clasificacion_final_del_caso!="NEGATIVO")
+# plot(incidence(as.Date(viruela_curva$fis), groups = viruela_curva$clasificacion_final_del_caso, first_date = "2022-07-10", last_date = "2023-02-28", interval = 7), border = "black")+ theme_classic()+
+#   coord_cartesian(ylim = c(0,7))+ labs(title = "Curva epidemica casos viruela simica", x = "Fecha inicio de sintomas", y = "Casos")+ scale_x_date(date_breaks = "7 day", date_labels = "%d %b %y")+
+#   theme(legend.position = "bottom", axis.text.x = element_text(angle = 45, size = 6))
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.height=3.2 , fig.width=8}
-viruela_curva <- viruela %>% 
-  filter(clasificacion_final_del_caso!="NEGATIVO")
-plot(incidence(as.Date(viruela_curva$fis), groups = viruela_curva$clasificacion_final_del_caso, first_date = "2022-07-10", last_date = "2023-02-28", interval = 7), border = "black")+ theme_classic()+
-  coord_cartesian(ylim = c(0,7))+ labs(title = "Curva epidemica casos viruela simica", x = "Fecha inicio de sintomas", y = "Casos")+ scale_x_date(date_breaks = "7 day", date_labels = "%d %b %y")+
-  theme(legend.position = "bottom", axis.text.x = element_text(angle = 45, size = 6))
-```
 
 \newpage
 
