@@ -14,7 +14,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 35 - 2023} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 36 - 2023} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -65,6 +65,8 @@ viruela <- read_sheet("https://docs.google.com/spreadsheets/d/1KLou92VRu8r5buo6j
   clean_names()
 saveRDS(viruela,"/cloud/project/Boletin_ Epi_Pereira/Datos/viruela.rds")
 ###################################################
+######### BORRAR CUANDO SE CVERIFIQUE QUE AJUSTO EMI
+evento_995[which(evento_995$nom_upgd== "GRUPO EMI" & evento_995$semana == "34"), "tot_iraext"] <- "123"
 evento_995<-evento_995 %>%
   filter(ajuste!="6") %>%
   filter(ajuste!= "D") %>%
@@ -103,15 +105,15 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
   mutate(across(everything(), as.character))
 
 epi3 <- epi3 %>% 
-  filter(as.numeric(semana)<=35) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=36) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=35) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=36) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=35) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=36) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana)) %>% 
   add_row(epi3)
 
@@ -125,11 +127,11 @@ saveRDS(casos2022,"/cloud/project/Boletin_ Epi_Pereira/Datos/casos2022.rds")
 
 # /CirGarGen/
 # /cont_jmestrada/
-# PARA REVISION DE COMPORTAMIENTO INUSUAL EN IRA COLECTVA
-# rev <- evento_995 %>% 
-#   group_by(nom_upgd, semana) %>% 
-#   summarise(sum(tot_iraext)) %>% 
-#   ungroup() %>% 
+#PARA REVISION DE COMPORTAMIENTO INUSUAL EN IRA COLECTVA
+# rev <- evento_995 %>%
+#   group_by(nom_upgd, semana) %>%
+#   summarise(sum(tot_ira)) %>%
+#   ungroup() %>%
 #   pivot_wider(names_from = semana, values_from = `sum(tot_iraext)`)
 
 ```
@@ -622,7 +624,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:35, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:36, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
@@ -776,7 +778,6 @@ Enfermera - SIVIGILA
 ***Angela Monsalve Esp. Epi***
 
 Epidemiologa
-
 
 **Alcaldia de Pereira**
 
