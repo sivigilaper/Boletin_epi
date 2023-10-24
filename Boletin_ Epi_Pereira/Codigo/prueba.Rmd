@@ -130,9 +130,9 @@ saveRDS(casos2022,"/cloud/project/Boletin_ Epi_Pereira/Datos/casos2022.rds")
 # #PARA REVISION DE COMPORTAMIENTO INUSUAL EN IRA COLECTVA
 # rev <- evento_995 %>%
 #   group_by(nom_upgd, semana) %>%
-#   summarise(sum(tot_irag)) %>%
+#   summarise(sum(tot_irauci)) %>%
 #   ungroup() %>%
-#   pivot_wider(names_from = semana, values_from = `sum(tot_irag)`)
+#   pivot_wider(names_from = semana, values_from = `sum(tot_irauci)`)
 ```
 
 # Eventos Trazadores
@@ -550,7 +550,7 @@ En la semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron `r casos
 | Sarampion           |                   0                    | `r round(as.numeric(histo[22,ncol(casos_sem)+1]), digits=0)` |                `r round(dpois(0, as.numeric(histo[22,ncol(casos_sem)+1])), digits=2)`                 |
 | Tosferina           |                   0                    |                              0                               |                                                   0                                                   |
 | Sifilis gestacional |  `r casos_sem["750",ncol(casos_sem)]`  | `r round(as.numeric(histo[24,ncol(casos_sem)+1]), digits=0)` | `r round(dpois(casos_sem["750",ncol(casos_sem)], as.numeric(histo[24,ncol(casos_sem)+1])), digits=2)` |
-| Sifilis congénita   |  `r casos_sem["750",ncol(casos_sem)]`  | `r round(as.numeric(histo[23,ncol(casos_sem)+1]), digits=0)` |                `r round(dpois(casos_sem["750",ncol(casos_sem)], as.numeric(histo[23,ncol(casos_sem)+1])), digits=2)`                 |
+| Sifilis congénita   |  `r casos_sem["740",ncol(casos_sem)]`  | `r round(as.numeric(histo[23,ncol(casos_sem)+1]), digits=0)` |                `r round(dpois(casos_sem["740",ncol(casos_sem)], as.numeric(histo[23,ncol(casos_sem)+1])), digits=2)`                 |
 
 ## Agresiones por animales potencialmente transmisores de rabia
 
