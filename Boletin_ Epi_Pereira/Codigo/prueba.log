@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.8.25)  24 OCT 2023 17:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.8.25)  2 NOV 2023 15:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -906,7 +906,7 @@ Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 777.
  ) 
 Here is how much of TeX's memory you used:
  14665 strings out of 481239
- 216294 string characters out of 5920377
+ 216296 string characters out of 5920377
  528242 words of memory out of 5000000
  29530 multiletter control sequences out of 15000+600000
  590666 words of font info for 90 fonts, out of 8000000 for 9000
@@ -916,7 +916,7 @@ Here is how much of TeX's memory you used:
 public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/s
 hare/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/publ
 ic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb>
-Output written on prueba.pdf (12 pages, 277553 bytes).
+Output written on prueba.pdf (12 pages, 278244 bytes).
 PDF statistics:
  308 PDF objects out of 1000 (max. 8388607)
  251 compressed objects within 3 object streams
