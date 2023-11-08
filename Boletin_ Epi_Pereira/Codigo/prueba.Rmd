@@ -14,7 +14,7 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 43 - 2023} 
+- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 44 - 2023} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -105,15 +105,15 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
   mutate(across(everything(), as.character))
 
 epi3 <- epi3 %>% 
-  filter(as.numeric(semana)<=43) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=44) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=43) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=44) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=43) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=44) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana)) %>% 
   add_row(epi3)
 
@@ -128,11 +128,11 @@ saveRDS(casos2022,"/cloud/project/Boletin_ Epi_Pereira/Datos/casos2022.rds")
 # /CirGarGen/
 # /cont_jmestrada/
 # #PARA REVISION DE COMPORTAMIENTO INUSUAL EN IRA COLECTVA
-rev <- evento_995 %>%
-  group_by(nom_upgd, semana) %>%
-  summarise(sum(tot_irag)) %>%
-  ungroup() %>%
-  pivot_wider(names_from = semana, values_from = `sum(tot_irag)`)
+# rev <- evento_995 %>%
+#   group_by(nom_upgd, semana) %>%
+#   summarise(sum(tot_irag)) %>%
+#   ungroup() %>%
+#   pivot_wider(names_from = semana, values_from = `sum(tot_irag)`)
 ```
 
 # Eventos Trazadores
@@ -518,7 +518,7 @@ legend(10,50, c("IC inf 95%","Media", "IC sup 95%", "2023"), col=c("green","yell
 | Zika        |                   0                    |                        0                         |
 | Malaria     | `r casos_sem2["465",ncol(casos_sem2)]` | `r sum(casos_sem2[c("465"),1:ncol(casos_sem2)])` |
 
-según canal endémico (figura 5) se identifica dengue estable sin cambios importantes sobre nivel de alerta y zona de control del evento.
+según canal endémico (figura 5) se identifica dengue con cambios importantes de aumento en las ultimas dos semanas epidemiologicas, tocando para esta semana 44 el limite superior de incremento.
 
 ## Infección Diarreica Aguda
 
@@ -621,7 +621,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:43, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:44, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
