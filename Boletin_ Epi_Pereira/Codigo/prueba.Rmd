@@ -14,7 +14,11 @@ header-includes:
 - \addtolength{\headheight}{1.3cm}
 - \pagestyle{fancyplain}
 - \lhead{\includegraphics[height=1.0cm]{municipio2020.png}}
-- \fancyhead[R]{Secretaria de Salud Pública y Seguridad Social \\ Vigilancia en Salud Pública \\ Semana 44 - 2023} 
+- 
+  \fancyhead[R]{
+  Secretaria de Salud Pública y Seguridad Social \\ 
+  Vigilancia en Salud Pública \\ 
+  Semana 45 - 2023} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -44,6 +48,7 @@ library(incidence)
 library(flextable)
 library(binom)
 library(ggpp)
+epiweek <- lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
 dengue2018 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/dengue2018.xlsx")
@@ -105,15 +110,15 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
   mutate(across(everything(), as.character))
 
 epi3 <- epi3 %>% 
-  filter(as.numeric(semana)<=44) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=epiweek(today()-7)) %>%       # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=44) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=epiweek(today()-7)) %>%    # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana))
 
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=44) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
+  filter(as.numeric(semana)<=epiweek(today()-7)) %>%   # SIEMPRE CAMBIAR A LA SEMANA NOTIFICADA DEL BOLETIN
   mutate(semana = as.numeric(semana)) %>% 
   add_row(epi3)
 
@@ -146,7 +151,7 @@ consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$t
 
 A semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por debajo del umbral estacional.
 
-```{r, echo=FALSE, fig.cap="Canal endémico IRA , Pereira 2023", fig.height=3.3, fig.width=7, fig.pos='h'}
+```{r, echo=FALSE, fig.cap= paste("Canal endémico IRA , Pereira 2023","semana epidemiologica",epiweek), fig.height=3.3, fig.width=7, fig.pos='h',}
 plot(ira$semana, ira$icinftotal, type='l', ylim=c(1,4000), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
 lines(ira$icsuptotal, col="red",lwd=3, cex=0.7)
 abline(1633,0,1633, col="yellow", lwd=3)
@@ -621,7 +626,7 @@ varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
   group_by(semana, sexo_, gr_edad) %>% count(semana, name = "casos") %>% 
   mutate(semana = as.numeric(semana))
 
-varicela_ajus <- expand.grid(semana = 1:44, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
+varicela_ajus <- expand.grid(semana = 1:epiweek, sexo_=c("F","M"), gr_edad=c("0-9","10 a 19","20 a 40","Mayores a 40"))
 
 varicela_ajus <- varicela_ajus %>% left_join(varicela, by=c("semana","sexo_","gr_edad")) %>%
   replace_na(list(casos = 0))
