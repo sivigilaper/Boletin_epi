@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 48 - 2023} 
+  Semana 50 - 2023} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -523,7 +523,7 @@ legend(10,50, c("IC inf 95%","Media", "IC sup 95%", "2023"), col=c("green","yell
 | Zika        |                   0                    |                        0                         |
 | Malaria     | `r casos_sem2["465",ncol(casos_sem2)]` | `r sum(casos_sem2[c("465"),1:ncol(casos_sem2)])` |
 
-según canal endémico (figura 5) se identifica dengue con cambios importantes de aumento en las ultimas dos semanas epidemiologicas, sobre pasando el limite superior para semana 44 y 45. 
+según canal endémico (figura 5) se identifica dengue con cambios importantes de aumento en las ultimas seis semanas epidemiologicas, mur cercano a limete superior de brote.
 
 ## Infección Diarreica Aguda
 
