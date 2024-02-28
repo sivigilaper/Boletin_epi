@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 51 - 2023} 
+  Semana 8 - 2024} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -48,14 +48,16 @@ library(incidence)
 library(flextable)
 library(binom)
 library(ggpp)
-epiweek <- lubridate::epiweek(today()-7)
+library(rio)
+epiweek <- 8
+  #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
 dengue2018 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/dengue2018.xlsx")
 histoira<-read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/histoira.csv")
 ira<-read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/ira.csv")
-evento_995 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/2023_995.xlsx")
-evento_998 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/2023_998.xlsx")
+evento_995 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/2024_995.xlsx")
+evento_998 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/2024_998.xlsx")
 #evento_346 <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/db346.xlsx") 
 #evento_346 <- evento_346 %>% filter(ajuste_=="0" | ajuste_=="3" | ajuste_=="4" | ajuste_=="5" | ajuste_=="7", nmun_proce == "PEREIRA", semana <= 5)   #### CAMBIAR CADA SEMANA 
 
@@ -89,7 +91,7 @@ infe<- evento_995 %>%
 write_excel_csv(infe, file = "/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls")
 ###################################################
 evento_998<-evento_998 %>%
-  filter(ajuste!="6", año == "2023") %>%
+  filter(ajuste!="6") %>%
   filter(ajuste!= "D") %>%
   mutate(semana= as.numeric(semana)) %>%
   mutate(cas_conc= as.numeric(cas_conc))
@@ -97,11 +99,11 @@ diarreas<- evento_998 %>%
   group_by(semana) %>% 
   summarise(
     casos = sum(cas_conc))
-write_excel_csv(diarreas, file = "/cloud/project/Boletin_ Epi_Pereira/Datos/eda2018.xls")
+export(diarreas,"/cloud/project/Boletin_ Epi_Pereira/Datos/eda2018.xlsx")
 ###################################################
 ira2018 <- read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls")
 eda<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/eda.xlsx")
-eda2018<-read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/eda2018.xls")
+eda2018<-import("/cloud/project/Boletin_ Epi_Pereira/Datos/eda2018.xlsx")
 epi1<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi1.csv") %>% 
   mutate(across(everything(), as.character))
 epi2<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi2.csv") %>% 
@@ -110,15 +112,15 @@ epi3<- read.csv("/cloud/project/Boletin_ Epi_Pereira/Datos/epi3.csv") %>%
   mutate(across(everything(), as.character))
 
 epi3 <- epi3 %>% 
-  filter(as.numeric(semana)<=epiweek(today()-7)) %>%       
+  filter(as.numeric(semana)<=epiweek) %>%       
   mutate(semana = as.numeric(semana))
 
 epi1<-epi1 %>% 
-  filter(as.numeric(semana)<=epiweek(today()-7)) %>%  
+  filter(as.numeric(semana)<=epiweek) %>%  
   mutate(semana = as.numeric(semana))
 
 epi2<-epi2 %>% 
-  filter(as.numeric(semana)<=epiweek(today()-7)) %>%
+  filter(as.numeric(semana)<=epiweek) %>%
   mutate(semana = as.numeric(semana)) %>% 
   add_row(epi3)
 
@@ -149,34 +151,34 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por debajo del umbral estacional.
+A semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se ubica por debajo del umbral estacional.
 
-```{r, echo=FALSE, fig.cap= paste("Canal endémico IRA , Pereira 2023","semana epidemiologica",epiweek), fig.height=3.3, fig.width=7, fig.pos='h',}
+```{r, echo=FALSE, fig.cap= paste("Canal endémico IRA , Pereira 2024","semana epidemiologica",epiweek), fig.height=3.3, fig.width=7, fig.pos='h',}
 plot(ira$semana, ira$icinftotal, type='l', ylim=c(1,4000), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
 lines(ira$icsuptotal, col="red",lwd=3, cex=0.7)
 abline(1633,0,1633, col="yellow", lwd=3)
 lines(ira2018$casos, col="black", lwd=3, cex=0.7, type = "p")
-legend(25,4000, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2023"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
+legend(25,4000, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2024"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
 En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica un aumento en la hospitalización IRA en sala.
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica `r ncol(casos_sem)`**
 
-| **Servicio**               |                 **a Sem `r ncol(casos_sem)`/2022**                  |                 **a Sem `r ncol(casos_sem)`/2023**                 |                                                                      **Variacion (%)**                                                                      |
+| **Servicio**               |                 **a Sem `r ncol(casos_sem)`/2023**                  |                 **a Sem `r ncol(casos_sem)`/2024**                 |                                                                      **Variacion (%)**                                                                      |
 |-----------------|:---------------:|:---------------:|:-------------------:|
-| Hospitalización Sala       |           `r sum(histoira[1:ncol(casos_sem),"ira_hosp"])`           | `r format(sum(ira2018[1:ncol(casos_sem),"c_hosp"]), scientific=F)` | `r round((sum(ira2018[1:ncol(casos_sem),"c_hosp"])- sum(histoira[1:ncol(casos_sem),"ira_hosp"]))/sum(histoira[1:ncol(casos_sem),"ira_hosp"])*100,digits=1)` |
+| Hospitalización Sala | `r sum(histoira[1:ncol(casos_sem),"ira_hosp"])` | `r format(sum(ira2018[1:ncol(casos_sem),"c_hosp"]), scientific=F)` | `r round((sum(ira2018[1:ncol(casos_sem),"c_hosp"])- sum(histoira[1:ncol(casos_sem),"ira_hosp"]))/sum(histoira[1:ncol(casos_sem),"ira_hosp"])*100,digits=1)` |
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
 Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general para esta semana disminuye el registro de casos pero se encuentra aun sobre umbral estacional. La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
-```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2023", fig.height=3.3, fig.width=7}
+```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2024", fig.height=3.3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,170), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(ira$icsuphosp, col="red",lwd=3, cex=0.7)
 abline(52,0,52, col="yellow", lwd=3)
 lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
-legend(5,160, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2023"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
+legend(5,160, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2024"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
 De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (**UCI**) (figura 3), con disminución para esta semana epidemiologica notificada. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
@@ -217,15 +219,15 @@ evento_995  %>%
 ```
 
 
-```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en UCI , Pereira 2023", fig.height=3.3, fig.width=7}
+```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en UCI , Pereira 2024", fig.height=3.3, fig.width=7}
 plot(ira$semana, ira$icinfuci, type='l', ylim=c(0,20), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(ira$icsupuci, col="red",lwd=3, cex=0.7)
 abline(5,0,5, col="yellow", lwd=3)
 lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
-legend(8,15, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2023"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
+legend(8,15, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2024"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
 
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa de infección respiratoria es en el grupo de edad menores a un año y el grupo de 1 año y menores a 1 año de edad, con una mayor concentracion de consultas por esta causa en el grupo de 2 a 4 años.
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa de infección respiratoria es en el grupo de edad menores a un año y el grupo de 1 año y menores a 1 año de edad.
 
 ```{r,echo=FALSE, warning=FALSE}
 hosp_tot <- evento_995  %>% 
@@ -264,17 +266,17 @@ evento_995  %>%
 
 En consulta externa y urgencias se han reportado de manera acumulada `r format(sum(evento_995$tot_exturg), scientific = F)` de consultas, donde las consultas por infección respiratoria aguda ocupan el `r round(sum(evento_995$iraext)/sum(evento_995$tot_exturg)*100,digits=3)`%. 
 
-```{r, echo=FALSE, fig.cap="Canal endémico consulta externa y urgencias por IRA, Pereira 2023", fig.height=3.3, fig.width=7}
+```{r, echo=FALSE, fig.cap="Canal endémico consulta externa y urgencias por IRA, Pereira 2024", fig.height=3.3, fig.width=7}
 plot(ira$semana, ira$icinfext, type='l', ylim=c(1,4000), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(ira$icsupext, col="red",lwd=3, cex=0.7)
 abline(1504,0,1504, col="yellow", lwd=3)
 lines(ira2018$c_ext, col="black", lwd=3, cex=0.7, type = "p")
-legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2023"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
+legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2024"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
 \newpage
 
-En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 10% en los de un año, con una mayor concentración de la consulta por IRA en este mismo grupo de edad. El canal endemico general para IRA se encuentra por debajo de umbral estacional.
+En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 10% en los de un año. El canal endemico general para IRA se encuentra por debajo de umbral estacional.
 
 ```{r, echo=FALSE, warning=FALSE}
 con_tot <- evento_995  %>% 
@@ -325,16 +327,19 @@ aislamientos <- filmarray %>%
   filter(RESULTADO != "NONE") %>% 
   separate(col = RESULTADO, into = c("m1","m2","m3","m4","m5","m6"), sep = ",")
 
-aislamiento <- aislamientos %>% pivot_longer(cols = starts_with("m"), names_to = "microorganismo") %>% 
+aislamiento <- aislamientos %>% 
+  pivot_longer(cols = starts_with("m"), names_to = "microorganismo") %>% 
   filter(!is.na(value)) %>%
   mutate(value = str_squish(value)) %>% 
   add_case(aislamiento2) %>% 
+  filter(year(FECHA) == 2024) %>%  # filtro de año 2024
   mutate(semana = epiweek(FECHA))
 
 write_csv(aislamiento, "/cloud/project/Boletin_ Epi_Pereira/Datos/aislamientos_2023.csv")
   
 
 positivo <- filmarray2 %>% 
+  filter(year(FECHA) == 2024) %>%    # filtro de año de muestra
   group_by(resultado) %>% 
   summarise(n=n()) %>% 
   adorn_percentages(denominator = "col") %>% 
@@ -347,6 +352,7 @@ microorg <- aislamiento %>%
   arrange(desc(n))
 
 m_ips <- filmarray2 %>% 
+                filter(year(fec_muestra) == 2024) %>% 
                 group_by(IPS) %>% 
                 count() %>% 
                 rename("Muestras (n)"= "n") %>% 
@@ -358,8 +364,9 @@ df <- tibble(x = 53, y = 2, m_ips = list(m_ips))
 ```
 
 
-```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2023"}
+```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2024"}
 filmarray2 %>% 
+  filter(year(fec_muestra)==2024) %>% # filtra solo para 2024
   group_by(semana) %>% 
   tabyl(semana, resultado) %>% 
   adorn_percentages() %>% 
@@ -381,11 +388,12 @@ filmarray2 %>%
   scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
 \newpage
-A periodo epidemiologico 11 de 2023 `r nrow(filmarray2) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para lo corrido del año son:
+A periodo epidemiologico 1 de 2024 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para lo corrido del año son:
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 aislamiento %>% 
+  filter(year(FECHA) == 2024) %>%  # filtro de año para 2024
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                            value == "enterovirus" ~ "Enterovirus",
                            value == "enterovirus humano" ~ "Enterovirus",
@@ -439,11 +447,11 @@ aislamiento %>%
 
 ```
 
-De esta manera se estima que la incidencia acumulada (entre muestras procesadas) para microorganismos asilados a través de panel molecular viral rapido en orden de aparición son  el Rinovirus, enterovirus, seguido  Virus Sincitial Respiratorio el cual ha mostrado aumento en su circulación.
+De esta manera se estima que la incidencia acumulada (entre muestras procesadas) para microorganismos asilados a través de panel molecular viral rapido en orden de aparición son  Influenza AH1N1, Rinovirus, caracterizado este pico estacional de Infeccion respiratoria con una probable mayor circulación de Influenza AH1N1.
 
 Cabe resaltar que las estimaciones presentadas corresponden a muestras recolectadas en pacientes consultantes a servicios de urgencias y hospitalizados, lo cual puede ser un reflejo de una circulación viral entre pacientes que requieren hospitalización y que dicho panel es realizado con el fin de guiar el manejo de terapia antibiotica y pueden no reflejar la circualción de microorganismos en población general no consultante.
 
-```{r, echo=FALSE, warning=FALSE, fig.height=3.2 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2023"}
+```{r, echo=FALSE, warning=FALSE, fig.height=3.2 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2024"}
 aislamiento %>% 
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                            value == "enterovirus" ~ "Enterovirus",
@@ -475,6 +483,7 @@ aislamiento %>%
                              value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | 
                              value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>%
   replace_na(list(viral = "Otras")) %>% 
+  filter(year(FECHA) == 2024) %>% # filtra AÑO
   group_by(semana, viral) %>% 
   summarise(Aislamientos = n(), .groups = "keep") %>% 
   ggplot(aes(x = semana, y = Aislamientos,
@@ -506,12 +515,12 @@ aislamiento %>%
 
 Para las diferentes enfermedades transmitidas por vectores el reporte de casos para esta semana y su acumulado se presentan en la siguiente tabla:
 
-```{r, echo=FALSE, fig.height=3, fig.width=7, fig.cap="Canal endémico Dengue, Pereira 2023"}
+```{r, echo=FALSE, fig.height=3, fig.width=7, fig.cap="Canal endémico Dengue, Pereira 2024"}
 plot(canalend$semana, canalend$exito, type='l', ylim=c(0,50), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(canalend$alerta, col="red",lwd=2, cex=0.7)
 lines(canalend$media, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7)
-legend(10,50, c("IC inf 95%","Media", "IC sup 95%", "2023"), col=c("green","yellow","red","black"), lty = c(1,1), lwd = c(1,1), bty="n", cex=0.7)
+legend(10,50, c("IC inf 95%","Media", "IC sup 95%", "2024"), col=c("green","yellow","red","black"), lty = c(1,1), lwd = c(1,1), bty="n", cex=0.7)
 ```
 
 **Tabla 2. Comportamiento de la enfermedades transmitidas por vectores, semana epidemiológica `r ncol(casos_sem)`**
@@ -532,7 +541,7 @@ plot(eda$semana, eda$exito, type='l', ylim=c(0,1500), xlim=c(1,52), col="green",
 lines(eda$alerta, col="red",lwd=2, cex=0.7)
 abline(683,0,683, col="yellow", lwd=3)
 lines(eda2018$semana,eda2018$casos, col="black",lwd=2, cex=0.7)
-legend(25,1400, c("IC inf 95%","Media", "IC sup 95%", "2023"), col=c("green","yellow","red","black"), lty = c(1,1), lwd = c(1,1), bty="n", cex=0.5)
+legend(25,1400, c("IC inf 95%","Media", "IC sup 95%", "2024"), col=c("green","yellow","red","black"), lty = c(1,1), lwd = c(1,1), bty="n", cex=0.5)
 ```
 
 
@@ -540,7 +549,8 @@ legend(25,1400, c("IC inf 95%","Media", "IC sup 95%", "2023"), col=c("green","ye
 
 ## Mortalidad materno-perinatal
 
-En la semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron `r casos_sem["560",ncol(casos_sem)]` muertes perinatales; `r sum(casos_sem["560",1:ncol(casos_sem)])` casos acumulados hasta el momento.
+En la semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron `r casos_sem["560",ncol(casos_sem)]` muertes perinatales; `r sum(casos_sem["560",1:ncol(casos_sem)])` casos acumulados hasta el momento.
+
 
 **Tabla 3. Comparación historica de eventos de baja incidencia , semana epidemiológica `r ncol(casos_sem)`**
 
@@ -549,7 +559,6 @@ En la semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron `r casos
 | Int. suicida        | `r casos_sem["356",ncol(casos_sem)]`  | `r round(as.numeric(histo[11,ncol(casos_sem)+1]),digits=0)`  | `r round(dpois(casos_sem["356",ncol(casos_sem)], as.numeric(histo[11,ncol(casos_sem)+1])), digits=2)` |
 | ETA                 |  `r casos_sem["355",ncol(casos_sem)]`  | `r round(as.numeric(histo[6,ncol(casos_sem)+1]), digits=0)`  |  `r round(dpois(casos_sem["355",ncol(casos_sem)], as.numeric(histo[6,ncol(casos_sem)+1])),digits=2)`  |
 | Hepatitis A         |   `r casos_sem2["330",ncol(casos_sem)] `   | `r round(as.numeric(histo[8,ncol(casos_sem2)+1]),digits=0)`  |                 `r round(dpois(casos_sem2["330",ncol(casos_sem2)], as.numeric(histo[8,ncol(casos_sem2)+1])),digits=2)` |
-| Lepra               |  `r casos_sem2["450",ncol(casos_sem)]` | `r round(as.numeric(histo[12,ncol(casos_sem2)+1]),digits=0)` |       `r round(dpois(casos_sem2["450",ncol(casos_sem)], as.numeric(histo[12,ncol(casos_sem2)+1])),digits=2)`                 |
 | Leptospirosis       |  `r casos_sem2["455",ncol(casos_sem)]`  | `r round(as.numeric(histo[13,ncol(casos_sem)+1]),digits=0)`  | `r round(dpois(casos_sem2["455",ncol(casos_sem)], as.numeric(histo[13,ncol(casos_sem)+1])),digits=2)`  |
 | Malaria             | `r casos_sem2["465",ncol(casos_sem2)]` | `r round(as.numeric(histo[14,ncol(casos_sem2)+1]),digits=0)` |                `r round(dpois(0, as.numeric(histo[14,ncol(casos_sem)+1])), digits=2)`                 |
 | Sarampion           |                   0                    | `r round(as.numeric(histo[22,ncol(casos_sem)+1]), digits=0)` |                `r round(dpois(0, as.numeric(histo[22,ncol(casos_sem)+1])), digits=2)`                 |
@@ -557,9 +566,16 @@ En la semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron `r casos
 | Sifilis gestacional |  `r casos_sem["750",ncol(casos_sem)]`  | `r round(as.numeric(histo[24,ncol(casos_sem)+1]), digits=0)` | `r round(dpois(casos_sem["750",ncol(casos_sem)], as.numeric(histo[24,ncol(casos_sem)+1])), digits=2)` |
 | Sifilis congénita   |  `r casos_sem["740",ncol(casos_sem)]`  | `r round(as.numeric(histo[23,ncol(casos_sem)+1]), digits=0)` |                `r round(dpois(casos_sem["740",ncol(casos_sem)], as.numeric(histo[23,ncol(casos_sem)+1])), digits=2)`                 |
 
+
+
+
+```{r, eva = FALSE, echo=FALSE}
+# Lepra               |  `r casos_sem2["450",ncol(casos_sem)]` | `r round(as.numeric(histo[12,ncol(casos_sem2)+1]),digits=0)` |   #    `r round(dpois(casos_sem2["450",ncol(casos_sem)], as.numeric(histo[12,ncol(casos_sem2)+1])),digits=2)`                 |
+```
+
 ## Agresiones por animales potencialmente transmisores de rabia
 
-En la semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron al Sivigila `r casos_sem2["300",ncol(casos_sem2)]` casos de agresiones por animales potencialmente transmisores de rabia , con un acumulado hasta el momento de `r sum(casos_sem2["300",1:ncol(casos_sem2)])` casos.
+En la semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron al Sivigila `r casos_sem2["300",ncol(casos_sem2)]` casos de agresiones por animales potencialmente transmisores de rabia , con un acumulado hasta el momento de `r sum(casos_sem2["300",1:ncol(casos_sem2)])` casos.
 
 ## Tuberculosis
 
@@ -586,7 +602,7 @@ Entre los tipos de cáncer objeto de vigilancia en salud pública se encuentra c
 
 ## Defectos congénitos y bajo peso al nacer
 
-Para esta semana epidemiológica `r ncol(casos_sem)` de 2023 se notificaron al sistema de vigilancia `r casos_sem["215", ncol(casos_sem)]` casos de defecto congénito, y `r casos_sem2["110", ncol(casos_sem2)]` casos de bajo peso al nacer, siendo este último catalogado como de alta incidencia. El total de casos ingresados hasta el momento son: `r sum(casos_sem["215",1:ncol(casos_sem)])` casos para defectos congénitos y `r sum(casos_sem2["110",1:ncol(casos_sem2)])` casos para bajo peso al nacer.
+Para esta semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron al sistema de vigilancia `r casos_sem["215", ncol(casos_sem)]` casos de defecto congénito. El total de casos ingresados hasta el momento son: `r sum(casos_sem["215",1:ncol(casos_sem)])` casos para defectos congénitos.
 
 ## Inmunoprevenibles
 
@@ -598,9 +614,9 @@ Frente al evento varicela, para esta semana epidemiológica se notificaron `r ca
 covid <- casos2022 %>% filter(cod_eve == "346") %>% group_by(tip_cas_) %>% count()
 ```
 
-Durante este año 2023, se han notificado a semana epidemiologica `r ncol(casos_sem)` al sistema de vigilancia SIVIGILA un total de `r covid[which(covid$tip_cas_=="3"),"n"]` casos leves o sin necesidad de hospitalización.
+Durante este año 2024, se han notificado a semana epidemiologica `r ncol(casos_sem)` al sistema de vigilancia SIVIGILA un total de `r covid[which(covid$tip_cas_=="3"),"n"]` casos leves o sin necesidad de hospitalización.
 
-```{r, echo=FALSE, warning=FALSE, fig.height=3 , fig.width=7, fig.cap="Notificacion semanal COVID-19, Pereira 2023"}
+```{r, echo=FALSE, warning=FALSE, fig.height=3 , fig.width=7, fig.cap="Notificacion semanal COVID-19, Pereira 2024"}
 ggplot(casos2022 %>% filter(cod_eve == "346"))+
   geom_bar(aes(x=as.numeric(semana)), fill = "#70BEBD" ,position = "dodge")+ theme_classic()+
   xlab("Semana/epidemiologica")+
@@ -616,7 +632,7 @@ ggplot(casos2022 %>% filter(cod_eve == "346"))+
 
 ## Vigilancia Varicela en distintos grupos poblacionales
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Comportamiento de varicela para Hombres por grupos de edad, Pereira 2023"}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Comportamiento de varicela para Hombres por grupos de edad, Pereira 2024"}
 ####################################################################################################
 varicela <- varicela %>% mutate(gr_edad = case_when(uni_med_>=2 ~ "0-9",
                                              uni_med_ == 1 & edad_< 10 ~ "0-9",
@@ -681,7 +697,7 @@ plot_grid(m1,m2,m3,m4)
 
 Ante la emergencia en salud publica internacional declarada por OMS por brote multi-pais por viruela simica, se realiza vigilancia de comportamientos inusuales para varicela en diferentes grupos de edad y sexo, en este sentido para semana epidemiologica  `r ncol(casos_sem)` no se presentan comportamientos fuera de lo esperado para ningun grupo de edad o sexo.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Comportamiento de varicela para Mujeres por grupos de edad, Pereira 2023"}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Comportamiento de varicela para Mujeres por grupos de edad, Pereira 2024"}
 m11 <- ggplot(varicela_ajus %>% 
          filter(sexo_=="F" & gr_edad=="0-9"), aes(x = as.numeric(semana), y = casos))+
   geom_abline(intercept = 1, slope = 0, color = "green", size = 1)+
@@ -778,6 +794,10 @@ Epidemiologa
 Enfermera - SIVIGILA
 
 ***Angela Monsalve Esp. Epi***
+
+Epidemiologa
+
+***Angela Maria Rincon Msc Epi. PhD***
 
 Epidemiologa
 
