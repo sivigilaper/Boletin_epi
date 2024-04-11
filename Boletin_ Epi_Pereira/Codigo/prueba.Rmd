@@ -784,6 +784,22 @@ plot_grid(m11,m22,m33,m44)
 ```
 
 
+
+```{r}
+promedios <- readRDS("/cloud/project/Boletin_ Epi_Pereira/Datos/promedios.rds")
+actual <- as.data.frame(table(casos2022$cod_eve, casos2022$semana)) %>% 
+  rename(evento = "Var1", semana = "Var2") %>% 
+  mutate(evento = as.character(evento), semana = as.numeric(semana)) %>% 
+    pivot_wider(id_cols = "evento", names_from = "semana", values_from = "Freq")
+
+actual %>% 
+  select(1, Observado = epiweek+1) %>% 
+  left_join(promedios %>% select(1,2, Esperado = epiweek+2), by = "evento") %>% 
+  relocate(evento, nom_eve, Esperado, Observado) %>% 
+  mutate(`valor p` = round(dpois(x = Observado, lambda = Esperado), 2)) %>% 
+  flextable()
+```
+
 \newpage
 
 ***Jorge Mario Estrada-Alvarez MSc. Epi***
