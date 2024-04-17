@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 14 - 2024} 
+  Semana 15 - 2024} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -49,7 +49,7 @@ library(flextable)
 library(binom)
 library(ggpp)
 library(rio)
-epiweek <- 14
+epiweek <- 15
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -79,7 +79,7 @@ evento_995<-evento_995 %>%
   filter(ajuste!= "D") %>%
   mutate(semana= as.numeric(semana)) %>%
   mutate(across(grupoh_1:tot_exturg, as.numeric)) %>% 
-  mutate(tot_ira= tot_irag+tot_irauci+tot_iraext)
+  mutate(tot_ira= tot_irag+tot_irauci+tot_iraext) %>% filter(semana<16) # QUITAR SEMANA 16
 # summary statistics on grouped linelist
 infe<- evento_995 %>% 
   group_by(semana) %>% 
@@ -94,7 +94,7 @@ evento_998<-evento_998 %>%
   filter(ajuste!="6") %>%
   filter(ajuste!= "D") %>%
   mutate(semana= as.numeric(semana)) %>%
-  mutate(cas_conc= as.numeric(cas_conc))
+  mutate(cas_conc= as.numeric(cas_conc)) %>% filter(semana<16) #### QUITAR SEMANA 16
 diarreas<- evento_998 %>% 
   group_by(semana) %>% 
   summarise(
@@ -274,8 +274,6 @@ lines(ira2018$c_ext, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2024"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-\newpage
-
 En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 10% en los de un año. El canal endemico general para IRA se encuentra por debajo de umbral estacional.
 
 ```{r, echo=FALSE, warning=FALSE}
@@ -360,7 +358,7 @@ m_ips <- filmarray2 %>%
    mutate(`Muestras (n)`= sprintf("%.0f", `Muestras (n)`)) 
 
 
-df <- tibble(x = 53, y = 2, m_ips = list(m_ips))
+df <- tibble(x = 53, y = 1, m_ips = list(m_ips))
 ```
 
 
@@ -387,9 +385,8 @@ filmarray2 %>%
         axis.title.y = element_text(size = 9))+
   scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
-\newpage
-A periodo epidemiologico 1 de 2024 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para lo corrido del año son:
 
+A periodo epidemiologico 4 de 2024 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislameintos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para lo corrido del año son:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 aislamiento %>% 
@@ -524,7 +521,7 @@ plot(canalend$semana, canalend$exito, type='l', ylim=c(0,110), xlim=c(1,52), col
 lines(canalend$alerta, col="red",lwd=2, cex=0.7)
 lines(canalend$media, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 14, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 15, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(30,90, c("IC inf 95%","Media", "IC sup 95%", "2024","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
@@ -556,28 +553,6 @@ legend(25,1400, c("IC inf 95%","Media", "IC sup 95%", "2024"), col=c("green","ye
 
 En la semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron `r casos_sem["560",ncol(casos_sem)]` muertes perinatales; `r sum(casos_sem["560",1:ncol(casos_sem)])` casos acumulados hasta el momento.
 
-
-**Tabla 3. Comparación historica de eventos de baja incidencia , semana epidemiológica `r ncol(casos_sem)`**
-
-| **Evento**          |             **Observado**              |                         **Esperado**                         |                                              **Valor p**                                              |
-|--------------------|:---------------:|:---------------:|:---------------:|
-| Int. suicida        | `r casos_sem["356",ncol(casos_sem)]`  | `r round(as.numeric(histo[11,ncol(casos_sem)+1]),digits=0)`  | `r round(dpois(casos_sem["356",ncol(casos_sem)], as.numeric(histo[11,ncol(casos_sem)+1])), digits=2)` |
-| ETA                 |  `r casos_sem["355",ncol(casos_sem)]`  | `r round(as.numeric(histo[6,ncol(casos_sem)+1]), digits=0)`  |  `r round(dpois(casos_sem["355",ncol(casos_sem)], as.numeric(histo[6,ncol(casos_sem)+1])),digits=2)`  |
-| Hepatitis A         |   `r casos_sem2["330",ncol(casos_sem)] `   | `r round(as.numeric(histo[8,ncol(casos_sem2)+1]),digits=0)`  |                 `r round(dpois(casos_sem2["330",ncol(casos_sem2)], as.numeric(histo[8,ncol(casos_sem2)+1])),digits=2)` |
-| Leptospirosis       |  `r casos_sem2["455",ncol(casos_sem)]`  | `r round(as.numeric(histo[13,ncol(casos_sem)+1]),digits=0)`  | `r round(dpois(casos_sem2["455",ncol(casos_sem)], as.numeric(histo[13,ncol(casos_sem)+1])),digits=2)`  |
-| Malaria             | `r casos_sem2["465",ncol(casos_sem2)]` | `r round(as.numeric(histo[14,ncol(casos_sem2)+1]),digits=0)` |                `r round(dpois(0, as.numeric(histo[14,ncol(casos_sem)+1])), digits=2)`                 |
-| Sarampion           |                   0                    | `r round(as.numeric(histo[22,ncol(casos_sem)+1]), digits=0)` |                `r round(dpois(0, as.numeric(histo[22,ncol(casos_sem)+1])), digits=2)`                 |
-| Tosferina           |                   0                    |                              0                               |                                                   0                                                   |
-| Sifilis gestacional |  `r casos_sem["750",ncol(casos_sem)]`  | `r round(as.numeric(histo[24,ncol(casos_sem)+1]), digits=0)` | `r round(dpois(casos_sem["750",ncol(casos_sem)], as.numeric(histo[24,ncol(casos_sem)+1])), digits=2)` |
-| Sifilis congénita   |  `r casos_sem["740",ncol(casos_sem)]`  | `r round(as.numeric(histo[23,ncol(casos_sem)+1]), digits=0)` |                `r round(dpois(casos_sem["740",ncol(casos_sem)], as.numeric(histo[23,ncol(casos_sem)+1])), digits=2)`                 |
-
-
-
-
-```{r, eva = FALSE, echo=FALSE}
-# Lepra               |  `r casos_sem2["450",ncol(casos_sem)]` | `r round(as.numeric(histo[12,ncol(casos_sem2)+1]),digits=0)` |   #    `r round(dpois(casos_sem2["450",ncol(casos_sem)], as.numeric(histo[12,ncol(casos_sem2)+1])),digits=2)`                 |
-```
-
 ## Agresiones por animales potencialmente transmisores de rabia
 
 En la semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron al Sivigila `r casos_sem2["300",ncol(casos_sem2)]` casos de agresiones por animales potencialmente transmisores de rabia , con un acumulado hasta el momento de `r sum(casos_sem2["300",1:ncol(casos_sem2)])` casos.
@@ -585,6 +560,8 @@ En la semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron al Sivig
 ## Tuberculosis
 
 Se notificaron al sistema de vigilancia para esta semana `r casos_sem2["813",ncol(casos_sem2)]` casos de tuberculosis sensible, con un acumulado en el sivigila de `r sum(casos_sem2["813",1:ncol(casos_sem2)])` casos para TB sensible.
+
+\newpage
 
 ## VIH/SIDA
 
@@ -598,14 +575,7 @@ Para esta semana se notificaron al Sivigila `r casos_sem["750", ncol(casos_sem)]
 
 Entre los tipos de cáncer objeto de vigilancia en salud pública se encuentra cáncer de mama y cuello uterino. De este evento esta semana se notificaron `r casos_sem["155", ncol(casos_sem)]`  casos, con un acumulado hasta el momento de `r sum(casos_sem["155",1:ncol(casos_sem)])` casos . En Cáncer en menor de 18 años se han notificado al momento  `r sum(casos_sem["115",1:ncol(casos_sem)])`
 
-```{r, echo=FALSE}
-#  casos (figura 1)
-#  `r sum(casos_sem["115",1:ncol(casos_sem)])`
-# 
-```
-
-
-## Defectos congénitos y bajo peso al nacer
+## Defectos congénitos
 
 Para esta semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron al sistema de vigilancia `r casos_sem["215", ncol(casos_sem)]` casos de defecto congénito. El total de casos ingresados hasta el momento son: `r sum(casos_sem["215",1:ncol(casos_sem)])` casos para defectos congénitos.
 
@@ -619,7 +589,7 @@ Frente al evento varicela, para esta semana epidemiológica se notificaron `r ca
 covid <- casos2022 %>% filter(cod_eve == "346") %>% group_by(tip_cas_) %>% count()
 ```
 
-Durante este año 2024, se han notificado a semana epidemiologica `r ncol(casos_sem)` al sistema de vigilancia SIVIGILA un total de `r covid[which(covid$tip_cas_=="3"),"n"]` casos leves o sin necesidad de hospitalización, para esta ultima semana epidemiologica no hya reporte de casos para COVID leve.
+Durante este año 2024, se han notificado a semana epidemiologica `r ncol(casos_sem)` al sistema de vigilancia SIVIGILA un total de `r covid[which(covid$tip_cas_=="3"),"n"]` casos leves o sin necesidad de hospitalización, para esta ultima semana epidemiologica no hay reporte de casos para COVID leve.
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=3 , fig.width=7, fig.cap="Notificacion semanal COVID-19, Pereira 2024"}
 ggplot(casos2022 %>% filter(cod_eve == "346"))+
@@ -785,19 +755,30 @@ plot_grid(m11,m22,m33,m44)
 
 
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Comportamiento inusuales en los eventos de interes en salud pública en el municipio de Pereira, Pereira 2024"}
 promedios <- readRDS("/cloud/project/Boletin_ Epi_Pereira/Datos/promedios.rds")
 actual <- as.data.frame(table(casos2022$cod_eve, casos2022$semana)) %>% 
   rename(evento = "Var1", semana = "Var2") %>% 
   mutate(evento = as.character(evento), semana = as.numeric(semana)) %>% 
     pivot_wider(id_cols = "evento", names_from = "semana", values_from = "Freq")
 
-actual %>% 
+poisson <- actual %>% 
   select(1, Observado = epiweek+1) %>% 
   left_join(promedios %>% select(1,2, Esperado = epiweek+2), by = "evento") %>% 
   relocate(evento, nom_eve, Esperado, Observado) %>% 
   mutate(`valor p` = round(dpois(x = Observado, lambda = Esperado), 2)) %>% 
-  flextable()
+  mutate(nom_eve = str_to_sentence(nom_eve))
+
+export(poisson,"/cloud/project/Boletin_ Epi_Pereira/Datos/poisson.xlsx")
+
+poisson %>% 
+  flextable() %>% 
+  flextable::bg(j = 5, i = ~ `valor p`< 0.05, part = "body", bg = "#E76B2F") %>% 
+  flextable::align(j = c(3:5), align = "center", part = "all") %>% 
+  set_header_labels(evento = "Codigo SIVIGILA", nom_eve = "Evento") %>% 
+  width(j = 2, width = 7, unit = "cm") %>% 
+  set_caption(paste("Comportamientos inusuales para los eventos de interes en salud publica notificados, semana epidemiologica",epiweek,", Pereira 2024"))
+
 ```
 
 \newpage
