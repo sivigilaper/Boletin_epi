@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.8.25)  17 APR 2024 15:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.8.25)  23 APR 2024 16:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -932,18 +932,18 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 14673 strings out of 481239
- 216350 string characters out of 5920377
- 543449 words of memory out of 5000000
+ 14675 strings out of 481239
+ 216370 string characters out of 5920377
+ 542449 words of memory out of 5000000
  29533 multiletter control sequences out of 15000+600000
- 590832 words of font info for 92 fonts, out of 8000000 for 9000
+ 590915 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  34i,15n,45p,805b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/
 public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/s
 hare/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/publ
 ic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb>
-Output written on prueba.pdf (12 pages, 484501 bytes).
+Output written on prueba.pdf (12 pages, 485214 bytes).
 PDF statistics:
  309 PDF objects out of 1000 (max. 8388607)
  252 compressed objects within 3 object streams
