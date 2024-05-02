@@ -14,5 +14,5 @@
 \contentsline {subsection}{\numberline {2.7}Defectos congénitos}{7}{subsection.2.7}%
 \contentsline {subsection}{\numberline {2.8}Inmunoprevenibles}{7}{subsection.2.8}%
 \contentsline {subsection}{\numberline {2.9}Virus nuevo (COVID-19)}{7}{subsection.2.9}%
-\contentsline {section}{\numberline {3}Vigilancia de exantematica}{8}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Vigilancia Varicela en distintos grupos poblacionales}{8}{subsection.3.1}%
+\contentsline {section}{\numberline {3}Vigilancia de exantematica}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Vigilancia Varicela en distintos grupos poblacionales}{7}{subsection.3.1}%

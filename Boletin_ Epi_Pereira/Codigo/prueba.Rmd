@@ -448,7 +448,8 @@ De esta manera se estima que la incidencia acumulada (entre muestras procesadas)
 
 Cabe resaltar que las estimaciones presentadas corresponden a muestras recolectadas en pacientes consultantes a servicios de urgencias y hospitalizados, lo cual puede ser un reflejo de una circulación viral entre pacientes que requieren hospitalización y que dicho panel es realizado con el fin de guiar el manejo de terapia antibiotica y pueden no reflejar la circualción de microorganismos en población general no consultante.
 
-```{r, echo=FALSE, warning=FALSE, fig.height=3.2 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2024"}
+
+```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2024"}
 aislamiento %>% 
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                            value == "enterovirus" ~ "Enterovirus",

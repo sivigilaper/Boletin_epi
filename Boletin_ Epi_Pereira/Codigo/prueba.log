@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.8.25)  23 APR 2024 16:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.8.25)  2 MAY 2024 19:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -801,13 +801,13 @@ has been already used, duplicate ignored
                                                   \fi \fi 
 l.574 \end{longtable}
                       <./prueba_files/figure-latex/unnamed-chunk-7-1.pdf>]
-<prueba_files/figure-latex/unnamed-chunk-13-1.pdf, id=107, 498.86375pt x 214.80
-25pt>
+<prueba_files/figure-latex/unnamed-chunk-13-1.pdf, id=107, 498.86375pt x 164.61
+5pt>
 File: prueba_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-13-1.pdf>
 Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-13-1.pdf  used
  on input line 592.
-(pdftex.def)             Requested size: 498.87013pt x 214.80524pt.
+(pdftex.def)             Requested size: 498.87775pt x 164.61961pt.
 <prueba_files/figure-latex/unnamed-chunk-14-1.pdf, id=108, 472.76625pt x 143.53
 625pt>
 File: prueba_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
@@ -815,9 +815,6 @@ File: prueba_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
 Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-14-1.pdf  used
  on input line 603.
 (pdftex.def)             Requested size: 472.77951pt x 143.54027pt.
-
-Overfull \vbox (199.64897pt too high) has occurred while \output is active []
-
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
 Package pdftex.def Info: municipio2020.png  used on input line 629.
@@ -836,36 +833,26 @@ r (name{figure.6}) has been already used, duplicate ignored
 l.629 \end{longtable}
                       <./prueba_files/figure-latex/unnamed-chunk-10-1.pdf> <./p
 rueba_files/figure-latex/unnamed-chunk-13-1.pdf>]
-<prueba_files/figure-latex/unnamed-chunk-15-1.pdf, id=133, 472.76625pt x 152.57
+<prueba_files/figure-latex/unnamed-chunk-15-1.pdf, id=134, 472.76625pt x 152.57
 pt>
 File: prueba_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-15-1.pdf>
 Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-15-1.pdf  used
  on input line 636.
 (pdftex.def)             Requested size: 472.77951pt x 152.57428pt.
-
-Overfull \vbox (35.61676pt too high) has occurred while \output is active []
-
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
 Package pdftex.def Info: municipio2020.png  used on input line 656.
 (pdftex.def)             Requested size: 139.71622pt x 28.4513pt.
-[6pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.656 \newpage
-               <./prueba_files/figure-latex/unnamed-chunk-14-1.pdf> <./prueba_f
-iles/figure-latex/unnamed-chunk-15-1.pdf>]
-<prueba_files/figure-latex/unnamed-chunk-17-1.pdf, id=160, 499.8675pt x 206.772
+[6 <./prueba_files/figure-latex/unnamed-chunk-15-1.pdf>]
+<prueba_files/figure-latex/unnamed-chunk-17-1.pdf, id=152, 499.8675pt x 206.772
 5pt>
 File: prueba_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-17-1.pdf>
 Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-17-1.pdf  used
  on input line 690.
 (pdftex.def)             Requested size: 499.88152pt x 206.77829pt.
-<prueba_files/figure-latex/unnamed-chunk-18-1.pdf, id=161, 459.7175pt x 316.181
+<prueba_files/figure-latex/unnamed-chunk-18-1.pdf, id=153, 459.7175pt x 316.181
 24pt>
 File: prueba_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-18-1.pdf>
@@ -874,16 +861,30 @@ Package pdftex.def Info: prueba_files/figure-latex/unnamed-chunk-18-1.pdf  used
 (pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
-Package pdftex.def Info: municipio2020.png  used on input line 704.
+Package pdftex.def Info: municipio2020.png  used on input line 707.
 (pdftex.def)             Requested size: 139.71622pt x 28.4513pt.
-[7pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) 
+[7pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.704 \end{figure}
-                   <./prueba_files/figure-latex/unnamed-chunk-17-1.pdf>]
-<prueba_files/figure-latex/unnamed-chunk-19-1.pdf, id=182, 459.7175pt x 316.181
+l.707 
+       <./prueba_files/figure-latex/unnamed-chunk-14-1.pdf>] [8pdfTeX warning (
+ext4): destination with the same identifier (name{figure.8}) has been already u
+sed, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.707 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+9}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.707 
+       <./prueba_files/figure-latex/unnamed-chunk-17-1.pdf> <./prueba_files/fig
+ure-latex/unnamed-chunk-18-1.pdf>]
+<prueba_files/figure-latex/unnamed-chunk-19-1.pdf, id=195, 459.7175pt x 316.181
 24pt>
 File: prueba_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type pdf)
 <use prueba_files/figure-latex/unnamed-chunk-19-1.pdf>
@@ -894,29 +895,23 @@ File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
 Package pdftex.def Info: municipio2020.png  used on input line 1028.
 (pdftex.def)             Requested size: 139.71622pt x 28.4513pt.
-[8pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) 
-has been already used, duplicate ignored
+[9pdfTeX warning (ext4): destination with the same identifier (name{figure.10})
+ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.1028 \end{longtable}
-                       <./prueba_files/figure-latex/unnamed-chunk-18-1.pdf>]
+                       <./prueba_files/figure-latex/unnamed-chunk-19-1.pdf>]
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
 Package pdftex.def Info: municipio2020.png  used on input line 1028.
 (pdftex.def)             Requested size: 139.71622pt x 28.4513pt.
-[9]
+[10]
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
 Package pdftex.def Info: municipio2020.png  used on input line 1040.
 (pdftex.def)             Requested size: 139.71622pt x 28.4513pt.
-[10] [11pdfTeX warning (ext4): destination with the same identifier (name{figur
-e.10}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1040 \newpage
-                <./prueba_files/figure-latex/unnamed-chunk-19-1.pdf>]
+[11]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1066.
 File: municipio2020.png Graphic file (type png)
 <use municipio2020.png>
@@ -932,18 +927,18 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 14675 strings out of 481239
- 216370 string characters out of 5920377
- 542449 words of memory out of 5000000
+ 14673 strings out of 481239
+ 216350 string characters out of 5920377
+ 542448 words of memory out of 5000000
  29533 multiletter control sequences out of 15000+600000
- 590915 words of font info for 93 fonts, out of 8000000 for 9000
+ 590832 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,15n,45p,805b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,15n,45p,805b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/
 public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/s
 hare/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/publ
 ic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb>
-Output written on prueba.pdf (12 pages, 485214 bytes).
+Output written on prueba.pdf (12 pages, 486214 bytes).
 PDF statistics:
  309 PDF objects out of 1000 (max. 8388607)
  252 compressed objects within 3 object streams
