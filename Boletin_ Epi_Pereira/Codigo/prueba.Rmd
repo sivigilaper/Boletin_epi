@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 17 - 2024} 
+  Semana 19 - 2024} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -49,7 +49,8 @@ library(flextable)
 library(binom)
 library(ggpp)
 library(rio)
-epiweek <- 17
+library(scales)
+epiweek <- 19
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -94,7 +95,7 @@ evento_998<-evento_998 %>%
   filter(ajuste!="6") %>%
   filter(ajuste!= "D") %>%
   mutate(semana= as.numeric(semana)) %>%
-  mutate(cas_conc= as.numeric(cas_conc)) %>% filter(semana<16) #### QUITAR SEMANA 16
+  mutate(cas_conc= as.numeric(cas_conc)) %>% filter(semana<19) #### QUITAR SEMANA 16
 diarreas<- evento_998 %>% 
   group_by(semana) %>% 
   summarise(
@@ -136,10 +137,10 @@ saveRDS(casos2022,"/cloud/project/Boletin_ Epi_Pereira/Datos/casos2022.rds")
 # /cont_jmestrada/
 # #PARA REVISION DE COMPORTAMIENTO INUSUAL EN IRA COLECTVA
 # rev <- evento_995 %>%
-#   group_by(nom_upgd, semana) %>%
-#   summarise(sum(tot_irag)) %>%
+#   group_by(cod_pre, cod_sub, nom_upgd, semana) %>%
+#   summarise(sum(tot_ira, na.rm = TRUE)) %>%
 #   ungroup() %>%
-#   pivot_wider(names_from = semana, values_from = `sum(tot_irag)`)
+#   pivot_wider(names_from = semana, values_from = `sum(tot_ira, na.rm = TRUE)`)
 ```
 
 # Eventos Trazadores
@@ -229,7 +230,7 @@ legend(30,20, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2024"), col=c("
 
 Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa de infección respiratoria es en el grupo de edad menores a un año y el grupo de 1 año y menores a 1 año de edad.
 
-```{r,echo=FALSE, warning=FALSE}
+```{r, warning=FALSE, echo=FALSE}
 hosp_tot <- evento_995  %>% 
   filter(semana==ncol(casos_sem)) %>% 
   summarise(menor1 = sum(hospital_1),
@@ -260,8 +261,9 @@ evento_995  %>%
       hosp_ira = "Hospitalizaciones IRA",                  
       hosp_tot = "Hospitalizacion todas las causa",
       porcentaje = "% de Hospitalizaciones") %>% 
-  flextable::bg(j = 4, i = ~ porcentaje>= 10, part = "body", bg = "yellow") %>% 
-  flextable::align(j = c(2:4), align = "center", part = "all" )
+  flextable::bg(bg = scales::col_numeric(palette = c("wheat", "red"), domain = c(0, 100), alpha = 0.5),
+                j = 4) %>% 
+  flextable::align(j = c(2:4), align = "center", part = "all")
 ```
 
 En consulta externa y urgencias se han reportado de manera acumulada `r format(sum(evento_995$tot_exturg), scientific = F)` de consultas, donde las consultas por infección respiratoria aguda ocupan el `r round(sum(evento_995$iraext)/sum(evento_995$tot_exturg)*100,digits=3)`%. 
@@ -518,12 +520,12 @@ ajuste <- casos_sem2['210',(length(casos_sem2['210',])-5):(length(casos_sem2['21
 p <- data.frame(t = as.numeric(names(ajuste)),ajuste)
 model <- glm(ajuste~t, family = "poisson", data = p)
 valor <- predict.glm(model, newdata = data.frame(t= c(12)),type = "response")
-plot(canalend$semana, canalend$exito, type='l', ylim=c(0,130), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
+plot(canalend$semana, canalend$exito, type='l', ylim=c(0,200), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(canalend$alerta, col="red",lwd=2, cex=0.7)
 lines(canalend$media, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 17, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
-legend(30,90, c("IC inf 95%","Media", "IC sup 95%", "2024","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
+lines(x = 19, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+legend(30,170, c("IC inf 95%","Media", "IC sup 95%", "2024","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
 **Tabla 2. Comportamiento de la enfermedades transmitidas por vectores, semana epidemiológica `r ncol(casos_sem)`**
