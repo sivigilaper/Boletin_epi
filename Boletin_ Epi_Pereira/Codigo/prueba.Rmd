@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 20 - 2024} 
+  Semana 21 - 2024} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 20
+epiweek <- 21
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -172,7 +172,7 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general para esta semana disminuye el registro de casos pero se encuentra por encima umbral estacional. La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general para esta semana incrementa el registro de casos superando el umbral estacional sobre el limite superior esperado. La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2024", fig.height=3.3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,170), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -182,7 +182,7 @@ lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
 legend(5,160, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2024"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (**UCI**) (figura 3), sobre el umbral estacional a semana epidemiologica notificada. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
+De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (**UCI**) (figura 3), se encuentra en el limite superior esperado a semana epidemiologica notificada. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
 
 ```{r, echo=FALSE, warning=FALSE}
 uci_tot <- evento_995  %>% 
@@ -524,7 +524,7 @@ plot(canalend$semana, canalend$exito, type='l', ylim=c(0,200), xlim=c(1,52), col
 lines(canalend$alerta, col="red",lwd=2, cex=0.7)
 lines(canalend$media, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 20, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 21, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(30,170, c("IC inf 95%","Media", "IC sup 95%", "2024","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
