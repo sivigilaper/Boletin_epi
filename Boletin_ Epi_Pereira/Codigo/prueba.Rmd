@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 38 - 2024} 
+  Semana 40 - 2024} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 38
+epiweek <- 40
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -104,7 +104,8 @@ export(diarreas,"/cloud/project/Boletin_ Epi_Pereira/Datos/eda2018.xlsx")
 ###################################################
 
 
-ira2018 <- read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls")
+ira2018 <- read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls") %>% filter(semana<=40)
+
 
 
 eda<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/eda.xlsx")
@@ -518,16 +519,20 @@ aislamiento %>%
 
 ```
 
-El microorganismo con mayor incidencia hasta la fecha ha sido el Rhinovirus, con una incidencia acumulada del 19.2% (IC 95%: 15.84% - 23.16%), seguido por el Virus Sincitial Respiratorio (VSR) con 16.3% (IC 95%: 13.18% - 20.05%) y el Enterovirus con 14.1% (IC 95%: 11.16% - 17.64%). Otros virus identificados incluyen Influenza AH1N1 (6.5%), Parainfluenza Virus (4.7%), Influenza A (4.3%), Metaneumovirus (2.9%), Adenovirus (2.5%) e Influenza B (1.3%).
+El microorganismo con mayor incidencia hasta la fecha ha sido el Rhinovirus, con una incidencia acumulada del 19.6% (IC 95%: 16.40% - 23.34%), seguido por el Enterovirus con 15.3% (IC 95%: 12.39% - 18.69%) y el Virus Sincitial Respiratorio (VSR) con 15.1% (IC 95%: 12.21% - 18.48%). Otros virus identificados incluyen Influenza AH1N1 (5.8%), Influenza A (4.4%), Parainfluenza Virus (4.2%), Adenovirus (3.0%), Metaneumovirus (3.0%) e Influenza B (1.2%).
 
-Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 33-35:
+Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 38-40:
 
 Virus cuya circulación disminuyó:
-Virus Sincitial Respiratorio (VSR): reducción de 15.4% a 10.3%. Influenza A: descenso de 3.8% a 0%.
-Virus cuya circulación aumentó:
-Rhinovirus: incremento de 7.7% a 10.3%, Parainfluenza Virus: subió de 0% a 6.9%, Metaneumovirus: pasó de 0% a 6.9%, Enterovirus: incremento de 3.8% a 6.9%.
 
-Estos cambios sugieren un aumento en la circulación de Enterovirus, Parainfluenza Virus y Metaneumovirus, mientras que virus como el VSR y la Influenza A han mostrado una disminución en su incidencia reciente.
+Virus Sincitial Respiratorio (VSR): reducción de 4.2% a 0%.
+Influenza A: descenso de 12.5% a 0%.
+Virus cuya circulación aumentó:
+
+Rhinovirus: incremento de 20.8% a 36.8%.
+Enterovirus: aumento de 8.3% a 36.8%.
+Adenovirus: incremento de 8.3% a 5.3%.
+Estos cambios sugieren un aumento considerable en la circulación de Rhinovirus y Enterovirus, mientras que virus como el VSR y la Influenza A han mostrado una disminución significativa en su incidencia reciente.
 
 \newpage
 Las estimaciones presentadas corresponden a muestras recolectadas en pacientes consultantes a servicios de urgencias y hospitalizados, lo cual puede ser un reflejo de una circulación viral entre pacientes que requieren hospitalización y que dicho panel es realizado con el fin de guiar el manejo de terapia antibiotica y pueden no reflejar la circualción de microorganismos en población general no consultante.
@@ -606,7 +611,7 @@ plot(canalend$semana, canalend$exito, type='l', ylim=c(0,250), xlim=c(1,52), col
 lines(canalend$alerta, col="red",lwd=2, cex=0.7)
 lines(canalend$media, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 38, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 40, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(40,190, c("IC inf 95%","Media", "IC sup 95%", "2024","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
