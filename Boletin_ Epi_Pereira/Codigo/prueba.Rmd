@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 43 - 2024} 
+  Semana 45 - 2024} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 43
+epiweek <- 45
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -80,7 +80,7 @@ evento_995<-evento_995 %>%
   filter(ajuste!= "D") %>%
   mutate(semana= as.numeric(semana)) %>%
   mutate(across(grupoh_1:tot_exturg, as.numeric)) %>% 
-  mutate(tot_ira= tot_irag+tot_irauci+tot_iraext)  %>% filter(semana<=43) # QUITAR SEMANA 
+  mutate(tot_ira= tot_irag+tot_irauci+tot_iraext)  %>% filter(semana<=45) # QUITAR SEMANA 
 # summary statistics on grouped linelist
 infe<- evento_995 %>% 
   group_by(semana) %>% 
@@ -406,7 +406,7 @@ filmarray2 %>%
   scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
 
-A periodo epidemiologico 10 de 2024 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
+A periodo epidemiologico 11 de 2024 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
 
 ```{r tabla para incidencia viral semanal, echo=FALSE, warning=FALSE}
 epi_viral <- aislamiento %>% 
@@ -519,20 +519,18 @@ aislamiento %>%
 
 ```
 
-El microorganismo con mayor incidencia hasta la fecha ha sido el Rhinovirus, con una incidencia acumulada del 19.6% (IC 95%: 16.40% - 23.34%), seguido por el Enterovirus con 15.3% (IC 95%: 12.39% - 18.69%) y el Virus Sincitial Respiratorio (VSR) con 15.1% (IC 95%: 12.21% - 18.48%). Otros virus identificados incluyen Influenza AH1N1 (5.8%), Influenza A (4.4%), Parainfluenza Virus (4.2%), Adenovirus (3.0%), Metaneumovirus (3.0%) e Influenza B (1.2%).
-
-Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 38-40:
+El microorganismo con mayor incidencia hasta la fecha ha sido el Rhinovirus, con una incidencia acumulada del 19.0% (IC 95%: 15.93% - 22.47%), seguido por el Enterovirus con 15.4% (IC 95%: 12.60% - 18.62%) y el Virus Sincitial Respiratorio (VSR) con 13.9% (IC 95%: 11.28% - 17.07%). Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 41-42 y 44-45:
 
 Virus cuya circulación disminuyó:
 
-Virus Sincitial Respiratorio (VSR): reducción de 4.2% a 0%.
-Influenza A: descenso de 12.5% a 0%.
+Virus Sincitial Respiratorio (VSR) presenta reducción de 13.9% a 0%, Influenza AH1N1 con un descenso de 5.2% a 0%, Metaneumovirus con un descenso de 3.1% a 0%.
+
 Virus cuya circulación aumentó:
 
-Rhinovirus: incremento de 20.8% a 36.8%.
-Enterovirus: aumento de 8.3% a 36.8%.
-Adenovirus: incremento de 8.3% a 5.3%.
-Estos cambios sugieren un aumento considerable en la circulación de Rhinovirus y Enterovirus, mientras que virus como el VSR y la Influenza A han mostrado una disminución significativa en su incidencia reciente.
+Enterovirus incremento de 6.2% a 37.5%, Parainfluenza Virus aumento de 4.3% a 6.2%.
+Adenovirus incremento de 3.1% a 6.2%.
+
+Estos cambios sugieren un aumento considerable en la circulación de Enterovirus y Parainfluenza Virus, mientras que virus como el VSR, Influenza AH1N1 y Metaneumovirus han mostrado una disminución significativa en su incidencia reciente.
 
 \newpage
 Las estimaciones presentadas corresponden a muestras recolectadas en pacientes consultantes a servicios de urgencias y hospitalizados, lo cual puede ser un reflejo de una circulación viral entre pacientes que requieren hospitalización y que dicho panel es realizado con el fin de guiar el manejo de terapia antibiotica y pueden no reflejar la circualción de microorganismos en población general no consultante.
@@ -606,13 +604,13 @@ Para las diferentes enfermedades transmitidas por vectores el reporte de casos p
 ajuste <- casos_sem2['210',(length(casos_sem2['210',])-5):(length(casos_sem2['210',])-1)]
 p <- data.frame(t = as.numeric(names(ajuste)),ajuste)
 model <- glm(ajuste~t, family = "poisson", data = p)
-valor <- predict.glm(model, newdata = data.frame(t= c(33)),type = "response") #cambiar a cada semana
+valor <- predict.glm(model, newdata = data.frame(t= c(45)),type = "response") #cambiar a cada semana
 plot(canalend$semana, canalend$exito, type='l', ylim=c(0,250), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(canalend$alerta, col="red",lwd=2, cex=0.7)
 lines(canalend$media, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 43, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
-legend(42,240, c("IC inf 95%","Media", "IC sup 95%", "2024","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
+lines(x = 45, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2024","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
 **Tabla 2. Comportamiento de la enfermedades transmitidas por vectores, semana epidemiológica `r ncol(casos_sem)`**
