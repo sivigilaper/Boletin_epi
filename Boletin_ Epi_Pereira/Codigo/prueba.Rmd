@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 48 - 2024} 
+  Semana 49 - 2024} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 48
+epiweek <- 49
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -80,7 +80,7 @@ evento_995<-evento_995 %>%
   filter(ajuste!= "D") %>%
   mutate(semana= as.numeric(semana)) %>%
   mutate(across(grupoh_1:tot_exturg, as.numeric)) %>% 
-  mutate(tot_ira= tot_irag+tot_irauci+tot_iraext)  %>% filter(semana<=48) # QUITAR SEMANA 
+  mutate(tot_ira= tot_irag+tot_irauci+tot_iraext)  %>% filter(semana<=49) # QUITAR SEMANA 
 # summary statistics on grouped linelist
 infe<- evento_995 %>% 
   group_by(semana) %>% 
@@ -102,11 +102,7 @@ diarreas<- evento_998 %>%
     casos = sum(cas_conc))
 export(diarreas,"/cloud/project/Boletin_ Epi_Pereira/Datos/eda2018.xlsx")
 ###################################################
-
-
 ira2018 <- read_csv("/cloud/project/Boletin_ Epi_Pereira/Datos/ira2018.xls")
-
-
 
 eda<-read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/eda.xlsx")
 eda2018<-import("/cloud/project/Boletin_ Epi_Pereira/Datos/eda2018.xlsx")
@@ -394,8 +390,8 @@ filmarray2 %>%
   labs(x = "Semana epidemiologica",
        y = "Proporción",
        fill = "Resultado")+
-  geom_table(data = df ,
-              aes(x = x , y = y, label = m_ips), size = 1.5)+
+  # geom_table(data = df ,
+  #             aes(x = x , y = y, label = m_ips), size = 1.5)+
   theme_classic()+
   theme(legend.position = "top", 
         axis.text.x = element_text(size = 6), 
@@ -519,9 +515,8 @@ aislamiento %>%
 
 ```
 
-El microorganismo con mayor incidencia hasta la fecha ha sido el Rhinovirus, con una incidencia acumulada del 19.0% (IC 95%: 15.93% - 22.47%), seguido por el Enterovirus con 15.4% (IC 95%: 12.60% - 18.62%) y el Virus Sincitial Respiratorio (VSR) con 13.9% (IC 95%: 11.28% - 17.07%). Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 41-42 y 44-45:
+El microorganismo con mayor incidencia hasta la fecha ha sido el Rhinovirus, con una incidencia acumulada del 18.8% (IC 95%: 15.85 - 22.26), seguido por el Enterovirus con 15.5% (IC 95%: 12.8 - 18.8) y el Virus Sincitial Respiratorio (VSR) con 13.4% (IC 95%: 10.8% - 16.5%). Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 46-45 y 47-48: mientras que el Rhinovirus mostró una disminución (16.7% a 15.4%), el Enterovirus incrementó su circulación (16.7% a 23.1%). Por su parte, otros virus como el VSR, Influenza AH1N1, y metaneumovirus no presentaron actividad en las semanas recientes. Los datos actuales de muestras procesadas por FilmArray son preliminares y están sujetos a verificación en la próxima semana epidemiológica.
 
-Para esta semana epidemiologica los datos de muestras por filmarray aun son preliminares para definir una tendencia, por lo tanto queda sujeto a verificacion durante la proxima semana epidemiologica.
 \newpage
 Las estimaciones presentadas corresponden a muestras recolectadas en pacientes consultantes a servicios de urgencias y hospitalizados, lo cual puede ser un reflejo de una circulación viral entre pacientes que requieren hospitalización y que dicho panel es realizado con el fin de guiar el manejo de terapia antibiotica y pueden no reflejar la circualción de microorganismos en población general no consultante.
 
@@ -599,7 +594,7 @@ plot(canalend$semana, canalend$exito, type='l', ylim=c(0,250), xlim=c(1,52), col
 lines(canalend$alerta, col="red",lwd=2, cex=0.7)
 lines(canalend$media, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 48, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 49, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2024","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
