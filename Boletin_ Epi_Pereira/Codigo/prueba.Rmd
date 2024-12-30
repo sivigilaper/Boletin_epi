@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 49 - 2024} 
+  Semana 51 - 2024} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 49
+epiweek <- 51
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -80,7 +80,7 @@ evento_995<-evento_995 %>%
   filter(ajuste!= "D") %>%
   mutate(semana= as.numeric(semana)) %>%
   mutate(across(grupoh_1:tot_exturg, as.numeric)) %>% 
-  mutate(tot_ira= tot_irag+tot_irauci+tot_iraext)  %>% filter(semana<=49) # QUITAR SEMANA 
+  mutate(tot_ira= tot_irag+tot_irauci+tot_iraext)  %>% filter(semana<=51) # QUITAR SEMANA 
 # summary statistics on grouped linelist
 infe<- evento_995 %>% 
   group_by(semana) %>% 
@@ -153,7 +153,7 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` muestra ascenso para las ultimas 2 semanas epidemiologicas.
+A semana epidemiológica `r ncol(casos_sem)` de 2024 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` muestra ascenso para las ultimas 3 semanas epidemiologicas.
 
 ```{r, echo=FALSE, fig.cap= paste("Canal endémico IRA , Pereira 2024","semana epidemiologica",epiweek), fig.height=3.3, fig.width=7, fig.pos='h',}
 plot(ira$semana, ira$icinftotal, type='l', ylim=c(1,4000), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -277,7 +277,7 @@ lines(ira2018$c_ext, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2024"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 10% en los de un año. El canal endemico general para IRA se encuentra sobre el umbral estacional.
+En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 10% en los de un año. El canal endemico general para IRA se encuentra en zona limitrofe con el limite superior esperado.
 
 ```{r, echo=FALSE, warning=FALSE}
 con_tot <- evento_995  %>% 
@@ -515,7 +515,7 @@ aislamiento %>%
 
 ```
 
-El microorganismo con mayor incidencia hasta la fecha ha sido el Rhinovirus, con una incidencia acumulada del 18.8% (IC 95%: 15.85 - 22.26), seguido por el Enterovirus con 15.5% (IC 95%: 12.8 - 18.8) y el Virus Sincitial Respiratorio (VSR) con 13.4% (IC 95%: 10.8% - 16.5%). Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 46-45 y 47-48: mientras que el Rhinovirus mostró una disminución (16.7% a 15.4%), el Enterovirus incrementó su circulación (16.7% a 23.1%). Por su parte, otros virus como el VSR, Influenza AH1N1, y metaneumovirus no presentaron actividad en las semanas recientes. Los datos actuales de muestras procesadas por FilmArray son preliminares y están sujetos a verificación en la próxima semana epidemiológica.
+El microorganismo con mayor incidencia hasta la fecha ha sido el Rhinovirus, con una incidencia acumulada del 18,4% (IC95%: 15,5 - 21,8), seguido por el Enterovirus con 16,5% y el Virus Sincitial Respiratorio (VSR) con 13,1%. Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 45-46 y 47-48: mientras que el Rhinovirus no ha mostrado cambios significativos, el Enterovirus dismunyo su circulación. Por su parte, otros virus como el VSR no ha mostrado cambios, influenza A y B, parainfluenza muestran cambios al aumento en su probable circulacion, lo que correlaciona al momento con un aumento en la consultas por IRA a servicios de salud evidenciado en los canales endemicos.
 
 \newpage
 Las estimaciones presentadas corresponden a muestras recolectadas en pacientes consultantes a servicios de urgencias y hospitalizados, lo cual puede ser un reflejo de una circulación viral entre pacientes que requieren hospitalización y que dicho panel es realizado con el fin de guiar el manejo de terapia antibiotica y pueden no reflejar la circualción de microorganismos en población general no consultante.
@@ -594,7 +594,7 @@ plot(canalend$semana, canalend$exito, type='l', ylim=c(0,250), xlim=c(1,52), col
 lines(canalend$alerta, col="red",lwd=2, cex=0.7)
 lines(canalend$media, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 49, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 50, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2024","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
