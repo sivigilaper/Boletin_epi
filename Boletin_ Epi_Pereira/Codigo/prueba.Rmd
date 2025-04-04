@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 11 - 2025} 
+  Semana 13 - 2025} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 11
+epiweek <- 13
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -169,7 +169,7 @@ infecciones <- sum(evento_995$tot_irag)+sum(evento_995$tot_irauci)+sum(evento_99
 consultas<-sum(evento_995$tot_exturg)+sum(evento_995$tot_cau_h)+sum(evento_995$tot_h_uci) 
 ```
 
-A semana epidemiológica `r ncol(casos_sem)` de 2025 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` se encuentra en incremento continuo para las ultimas semana epidemiologicas, sobre pasando el nivel superior de lo esperado para esta semana 11.
+A semana epidemiológica `r ncol(casos_sem)` de 2025 se notificaron un total entre consultas externa/urgencias hospitalizaciones en sala y hospitalizaciones en UCI de `r format(consultas,scientific = F)` de las cuales el `r round(infecciones/consultas*100, digits = 2)`% (n= `r format(infecciones, scientific = F)`) corresponden a IRA. El canal endémico muestra el evento para la semana `r ncol(casos_sem)` en un descenso, sin embargo es preliminar frente a un pico estacional de IRA el cual se esta presentando en el pais.
 
 ```{r, echo=FALSE, fig.cap= paste("Canal endémico IRA , Pereira 2025","semana epidemiologica",epiweek), fig.height=3.3, fig.width=7, fig.pos='h',}
 plot(ira$semana, ira$icinftotal, type='l', ylim=c(1,4000), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6)
@@ -418,17 +418,18 @@ filmarray2 %>%
   scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
 
-A periodo epidemiologico 3 de 2025 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
+A periodo epidemiologico 4 de 2025 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
 
 ```{r tabla para incidencia viral semanal, echo=FALSE, warning=FALSE}
 epi_viral <- aislamiento %>% 
-  filter(year(FECHA) == 2025) %>%  # filtro de año para 2024
+  filter(year(FECHA) == 2025) %>%  # filtro de año 
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                            value == "enterovirus" ~ "Enterovirus",
-                           value == "enterovirus humano" ~ "Enterovirus",
+                           str_detect(value,pattern = regex("enterovirus humano", ignore_case = TRUE)) == TRUE ~ "Enterovirus",
                            value == "Rhinovirus"~ "Rhinovirus",
                            value == "Rinovirus"~ "Rhinovirus",
                            value == "Human Rhinovirus/Enterovirus"~"Rhinovirus",
+                           str_detect(value,patter = regex("Human rhinovirus", ignore_case = TRUE)) == TRUE~"Rhinovirus",
                            value == "Rinovirus/Enterovirus Humano"~"Rhinovirus",
                            value == "metaneumovirus" ~ "metaneumovirus",
                            value == "Metaneumovirus" ~ "metaneumovirus",
@@ -441,17 +442,16 @@ epi_viral <- aislamiento %>%
                            value == "Influenza A H1 – 2009"~"Influenza AH1N1",
                            value == "Adenovirus" ~ "Adenovirus",
                            value == "Influenza A" ~ "Influenza A",
-                           value == "Influenza A H3" ~ "Influenza A",
+                           str_detect(value, regex("Influenza A H3|Influenza A-H3", ignore_case=TRUE)) == TRUE ~ "Influenza A",
                            value == "Respiratory Syncytial Virus"~ "VSR",
                            value == "Virus Sincitial Respiratorio"~ "VSR",
                            value == "Virus Syncitial Respiratorio"~ "VSR",
                            value == "Respiratory syncytial virus"~ "VSR",
-                           value == "SARS-CoV-2"~"SARS-CoV-2",
+                           value == "SARS-CoV-2" | value == "Sars Cov -2"~"SARS-CoV-2", 
                            value == "Coronavirus SARS Cov 2"~"SARS-CoV-2",
-                           value == "Influenza B"~"Influenza B",
-                           value == "Parainfluenza Virus" | value == "Parainfluenza Virus 1" | 
-                             value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | 
-                             value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>% 
+                           str_detect(value,regex("influenza B", ignore_case = TRUE)) == TRUE ~"Influenza B",
+                           str_detect(value,regex("Parainfluenza( virus( [1-4])?)?", ignore_case = TRUE)) == TRUE~"Parainfluenza Virus (1,2,3)",
+                           str_detect(value, pattern = regex("Coronavirus\\sN\\w*|Coronavirus")) == TRUE ~ "Coronavirus")) %>% 
   filter(is.na(viral)==FALSE) %>% 
   count(viral, gr_semana) %>% 
   filter(!is.na(gr_semana)) %>% 
@@ -463,13 +463,14 @@ epi_viral <- aislamiento %>%
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 aislamiento %>% 
-  filter(year(FECHA) == 2025) %>%  # filtro de año para 2025
+  filter(year(FECHA) == 2025) %>%   # filtro de año para 2025
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                            value == "enterovirus" ~ "Enterovirus",
-                           value == "enterovirus humano" ~ "Enterovirus",
+                           str_detect(value,pattern = regex("enterovirus humano", ignore_case = TRUE)) == TRUE ~ "Enterovirus",
                            value == "Rhinovirus"~ "Rhinovirus",
                            value == "Rinovirus"~ "Rhinovirus",
                            value == "Human Rhinovirus/Enterovirus"~"Rhinovirus",
+                           str_detect(value,patter = regex("Human rhinovirus", ignore_case = TRUE)) == TRUE~"Rhinovirus",
                            value == "Rinovirus/Enterovirus Humano"~"Rhinovirus",
                            value == "metaneumovirus" ~ "metaneumovirus",
                            value == "Metaneumovirus" ~ "metaneumovirus",
@@ -482,17 +483,16 @@ aislamiento %>%
                            value == "Influenza A H1 – 2009"~"Influenza AH1N1",
                            value == "Adenovirus" ~ "Adenovirus",
                            value == "Influenza A" ~ "Influenza A",
-                           value == "Influenza A H3" ~ "Influenza A",
+                           str_detect(value, regex("Influenza A H3|Influenza A-H3", ignore_case=TRUE)) == TRUE ~ "Influenza A",
                            value == "Respiratory Syncytial Virus"~ "VSR",
                            value == "Virus Sincitial Respiratorio"~ "VSR",
                            value == "Virus Syncitial Respiratorio"~ "VSR",
                            value == "Respiratory syncytial virus"~ "VSR",
-                           value == "SARS-CoV-2"~"SARS-CoV-2",
+                           value == "SARS-CoV-2" | value == "Sars Cov -2"~"SARS-CoV-2", 
                            value == "Coronavirus SARS Cov 2"~"SARS-CoV-2",
-                           value == "Influenza B"~"Influenza B",
-                           value == "Parainfluenza Virus" | value == "Parainfluenza Virus 1" | 
-                             value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | 
-                             value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>% 
+                           str_detect(value,regex("influenza B", ignore_case = TRUE)) == TRUE ~"Influenza B",
+                           str_detect(value,regex("Parainfluenza( virus( [1-4])?)?", ignore_case = TRUE)) == TRUE~"Parainfluenza Virus (1,2,3)",
+                           str_detect(value, pattern = regex("Coronavirus\\sN\\w*|Coronavirus")) == TRUE ~ "Coronavirus")) %>%  
   filter(is.na(viral)==FALSE) %>% 
   group_by(viral) %>% 
   summarise(n = n(),
@@ -531,11 +531,13 @@ aislamiento %>%
 
 ```
 
-El microorganismo con mayor proporción de incidencia hasta la fecha ha sido Enterovirus, con un 2,6% (IC95%: 1,68 - 4,04), seguido por Influenza A con un 1,2% (IC95%: 0,65 - 2,33) e Influenza B y Rhinovirus, ambos con una incidencia del 1,0% (IC95%: 0,47 - 1,97). Virus Sincitial Respiratorio (VSR) y Metaneumovirus presentaron una incidencia del 0,4% (IC95%: 0,14 - 1,20), mientras que Parainfluenza Virus (1,2,3) alcanzó el 0,3% (IC95%: 0,08 - 1,00%). Adenovirus fue el microorganismo con menor incidencia, con 0,1% (IC95%: 0,02 - 0,77).
+El microorganismo con mayor proporción de incidencia hasta la fecha ha sido Rhinovirus, con un 5,9% (IC95%: 4,45 – 7,82), seguido por Enterovirus con un 5,7% (IC95%: 4,22 – 7,52) e Influenza A con un 2,0% (IC95%: 1,20 – 3,23). Parainfluenza virus (1,2,3) alcanzó una incidencia del 1,8% (IC95%: 1,10 – 3,06), mientras que Influenza B presentó una incidencia de 1,3% (IC95%: 0,72 – 2,40) y Coronavirus, del 1,1% (IC95%: 0,53 – 2,06).
 
-Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 7-6a y 8-9a. Enterovirus mostró un incremento en su circulación, pasando de 23,5% a 35,3%, mientras que Influenza A se mantuvo estable en 5,9%. Influenza B dejó de detectarse tras haber registrado 11,8% en la semana 7-6a. Rhinovirus, por el contrario, mostró un aumento en su circulación, de 5,9% a 17,6%.
+Virus Sincitial Respiratorio (VSR) tuvo una incidencia de 0,8% (IC95%: 0,36 – 1,71), seguido por Adenovirus y Metaneumovirus, ambos con 0,7% (IC95%: 0,28 – 1,53). Finalmente, SARS-CoV-2 fue el microorganismo con menor incidencia, con 0,4% (IC95%: 0,13 – 1,15).
 
-VSR y Adenovirus dejaron de detectarse tras haber registrado 5,9% y 0,0% respectivamente en la semana 7-6a, mientras que Metaneumovirus se mantuvo sin cambios en 5,9%. Parainfluenza Virus (1,2,3) no se detectó en ninguna de las dos semanas.
+Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 11–12a y 13–14a. Enterovirus mostró un incremento importante en su circulación, pasando de 18,8% a 5,7% de proporción de incidencia. Rhinovirus, que no se detectó en la semana 11–12a (0,0%), pasó a ser el microorganismo más prevalente en la semana 13–14a con 5,9%. Influenza A también presentó un leve descenso, de 6,2% a 2,0%.
+
+Por su parte, Influenza B, VSR, Adenovirus, Metaneumovirus, Coronavirus, Parainfluenza virus (1,2,3) y SARS-CoV-2 dejaron de detectarse en la semana 11–12a, mientras que en la semana 13–14a mostraron circulación en proporciones que van del 0,4% al 1,8%.
 
 Estos cambios en la circulación viral podrían estar relacionados con la dinámica estacional de los virus respiratorios y su impacto en la demanda de atención por infecciones respiratorias agudas (IRA), según lo observado en los sistemas de vigilancia epidemiológica.
 
@@ -547,10 +549,11 @@ Las estimaciones presentadas corresponden a muestras recolectadas en pacientes c
 aislamiento %>% 
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                            value == "enterovirus" ~ "Enterovirus",
-                           value == "enterovirus humano" ~ "Enterovirus",
+                           str_detect(value,pattern = regex("enterovirus humano", ignore_case = TRUE)) == TRUE ~ "Enterovirus",
                            value == "Rhinovirus"~ "Rhinovirus",
                            value == "Rinovirus"~ "Rhinovirus",
                            value == "Human Rhinovirus/Enterovirus"~"Rhinovirus",
+                           str_detect(value,patter = regex("Human rhinovirus", ignore_case = TRUE)) == TRUE~"Rhinovirus",
                            value == "Rinovirus/Enterovirus Humano"~"Rhinovirus",
                            value == "metaneumovirus" ~ "metaneumovirus",
                            value == "Metaneumovirus" ~ "metaneumovirus",
@@ -563,17 +566,16 @@ aislamiento %>%
                            value == "Influenza A H1 – 2009"~"Influenza AH1N1",
                            value == "Adenovirus" ~ "Adenovirus",
                            value == "Influenza A" ~ "Influenza A",
-                           value == "Influenza A H3" ~ "Influenza A",
+                           str_detect(value, regex("Influenza A H3|Influenza A-H3", ignore_case=TRUE)) == TRUE ~ "Influenza A",
                            value == "Respiratory Syncytial Virus"~ "VSR",
                            value == "Virus Sincitial Respiratorio"~ "VSR",
                            value == "Virus Syncitial Respiratorio"~ "VSR",
                            value == "Respiratory syncytial virus"~ "VSR",
-                           value == "SARS-CoV-2"~"SARS-CoV-2",
+                           value == "SARS-CoV-2" | value == "Sars Cov -2"~"SARS-CoV-2", 
                            value == "Coronavirus SARS Cov 2"~"SARS-CoV-2",
-                           value == "Influenza B"~"Influenza B",
-                           value == "Parainfluenza Virus" | value == "Parainfluenza Virus 1" | 
-                             value == "Parainfluenza Virus 2" | value == "Parainfluenza Virus 3" | 
-                             value == "Parainfluenza Virus 4"| value == "Parainfluenza Virus" ~ "Parainfluenza Virus (1,2,3)")) %>%
+                           str_detect(value,regex("influenza B", ignore_case = TRUE)) == TRUE ~"Influenza B",
+                           str_detect(value,regex("Parainfluenza( virus( [1-4])?)?", ignore_case = TRUE)) == TRUE~"Parainfluenza Virus (1,2,3)",
+                           str_detect(value, pattern = regex("Coronavirus\\sN\\w*|Coronavirus")) == TRUE ~ "Coronavirus")) %>%
   replace_na(list(viral = "Otras")) %>% 
   filter(year(FECHA) == 2025) %>% # filtra AÑO
   group_by(semana, viral) %>% 
@@ -616,7 +618,7 @@ plot(canalend$semana, canalend$p25, type='l', ylim=c(0,46), xlim=c(1,52), col="g
 lines(canalend$p75, col="red",lwd=2, cex=0.7)
 lines(canalend$p50, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 11, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 13, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2025","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
