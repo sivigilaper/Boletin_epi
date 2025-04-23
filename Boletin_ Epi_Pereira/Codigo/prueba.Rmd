@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 13 - 2025} 
+  Semana 16 - 2025} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 13
+epiweek <- 16
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -179,7 +179,7 @@ lines(ira2018$casos, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,4000, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2025"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en todos los servicios vigilados
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en en servicio de hospitalización UCI
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica `r ncol(casos_sem)`**
 
@@ -199,7 +199,7 @@ lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
 legend(5,160, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2025"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (**UCI**) (figura 3), se encuentra por debajo del limite superior esperado a semana epidemiologica notificada. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
+De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (**UCI**) (figura 3), se encuentra por encima del limite superior esperado a semana epidemiologica notificada. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
 
 ```{r, echo=FALSE, warning=FALSE}
 uci_tot <- evento_995  %>% 
@@ -531,15 +531,15 @@ aislamiento %>%
 
 ```
 
-El microorganismo con mayor proporción de incidencia hasta la fecha ha sido Rhinovirus, con un 5,9% (IC95%: 4,45 – 7,82), seguido por Enterovirus con un 5,7% (IC95%: 4,22 – 7,52) e Influenza A con un 2,0% (IC95%: 1,20 – 3,23). Parainfluenza virus (1,2,3) alcanzó una incidencia del 1,8% (IC95%: 1,10 – 3,06), mientras que Influenza B presentó una incidencia de 1,3% (IC95%: 0,72 – 2,40) y Coronavirus, del 1,1% (IC95%: 0,53 – 2,06).
+El microorganismo con mayor proporción de incidencia durante el periodo analizado fue Enterovirus, con un 7,1% (IC95%: 5,54–9,12), seguido por Rhinovirus con un 6,0% (IC95%: 4,56–7,87) y Parainfluenza virus (1,2,3) con 2,6% (IC95%: 1,72–3,98). Le siguen en orden de frecuencia Influenza A con 2,0% (IC95%: 1,23–3,22), Influenza B con 1,4% (IC95%: 0,77–2,45) y Coronavirus con 1,1% (IC95%: 0,59–2,12).
 
-Virus Sincitial Respiratorio (VSR) tuvo una incidencia de 0,8% (IC95%: 0,36 – 1,71), seguido por Adenovirus y Metaneumovirus, ambos con 0,7% (IC95%: 0,28 – 1,53). Finalmente, SARS-CoV-2 fue el microorganismo con menor incidencia, con 0,4% (IC95%: 0,13 – 1,15).
+El Virus Sincitial Respiratorio (VSR) presentó una incidencia de 1,0% (IC95%: 0,51–1,96), mientras que Adenovirus y Metaneumovirus alcanzaron proporciones de 0,9% (IC95%: 0,42–1,80) y 0,8% (IC95%: 0,34–1,63), respectivamente. Finalmente, SARS-CoV-2 fue el microorganismo con menor proporción de incidencia, con 0,4% (IC95%: 0,13–1,10).
 
-Se observan variaciones en la circulación de algunos virus entre las semanas epidemiológicas 11–12a y 13–14a. Enterovirus mostró un incremento importante en su circulación, pasando de 18,8% a 5,7% de proporción de incidencia. Rhinovirus, que no se detectó en la semana 11–12a (0,0%), pasó a ser el microorganismo más prevalente en la semana 13–14a con 5,9%. Influenza A también presentó un leve descenso, de 6,2% a 2,0%.
+En cuanto a la dinámica por semanas epidemiológicas, se evidenciaron variaciones en la circulación viral entre los periodos semana 12–11a y semana 13–14a. Enterovirus se mantuvo con una alta circulación, con proporciones de 44,8% y 42,9%, respectivamente. Rhinovirus, por su parte, aumentó notablemente, pasando de 17,2% a 42,9%. También se observó un incremento en la detección de Parainfluenza virus (1,2,3) (de 10,3% a 23,8%) y de VSR (de 0,0% a 9,5%).
 
-Por su parte, Influenza B, VSR, Adenovirus, Metaneumovirus, Coronavirus, Parainfluenza virus (1,2,3) y SARS-CoV-2 dejaron de detectarse en la semana 11–12a, mientras que en la semana 13–14a mostraron circulación en proporciones que van del 0,4% al 1,8%.
+Por otro lado, virus como Influenza A, Adenovirus y Metaneumovirus mostraron una disminución en su circulación, con valores que van de 6,9% a 9,5% en la semana más reciente. Influenza B, Coronavirus y SARS-CoV-2, que no se detectaron en la semana 13–14a, sí se habían registrado en proporciones menores en la semana anterior.
 
-Estos cambios en la circulación viral podrían estar relacionados con la dinámica estacional de los virus respiratorios y su impacto en la demanda de atención por infecciones respiratorias agudas (IRA), según lo observado en los sistemas de vigilancia epidemiológica.
+Estos cambios en la circulación de virus respiratorios pueden reflejar tanto la dinámica estacional como la interacción entre virus.
 
 \newpage
 Las estimaciones presentadas corresponden a muestras recolectadas en pacientes consultantes a servicios de urgencias y hospitalizados, lo cual puede ser un reflejo de una circulación viral entre pacientes que requieren hospitalización y que dicho panel es realizado con el fin de guiar el manejo de terapia antibiotica y pueden no reflejar la circualción de microorganismos en población general no consultante.
@@ -613,12 +613,12 @@ Para las diferentes enfermedades transmitidas por vectores el reporte de casos p
 ajuste <- casos_sem2['210',(length(casos_sem2['210',])-4):(length(casos_sem2['210',])-1)]
 p <- data.frame(t = as.numeric(names(ajuste)),ajuste)
 model <- glm(ajuste~t, family = "poisson", data = p)
-valor <- predict.glm(model, newdata = data.frame(t= c(4)),type = "response") #cambiar a cada semana
+valor <- predict.glm(model, newdata = data.frame(t= c(16)),type = "response") #cambiar a cada semana
 plot(canalend$semana, canalend$p25, type='l', ylim=c(0,46), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(canalend$p75, col="red",lwd=2, cex=0.7)
 lines(canalend$p50, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 13, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 16, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2025","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
