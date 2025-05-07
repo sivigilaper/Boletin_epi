@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 17 - 2025} 
+  Semana 18 - 2025} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 17
+epiweek <- 18
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -418,7 +418,7 @@ filmarray2 %>%
   scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
 
-A periodo epidemiologico 4 de 2025 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
+A periodo epidemiologico 5 de 2025 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
 
 ```{r tabla para incidencia viral semanal, echo=FALSE, warning=FALSE}
 epi_viral <- aislamiento %>% 
@@ -531,15 +531,17 @@ aislamiento %>%
 
 ```
 
-El microorganismo con mayor proporción de incidencia durante el periodo analizado fue Enterovirus, con un 7,1% (IC95%: 5,54–9,12), seguido por Rhinovirus con un 6,0% (IC95%: 4,56–7,87) y Parainfluenza virus (1,2,3) con 2,6% (IC95%: 1,72–3,98). Le siguen en orden de frecuencia Influenza A con 2,0% (IC95%: 1,23–3,22), Influenza B con 1,4% (IC95%: 0,77–2,45) y Coronavirus con 1,1% (IC95%: 0,59–2,12).
+Durante el periodo analizado, el microorganismo con mayor proporción de incidencia fue Enterovirus, con una frecuencia de 8.2% (IC95%: 6.52–10.19), seguido por Rhinovirus con 7.2% (IC95%: 5.68–9.17) y Parainfluenza virus (1,2,3) con 3.0% (IC95%: 2.08–4.41). Otros virus detectados con menor frecuencia fueron Influenza A con 2.3% (IC95%: 1.52–3.58), Coronavirus con 1.9% (IC95%: 1.15–3.01), y Adenovirus, Influenza B y Metaneumovirus, cada uno con 1.3% (IC95%: 0.72–2.28).
 
-El Virus Sincitial Respiratorio (VSR) presentó una incidencia de 1,0% (IC95%: 0,51–1,96), mientras que Adenovirus y Metaneumovirus alcanzaron proporciones de 0,9% (IC95%: 0,42–1,80) y 0,8% (IC95%: 0,34–1,63), respectivamente. Finalmente, SARS-CoV-2 fue el microorganismo con menor proporción de incidencia, con 0,4% (IC95%: 0,13–1,10).
+El Virus Sincitial Respiratorio (VSR) presentó una proporción de 1.2% (IC95%: 0.64–2.13), mientras que SARS-CoV-2 fue el microorganismo con menor incidencia registrada, con 0.4% (IC95%: 0.12–1.02).
 
-En cuanto a la dinámica por semanas epidemiológicas, se evidenciaron variaciones en la circulación viral entre los periodos semana 12–11a y semana 13–14a. Enterovirus se mantuvo con una alta circulación, con proporciones de 44,8% y 42,9%, respectivamente. Rhinovirus, por su parte, aumentó notablemente, pasando de 17,2% a 42,9%. También se observó un incremento en la detección de Parainfluenza virus (1,2,3) (de 10,3% a 23,8%) y de VSR (de 0,0% a 9,5%).
+En cuanto a la dinámica por semanas epidemiológicas (comparando semanas 15a–16 con semanas 17–18a), se observaron cambios relevantes en la circulación viral. Enterovirus se mantuvo con una circulación elevada, pasando de 17.4% a 21.4%. Rhinovirus mostró una ligera disminución, de 26.1% a 21.4%, aunque continuó siendo uno de los virus predominantes.
 
-Por otro lado, virus como Influenza A, Adenovirus y Metaneumovirus mostraron una disminución en su circulación, con valores que van de 6,9% a 9,5% en la semana más reciente. Influenza B, Coronavirus y SARS-CoV-2, que no se detectaron en la semana 13–14a, sí se habían registrado en proporciones menores en la semana anterior.
+Se evidenció también un aumento en la circulación de Parainfluenza virus (1,2,3) (de 8.7% a 14.3%), mientras que Influenza A y Coronavirus mostraron una disminución en su frecuencia, ambas bajando de 13.0% a 7.1%. Metaneumovirus se mantuvo relativamente estable (de 8.7% a 7.1%).
 
-Estos cambios en la circulación de virus respiratorios pueden reflejar tanto la dinámica estacional como la interacción entre virus.
+Por otro lado, virus como Adenovirus, VSR, Influenza B y SARS-CoV-2 no se detectaron en la semana 17–18a, a pesar de haberse identificado en semanas previas.
+
+Estas variaciones podrían estar relacionadas con la dinámica estacional de los virus respiratorios y posibles interacciones virales que condicionan su comportamiento epidemiológico.
 
 \newpage
 Las estimaciones presentadas corresponden a muestras recolectadas en pacientes consultantes a servicios de urgencias y hospitalizados, lo cual puede ser un reflejo de una circulación viral entre pacientes que requieren hospitalización y que dicho panel es realizado con el fin de guiar el manejo de terapia antibiotica y pueden no reflejar la circualción de microorganismos en población general no consultante.
@@ -613,12 +615,12 @@ Para las diferentes enfermedades transmitidas por vectores el reporte de casos p
 ajuste <- casos_sem2['210',(length(casos_sem2['210',])-4):(length(casos_sem2['210',])-1)]
 p <- data.frame(t = as.numeric(names(ajuste)),ajuste)
 model <- glm(ajuste~t, family = "poisson", data = p)
-valor <- predict.glm(model, newdata = data.frame(t= c(16)),type = "response") #cambiar a cada semana
+valor <- predict.glm(model, newdata = data.frame(t= c(17)),type = "response") #cambiar a cada semana
 plot(canalend$semana, canalend$p25, type='l', ylim=c(0,46), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(canalend$p75, col="red",lwd=2, cex=0.7)
 lines(canalend$p50, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 17, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 18, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2025","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
