@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 19 - 2025} 
+  Semana 20 - 2025} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 19
+epiweek <- 20
   #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -396,7 +396,7 @@ df <- tibble(x = 20, y = 1, m_ips = list(m_ips))
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2025"}
 filmarray2 %>% 
-  filter(year(fec_muestra)==2025) %>% # filtra solo para 2024
+  filter(year(fec_muestra)==2025) %>% # filtra solo para 2025
   group_by(semana) %>% 
   tabyl(semana, resultado) %>% 
   adorn_percentages() %>% 
@@ -531,17 +531,15 @@ aislamiento %>%
 
 ```
 
-Durante el periodo analizado, el microorganismo con mayor proporción de incidencia fue Enterovirus, con una frecuencia de 8.2% (IC95%: 6.52–10.19), seguido por Rhinovirus con 7.2% (IC95%: 5.68–9.17) y Parainfluenza virus (1,2,3) con 3.0% (IC95%: 2.08–4.41). Otros virus detectados con menor frecuencia fueron Influenza A con 2.3% (IC95%: 1.52–3.58), Coronavirus con 1.9% (IC95%: 1.15–3.01), y Adenovirus, Influenza B y Metaneumovirus, cada uno con 1.3% (IC95%: 0.72–2.28).
+Durante el periodo analizado, el microorganismo con mayor proporción de incidencia fue Enterovirus, con una frecuencia de 8.9% (IC95%: 7.21–10.97), seguido por Rhinovirus con 8.4% (IC95%: 6.71–10.36) y Parainfluenza virus (tipos 1, 2 y 3) con 3.2% (IC95%: 2.20–4.53). Otros virus identificados con menor frecuencia fueron Influenza A (2.3%; IC95%: 1.47–3.46), Coronavirus (1.8%; IC95%: 1.11–2.91), Influenza B y Metaneumovirus, ambos con 1.5% (IC95%: 0.86–2.49). Asimismo, Adenovirus presentó una proporción de 1.4% (IC95%: 0.78–2.35), y el Virus Sincitial Respiratorio (VSR) registró 1.2% (IC95%: 0.69–2.21). SARS-CoV-2 fue el microorganismo con menor incidencia reportada, con apenas 0.3% (IC95%: 0.12–0.99).
 
-El Virus Sincitial Respiratorio (VSR) presentó una proporción de 1.2% (IC95%: 0.64–2.13), mientras que SARS-CoV-2 fue el microorganismo con menor incidencia registrada, con 0.4% (IC95%: 0.12–1.02).
+Al analizar la dinámica viral por semanas epidemiológicas (comparando los periodos de la semana 15 a la 16 con las semanas 17 a 18), se evidencian cambios relevantes en la circulación de los principales virus respiratorios. Enterovirus mostró un incremento significativo en su proporción, pasando de 18.9% a 29.2%, consolidándose como el virus predominante. Por su parte, Rhinovirus presentó una ligera disminución, de 32.4% a 29.2%, aunque se mantuvo con alta circulación.
 
-En cuanto a la dinámica por semanas epidemiológicas (comparando semanas 15a–16 con semanas 17–18a), se observaron cambios relevantes en la circulación viral. Enterovirus se mantuvo con una circulación elevada, pasando de 17.4% a 21.4%. Rhinovirus mostró una ligera disminución, de 26.1% a 21.4%, aunque continuó siendo uno de los virus predominantes.
+En cuanto al Parainfluenza virus, se observó una reducción de su frecuencia, de 10.8% a 8.3%, al igual que Influenza A y Coronavirus, que pasaron de 8.1% a 4.2%, lo cual sugiere una tendencia descendente en su actividad reciente. Metaneumovirus se mantuvo estable, con proporciones similares entre ambos periodos (8.1% a 8.3%).
 
-Se evidenció también un aumento en la circulación de Parainfluenza virus (1,2,3) (de 8.7% a 14.3%), mientras que Influenza A y Coronavirus mostraron una disminución en su frecuencia, ambas bajando de 13.0% a 7.1%. Metaneumovirus se mantuvo relativamente estable (de 8.7% a 7.1%).
+Cabe resaltar que Adenovirus no fue detectado en el periodo más reciente (semanas 17–18), a pesar de haberse identificado previamente (5.4% en semanas 15–16), al igual que SARS-CoV-2, cuya circulación fue nula en ambos periodos recientes. En contraste, Influenza B, ausente en semanas previas, se identificó en la semana 17–18 con una frecuencia de 8.3%, lo que podría indicar un inicio de circulación activa.
 
-Por otro lado, virus como Adenovirus, VSR, Influenza B y SARS-CoV-2 no se detectaron en la semana 17–18a, a pesar de haberse identificado en semanas previas.
-
-Estas variaciones podrían estar relacionadas con la dinámica estacional de los virus respiratorios y posibles interacciones virales que condicionan su comportamiento epidemiológico.
+Estos hallazgos permiten una lectura dinámica de la circulación viral respiratoria en el periodo, orientando el enfoque de vigilancia y las medidas de prevención hacia los virus con mayor actividad reciente.
 
 \newpage
 Las estimaciones presentadas corresponden a muestras recolectadas en pacientes consultantes a servicios de urgencias y hospitalizados, lo cual puede ser un reflejo de una circulación viral entre pacientes que requieren hospitalización y que dicho panel es realizado con el fin de guiar el manejo de terapia antibiotica y pueden no reflejar la circualción de microorganismos en población general no consultante.
