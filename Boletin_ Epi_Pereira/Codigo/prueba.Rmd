@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 38 - 2025} 
+  Semana 40 - 2025} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 38
+epiweek <- 40
 #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -179,7 +179,7 @@ lines(ira2018$casos, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,4000, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2025"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica una disminución en en servicio de hospitalización UCI
+En relación a la notificación segun servicio y comparando la semana notificada del actual año con la misma semana del año anterior, se identifica un aumento en el servicio de hospitalización UCI.
 
 **Tabla 1. Comportamiento de la Infección Respiratoria Aguda segun tipo de servicio, semana epidemiológica `r ncol(casos_sem)`**
 
@@ -189,14 +189,14 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general para esta semana muestra disminución continua, estando por debajo del limite superior esperado. La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general  muestra disminución continua, estando sobre el limite superior esperado. La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2025", fig.height=3.3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,250), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(ira$icsuphosp, col="red",lwd=3, cex=0.7)
 abline(52,0,52, col="yellow", lwd=3)
 lines(ira2018$c_hosp, col="black", lwd=3, cex=0.7, type = "p")
-legend(5,160, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2025"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
+legend(5,200, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "casos 2025"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
 De igual manera en el canal endémico para la notificación por IRA hospitalizados en Unidad de Cuidados Intensivos (**UCI**) (figura 3), se encuentra en disminución hacia el limite superior esperado a semana epidemiologica notificada. La proporción acumulada de hospitalizaciones por IRA en UCI alcanza un `r round(sum(evento_995$tot_irauci)/sum(evento_995$tot_h_uci)*100,digits=2)`%.
@@ -245,7 +245,7 @@ lines(ira2018$c_uci, col="black", lwd=3, cex=0.7, type = "p")
 legend(30,20, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2025"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.5)
 ```
 
-Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa de infección respiratoria es en el grupo de edad menores a un año y el grupo de 1 año y menores a 1 año de edad.
+Por grupo de edad en la hospitalizaciones por IRA, la mayor concentración de hospitalizaciones a causa de infección respiratoria esta los grupos menores a 5 años.
 
 ```{r, warning=FALSE, echo=FALSE}
 hosp_tot <- evento_995  %>% 
@@ -283,7 +283,7 @@ evento_995  %>%
   flextable::align(j = c(2:4), align = "center", part = "all")
 ```
 
-En consulta externa y urgencias se han reportado de manera acumulada `r format(sum(evento_995$tot_exturg), scientific = F)` de consultas, donde las consultas por infección respiratoria aguda ocupan el `r round(sum(evento_995$iraext)/sum(evento_995$tot_exturg)*100,digits=3)`%. 
+En consulta externa y urgencias se han reportado de manera acumulada `r format(sum(evento_995$tot_exturg), scientific = F)` de consultas, donde las consultas por infección respiratoria aguda ocupan el `r round(sum(evento_995$tot_iraext)/sum(evento_995$tot_exturg)*100,digits=3)`%. 
 
 ```{r, echo=FALSE, fig.cap="Canal endémico consulta externa y urgencias por IRA, Pereira 2025", fig.height=3.3, fig.width=7}
 plot(ira$semana, ira$icinfext, type='l', ylim=c(1,4000), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -293,7 +293,7 @@ lines(ira2018$c_ext, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2025"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se observa una concentración del mas de 10% en los de un año. El canal endemico general para IRA se encuentra bajo el umbral estacional.
+En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se muestra en la tabla. El canal endemico general para IRA se encuentra bajo el umbral estacional.
 
 ```{r, echo=FALSE, warning=FALSE}
 con_tot <- evento_995  %>% 
@@ -390,7 +390,7 @@ m_ips <- filmarray2 %>%
    mutate(`Muestras (n)`= sprintf("%.0f", `Muestras (n)`)) 
 
 
-df <- tibble(x = 47, y = 1, m_ips = list(m_ips))
+df <- tibble(x = 50, y = 1, m_ips = list(m_ips))
 ```
 
 
@@ -418,7 +418,7 @@ filmarray2 %>%
   scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
 
-A periodo epidemiologico 9 de 2025 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
+A periodo epidemiologico 10 de 2025 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
 
 ```{r tabla para incidencia viral semanal, echo=FALSE, warning=FALSE}
 epi_viral <- aislamiento %>% 
@@ -458,7 +458,12 @@ epi_viral <- aislamiento %>%
   pivot_wider(id_cols = viral, names_from = gr_semana, values_from = n, values_fill = 0)
 ```
 
-Durante el periodo analizado, el microorganismo con mayor proporción de incidencia fue Rhinovirus, con una frecuencia de 10.0% (IC95%: 8.28–12.06), seguido de Enterovirus, con 9.6% (IC95%: 7.90–11.61). En tercer lugar se encuentra el virus Parainfluenza (tipos 1, 2 y 3) con una proporción de 3.3% (IC95%: 2.35–4.62). Otros virus respiratorios identificados con menor frecuencia fueron: Metaneumovirus (2.7%; IC95%: 1.84–3.90), Influenza A (2.6%; IC95%: 1.75–3.78), Virus Sincitial Respiratorio (VSR) (2.2%; IC95%: 1.42–3.29), Adenovirus (1.8%; IC95%: 1.10–2.79), Coronavirus (1.7%; IC95%: 1.02–2.67) e Influenza B (1.4%; IC95%: 0.86–2.41). Finalmente, tanto Influenza AH1N1 como SARS-CoV-2 registraron las menores proporciones de incidencia, con 0.3% cada uno (IC95%: 0.11–0.91).
+Durante el periodo analizado, el microorganismo con mayor proporción de incidencia fue Rhinovirus, con una frecuencia de 13,2% (IC95%: 11,39–15,29), mostrando un incremento respecto al periodo previo (de 20 a 50 aislamientos).
+Le siguió Enterovirus, con 12,0% (IC95%: 10,27–14,01), también en aumento en las últimas semanas (de 20 a 30 aislamientos).
+En tercer lugar se ubicó el Virus Sincitial Respiratorio (VSR), con una proporción de 4,0% (IC95%: 3,05–5,32), evidenciando reactivación reciente tras varias semanas sin detección.
+
+Otros virus respiratorios identificados con menor frecuencia fueron: Parainfluenza (tipos 1, 2 y 3) con 3,9%, Influenza A con 2,8%, Metaneumovirus con 2,6%, Influenza AH1N1 con 2,1%, Adenovirus con 2,1%, Coronavirus con 1,6%, Influenza B con 1,3% y SARS-CoV-2 con 0,3%.
+En conjunto, estos hallazgos reflejan una transición viral con predominio de Rhinovirus y Enterovirus, acompañada de un repunte inicial del VSR.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 aislamiento %>% 
@@ -525,13 +530,14 @@ aislamiento %>%
   width(j = 1:3, width = 1)
 ```
 
-Al analizar la circulación viral entre las semanas epidemiológicas 34–35 y 32–33, se observaron variaciones relevantes en la actividad de los principales virus respiratorios. Rhinovirus incrementó su proporción de incidencia de 20,0 % a 40,0 %, manteniéndose como el agente más frecuente. Enterovirus también mostró un aumento de 13,3 % a 50,0 %, lo que sugiere un incremento sostenido de su actividad.
+Al analizar la circulación viral entre las semanas epidemiológicas 37–38 y 39–40, se observaron variaciones relevantes en la actividad de los principales virus respiratorios.
+Rhinovirus incrementó su proporción de incidencia de 20,0% a 50,0%, consolidándose como el agente más frecuente en el periodo.
+De forma similar, Enterovirus aumentó de 20,0% a 30,0%, manteniendo una tendencia ascendente sostenida.
+Por su parte, el Virus Sincitial Respiratorio (VSR) reapareció con una participación del 10,0%, tras no haberse detectado en las semanas previas, lo que indica un posible inicio de su periodo de mayor circulación.
 
 \newpage
 
-En el caso de Parainfluenza (tipos 1–3), se detectó circulación únicamente en la semana más reciente, con una proporción de 18,2 % (45 aislamientos), mientras que VSR pasó de 0,0 % a 20,0 %. De forma similar, Influenza A presentó un ascenso de 0,0 % a 13,6 %, mientras que Influenza AH1N1 disminuyó de 27,3 % a 13,6 %. Por el contrario, Metaneumovirus dejó de detectarse (0,0 %), y Adenovirus, Coronavirus, Influenza B y SARS-CoV-2 no presentaron circulación en el periodo más reciente.
-
-Estos hallazgos evidencian una dinámica viral cambiante, con incrementos significativos en la actividad de Rhinovirus, Enterovirus, Parainfluenza y VSR, y una reducción o ausencia en otros agentes respiratorios. Esta información es esencial para orientar las acciones de vigilancia virológica y reforzar las medidas de prevención, particularmente en poblaciones pediátricas y otros grupos vulnerables.
+Estos hallazgos evidencian una dinámica viral cambiante, con incrementos significativos en la actividad de Rhinovirus, VSR y Adenovirus. Esta información es esencial para orientar las acciones de vigilancia virológica y reforzar las medidas de prevención, particularmente en poblaciones pediátricas y otros grupos vulnerables.
 
 Las estimaciones presentadas corresponden a muestras recolectadas en pacientes que consultaron servicios de urgencias o que se encontraban hospitalizados. Por tanto, los hallazgos reflejan la circulación viral en una población con mayor compromiso clínico y cuyo panel diagnóstico está orientado a apoyar la toma de decisiones terapéuticas (por ejemplo, uso racional de antibióticos), lo que puede no representar de manera completa el comportamiento general en la comunidad.
 
@@ -608,7 +614,7 @@ plot(canalend$semana, canalend$p25, type='l', ylim=c(0,46), xlim=c(1,52), col="g
 lines(canalend$p75, col="red",lwd=2, cex=0.7)
 lines(canalend$p50, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 36, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 40, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2025","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
