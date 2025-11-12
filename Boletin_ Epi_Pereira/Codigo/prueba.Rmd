@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 43 - 2025} 
+  Semana 45 - 2025} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 43
+epiweek <- 45
 #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -418,7 +418,7 @@ filmarray2 %>%
   scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
 
-A periodo epidemiologico 10 de 2025 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
+A periodo epidemiologico 11 de 2025 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
 
 ```{r tabla para incidencia viral semanal, echo=FALSE, warning=FALSE}
 epi_viral <- aislamiento %>% 
@@ -458,12 +458,12 @@ epi_viral <- aislamiento %>%
   pivot_wider(id_cols = viral, names_from = gr_semana, values_from = n, values_fill = 0)
 ```
 
-Durante el periodo analizado, el microorganismo con mayor proporción de incidencia fue Rhinovirus, con una frecuencia de 13,2% (IC95%: 11,39–15,29), mostrando un incremento respecto al periodo previo (de 20 a 50 aislamientos).
-Le siguió Enterovirus, con 12,0% (IC95%: 10,27–14,01), también en aumento en las últimas semanas (de 20 a 30 aislamientos).
-En tercer lugar se ubicó el Virus Sincitial Respiratorio (VSR), con una proporción de 4,0% (IC95%: 3,05–5,32), evidenciando reactivación reciente tras varias semanas sin detección.
+Durante el periodo analizado, Rhinovirus se mantuvo como el agente más frecuente, con una proporción de 13,5% (IC95%: 11,66–15,57) y un incremento notable frente al periodo previo (de 14,3% a 60 aislamientos).
+En segundo lugar se ubicó Enterovirus, con 12,3% (IC95%: 10,55–14,31), también en ascenso reciente (de 14,3% a 60 aislamientos).
+El Virus Sincitial Respiratorio (VSR) ocupó el tercer lugar con 4,1% (IC95%: 3,09–5,36), mostrando reactivación tras varias semanas sin detección (de 0 a 20 aislamientos).
 
-Otros virus respiratorios identificados con menor frecuencia fueron: Parainfluenza (tipos 1, 2 y 3) con 3,9%, Influenza A con 2,8%, Metaneumovirus con 2,6%, Influenza AH1N1 con 2,1%, Adenovirus con 2,1%, Coronavirus con 1,6%, Influenza B con 1,3% y SARS-CoV-2 con 0,3%.
-En conjunto, estos hallazgos reflejan una transición viral con predominio de Rhinovirus y Enterovirus, acompañada de un repunte inicial del VSR.
+Entre los demás virus respiratorios se observaron proporciones menores: Parainfluenza (1–3) 4,0%, Influenza A 2,9%, Metaneumovirus 2,5%, Adenovirus 2,3%, Influenza AH1N1 2,2%, Coronavirus 1,7%, Influenza B 1,3% y SARS-CoV-2 0,3%.
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 aislamiento %>% 
@@ -530,15 +530,11 @@ aislamiento %>%
   width(j = 1:3, width = 1)
 ```
 
-Al analizar la circulación viral entre las semanas epidemiológicas 37–38 y 39–40, se observaron variaciones relevantes en la actividad de los principales virus respiratorios.
-Rhinovirus incrementó su proporción de incidencia de 20,0% a 50,0%, consolidándose como el agente más frecuente en el periodo.
-De forma similar, Enterovirus aumentó de 20,0% a 30,0%, manteniendo una tendencia ascendente sostenida.
+En conjunto, los resultados evidencian una transición viral con predominio de Rhinovirus y Enterovirus, acompañada de un repunte inicial del VSR y baja circulación de los demás virus respiratorios.
+El comportamiento observado sugiere circulación sostenida de virus respiratorios no influenza, con un posible cambio en el patrón estacional hacia mayor actividad de Rhinovirus y Enterovirus en las últimas semanas.
+
 
 \newpage
-
-Por su parte, el Virus Sincitial Respiratorio (VSR) reapareció con una participación del 10,0%, tras no haberse detectado en las semanas previas, lo que indica un posible inicio de su periodo de mayor circulación.
-
-Estos hallazgos evidencian una dinámica viral cambiante, con incrementos significativos en la actividad de Rhinovirus, VSR y Adenovirus. Esta información es esencial para orientar las acciones de vigilancia virológica y reforzar las medidas de prevención, particularmente en poblaciones pediátricas y otros grupos vulnerables.
 
 Las estimaciones presentadas corresponden a muestras recolectadas en pacientes que consultaron servicios de urgencias o que se encontraban hospitalizados. Por tanto, los hallazgos reflejan la circulación viral en una población con mayor compromiso clínico y cuyo panel diagnóstico está orientado a apoyar la toma de decisiones terapéuticas (por ejemplo, uso racional de antibióticos), lo que puede no representar de manera completa el comportamiento general en la comunidad.
 
@@ -610,12 +606,12 @@ Para las diferentes enfermedades transmitidas por vectores el reporte de casos p
 ajuste <- casos_sem2['210',(length(casos_sem2['210',])-4):(length(casos_sem2['210',])-1)]
 p <- data.frame(t = as.numeric(names(ajuste)),ajuste)
 model <- glm(ajuste~t, family = "poisson", data = p)
-valor <- predict.glm(model, newdata = data.frame(t= c(43)),type = "response") #cambiar a cada semana
+valor <- predict.glm(model, newdata = data.frame(t= c(45)),type = "response") #cambiar a cada semana
 plot(canalend$semana, canalend$p25, type='l', ylim=c(0,46), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(canalend$p75, col="red",lwd=2, cex=0.7)
 lines(canalend$p50, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 43, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 45, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2025","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
