@@ -10,8 +10,8 @@
 \contentsline {subsection}{\numberline {2.3}Tuberculosis}{7}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}VIH/SIDA}{7}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Sìfilis gestacional y congénita}{7}{subsection.2.5}%
-\contentsline {subsection}{\numberline {2.6}Cáncer}{7}{subsection.2.6}%
-\contentsline {subsection}{\numberline {2.7}Defectos congénitos}{7}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.6}Cáncer}{8}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Defectos congénitos}{8}{subsection.2.7}%
 \contentsline {subsection}{\numberline {2.8}Inmunoprevenibles}{8}{subsection.2.8}%
 \contentsline {subsection}{\numberline {2.9}Virus nuevo (COVID-19)}{8}{subsection.2.9}%
 \contentsline {section}{\numberline {3}Vigilancia de exantematica}{8}{section.3}%
