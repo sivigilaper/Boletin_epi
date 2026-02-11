@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 04 - 2026} 
+  Semana 05 - 2026} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 4
+epiweek <- 5
 #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -458,13 +458,11 @@ epi_viral <- aislamiento %>%
   pivot_wider(id_cols = viral, names_from = gr_semana, values_from = n, values_fill = 0)
 ```
 
-Durante el periodo analizado, Rhinovirus se mantuvo como el agente respiratorio predominante, con una proporción de incidencia de 14,1% (IC95%: 12,22–16,15) y un incremento marcado en la última quincena, pasando de 50 aislamientos en las semanas 46–47 a 27,3% de las muestras procesadas en las semanas 47–48, lo que confirma su transmisión activa y sostenida.
+Durante el periodo analizado, Rhinovirus se consolidó como el agente respiratorio predominante, con una proporción de incidencia de 19,1% (IC95%: 17,15–21,15). Se evidenció un incremento sostenido entre las dos semanas evaluadas, pasando de 37,5% en la semana 51–50a a 43,3% en la semana 52–53a, lo que confirma una transmisión activa y persistente en la población muestreada.
 
-En segundo lugar se ubicó Enterovirus, con 12,8% (IC95%: 11,05–14,83), mostrando un patrón similar al de Rhinovirus, con ascenso reciente (de 50 aislamientos a 27,3% en el periodo siguiente), lo que sugiere una co-circulación relevante de ambos agentes.
+En segundo lugar se ubicó Enterovirus, con una proporción de incidencia de 17,9% (IC95%: 16,05–19,95). Este agente mostró un ascenso aún más marcado, pasando de 28,1% a 46,7% entre ambos periodos semanales, lo que sugiere una co-circulación intensa con Rhinovirus y un aumento reciente de su participación relativa entre las muestras positivas.
 
-El Virus Sincitial Respiratorio (VSR) presentó una proporción de 4,0% (IC95%: 3,03–5,26), con reaparición tras un periodo sin notificaciones; pasó de 0 casos a un incremento en las semanas 47–48 (aunque sin aislamientos adicionales registrados, el valor porcentual señala reactivación en las muestras positivas del periodo).
-
-Los demás virus respiratorios mostraron proporciones menores y sin aumentos significativos.
+El Virus Sincitial Respiratorio (VSR) presentó una proporción de incidencia de 5,0% (IC95%: 4,00–6,24), con un descenso en el último periodo, al pasar de 9,4% en la semana 51–50a a 3,3% en la semana 52–53a. Este comportamiento sugiere una circulación activa pero fluctuante, sin evidencia de un crecimiento sostenido en la quincena evaluada.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 aislamiento %>% 
@@ -531,13 +529,13 @@ aislamiento %>%
   width(j = 1:3, width = 1)
 ```
 
-En conjunto, estos valores reflejan una transición virológica en la cual Rhinovirus y Enterovirus continúan dominando, con un ascenso simultáneo en las últimas dos semanas, mientras que el VSR muestra señales tempranas de reemergencia y los demás virus mantienen una circulación baja y estable.
+Entre los demás virus respiratorios, Adenovirus (4,1%; IC95%: 3,22–5,26) y Virus Parainfluenza 1–3 (4,0%; IC95%: 3,11–5,11) mostraron proporciones intermedias, con variaciones semanales moderadas. Adenovirus presentó una leve reducción (18,8% a 13,3%), mientras que Parainfluenza evidenció un aumento relativo (3,1% a 13,3%), sin alcanzar niveles predominantes.
 
 \newpage
 
-El comportamiento observado sugiere una circulación sostenida de virus respiratorios no influenza, destacando un cambio reciente hacia mayor actividad de Rhinovirus y Enterovirus, acompañado de un incipiente repunte del VSR. Este patrón puede anticipar mayor presión viral en la morbilidad respiratoria, por lo cual se recomienda mantener la vigilancia activa y el seguimiento semanal de la tendencia.
+En conjunto, el patrón observado refleja una circulación predominantemente sostenida de virus respiratorios no influenza, con Rhinovirus y Enterovirus como los principales agentes dominantes, ambos con incrementos claros en la última semana evaluada. El VSR, aunque presente, no muestra por el momento una tendencia ascendente sostenida, mientras que influenza y SARS-CoV-2 permanecen en niveles bajos.
 
-Las estimaciones presentadas corresponden a muestras recolectadas en pacientes que consultaron servicios de urgencias o que se encontraban hospitalizados. Por tanto, los hallazgos reflejan la circulación viral en una población con mayor compromiso clínico y cuyo panel diagnóstico está orientado a apoyar la toma de decisiones terapéuticas (por ejemplo, uso racional de antibióticos), lo que puede no representar de manera completa el comportamiento general en la comunidad.
+Este comportamiento sugiere un escenario de alta presión viral por agentes no influenza, lo cual puede contribuir de manera significativa a la morbilidad respiratoria ambulatoria. Se recomienda mantener la vigilancia virológica activa, con seguimiento semanal de tendencias y especial atención a la evolución de Rhinovirus, Enterovirus y VSR en las próximas semanas.
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2026"}
 aislamiento %>% 
@@ -612,7 +610,7 @@ plot(canalend$semana, canalend$p25, type='l', ylim=c(0,52), xlim=c(1,52), col="g
 lines(canalend$p75, col="red",lwd=2, cex=0.7)
 lines(canalend$p50, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 4, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 5, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2025","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
