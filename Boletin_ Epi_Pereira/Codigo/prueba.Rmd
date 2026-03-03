@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 06 - 2026} 
+  Semana 08 - 2026} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 6
+epiweek <- 8
 #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -66,7 +66,7 @@ varicela <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/2026_831_Repor
 c_viral <- readRDS("/cloud/project/Boletin_ Epi_Pereira/Datos/c_viral.rds")
 filmarray <- read_sheet("https://docs.google.com/spreadsheets/d/1W9bwlXzatRVZKkwsaVo2i91fs_RcpSAQ77Ks99ykyRc/edit#gid=1910681332", sheet = "Muestras2023") %>% 
   mutate(`N IDENTIFICACION` = as.character(`N IDENTIFICACION`))
-filmarray2 <- add_case(filmarray,c_viral)
+filmarray2 <- add_case(filmarray,c_viral) # consolidado total de filmarray PEREIRA
 saveRDS(filmarray2,"/cloud/project/Boletin_ Epi_Pereira/Datos/filmarray2.rds")
 aislamiento2 <- readRDS("/cloud/project/Boletin_ Epi_Pereira/Datos/aislamiento2.rds")
 # viruela <- read_sheet("https://docs.google.com/spreadsheets/d/1KLou92VRu8r5buo6jG9DaERPpApAo1_FnN5n3SymIS0/edit#gid=966374205", sheet = "casos") %>% 
@@ -343,7 +343,7 @@ filmarray2 <- filmarray2 %>%
 
 ############ creacion de denominador para incidencia de semana en la circulacion viral
 denom_semanal <- filmarray2 %>% 
-  filter(year(fec_muestra) == 2025) %>%
+  filter(fec_muestra >= "2026-01-04") %>%
   mutate(resultado = case_when(RESULTADO == "NONE"~"Negativo",
                                RESULTADO != "NONE"~"Positivo")) %>% 
   mutate(gr_semana = case_when(semana >= max(semana)-3 & semana <= max(semana)-2 ~ str_glue("Semana {max(semana)-2} ","- ","{max(semana)-3}"),
@@ -352,7 +352,7 @@ denom_semanal <- filmarray2 %>%
   data.frame()
 
 ############################################
-aislamientos <- filmarray %>% 
+aislamientos <- filmarray2 %>% 
   filter(RESULTADO != "NONE") %>% 
   separate(col = RESULTADO, into = c("m1","m2","m3","m4","m5","m6"), sep = ",")
 
@@ -360,16 +360,16 @@ aislamiento <- aislamientos %>%
   pivot_longer(cols = starts_with("m"), names_to = "microorganismo") %>% 
   filter(!is.na(value)) %>%
   mutate(value = str_squish(value)) %>% 
-  add_case(aislamiento2) %>% 
-  filter(year(FECHA) == 2025) %>%  # filtro de año 2024
-  mutate(semana = epiweek(FECHA)) %>%  
+  add_case(aislamiento2) %>%              # une con base de paneles idime
+  filter(fec_muestra >= "2026-01-04") %>%  # inicio año epidemiologico 2026
+  mutate(semana = epiweek(fec_muestra)) %>%  
   mutate(gr_semana = case_when(semana >= max(semana)-3 & semana <= max(semana)-2 ~ str_glue("Sem {max(semana)-2} ","- ","{max(semana)-3}"), semana >= max(semana)-1 ~ str_glue("Sem {max(semana)-1} ","- ","{max(semana)}")))
 
-write_csv(aislamiento, "/cloud/project/Boletin_ Epi_Pereira/Datos/aislamientos_2023.csv")
+write_csv(aislamiento, "/cloud/project/Boletin_ Epi_Pereira/Datos/aislamientos_2026.csv")
   
 
 positivo <- filmarray2 %>% 
-  filter(year(FECHA) == 2025) %>%    # filtro de año de muestra
+  filter(fec_muestra >= "2026-01-04") %>%    # filtro de año de muestra
   group_by(resultado) %>% 
   summarise(n=n()) %>% 
   adorn_percentages(denominator = "col") %>% 
@@ -382,7 +382,7 @@ microorg <- aislamiento %>%
   arrange(desc(n))
 
 m_ips <- filmarray2 %>% 
-                filter(year(fec_muestra) == 2025) %>% 
+                filter(fec_muestra >= "2026-01-04") %>% 
                 group_by(IPS) %>% 
                 count() %>% 
                 rename("Muestras (n)"= "n") %>% 
@@ -396,7 +396,7 @@ df <- tibble(x = 50, y = 1, m_ips = list(m_ips))
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Positividad muestras tracto respiratorio, Pereira 2026"}
 filmarray2 %>% 
-  filter(year(fec_muestra)==2025) %>% # filtra solo para 2025
+  filter(fec_muestra >= "2026-01-04") %>% # filtra solo para año epidemiologico
   group_by(semana) %>% 
   tabyl(semana, resultado) %>% 
   adorn_percentages() %>% 
@@ -418,11 +418,11 @@ filmarray2 %>%
   scale_fill_manual(values = c("#5189C1","#95CFA5"))
 ```
 
-A periodo epidemiologico 12 de 2025 `r nrow(filmarray2 %>% filter(year(FECHA)==2024)) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
+A periodo epidemiologico 2 de 2026 `r nrow(filmarray2 %>% filter(fec_muestra >= "2026-01-04")) ` muestras en el municipio, con aislamientos tanto virales como bacterianos con una positividad acumulada de `r positivo[2,2] `  y una  positividad semanal como lo muestra la **figura 5**. La incidencia de microorganismos en aislamientos virales procesado por FilmArray para el año en curso.
 
 ```{r tabla para incidencia viral semanal, echo=FALSE, warning=FALSE}
 epi_viral <- aislamiento %>% 
-  filter(year(FECHA) == 2025) %>%  # filtro de año 
+  filter(fec_muestra >= "2026-01-04") %>%  # filtro de año epidemiologico
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                            value == "enterovirus" ~ "Enterovirus",
                            str_detect(value,pattern = regex("enterovirus humano", ignore_case = TRUE)) == TRUE ~ "Enterovirus",
@@ -458,15 +458,13 @@ epi_viral <- aislamiento %>%
   pivot_wider(id_cols = viral, names_from = gr_semana, values_from = n, values_fill = 0)
 ```
 
-Durante el periodo analizado, Rhinovirus se consolidó como el agente respiratorio predominante, con una proporción de incidencia de 19,1% (IC95%: 17,15–21,15). Se evidenció un incremento sostenido entre las dos semanas evaluadas, pasando de 37,5% en la semana 51–50a a 43,3% en la semana 52–53a, lo que confirma una transmisión activa y persistente en la población muestreada.
+Durante el periodo analizado (semanas 6–5a y 7–8a), Rhinovirus se consolidó como el agente respiratorio predominante, con 52 aislamientos y una proporción de incidencia de 38,0% (IC95%: 30,26–46,31). Entre las dos semanas evaluadas se evidenció un incremento importante, pasando de 18,8% en la semana 6–5a a 39,1% en la semana 7–8a, lo que confirma una transmisión activa y en ascenso en la población muestreada.
 
-En segundo lugar se ubicó Enterovirus, con una proporción de incidencia de 17,9% (IC95%: 16,05–19,95). Este agente mostró un ascenso aún más marcado, pasando de 28,1% a 46,7% entre ambos periodos semanales, lo que sugiere una co-circulación intensa con Rhinovirus y un aumento reciente de su participación relativa entre las muestras positivas.
-
-El Virus Sincitial Respiratorio (VSR) presentó una proporción de incidencia de 5,0% (IC95%: 4,00–6,24), con un descenso en el último periodo, al pasar de 9,4% en la semana 51–50a a 3,3% en la semana 52–53a. Este comportamiento sugiere una circulación activa pero fluctuante, sin evidencia de un crecimiento sostenido en la quincena evaluada.
+En segundo lugar se ubicó Enterovirus, con 47 aislamientos y una proporción de incidencia de 34,3% (IC95%: 26,88–42,59). Este agente mostró un comportamiento similar al de Rhinovirus, con un aumento marcado de 18,8% a 39,1% entre ambos periodos semanales, lo que sugiere una co-circulación intensa y un incremento reciente de su participación relativa dentro de las muestras positivas.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 aislamiento %>% 
-  filter(year(FECHA) == 2025) %>%   # filtro de año para 2025
+  filter(fec_muestra >= "2026-01-04") %>%   # filtro de año epidemiologico
   mutate(viral = case_when(value == "Enterovirus" ~ "Enterovirus",
                            value == "enterovirus" ~ "Enterovirus",
                            str_detect(value,pattern = regex("enterovirus humano", ignore_case = TRUE)) == TRUE ~ "Enterovirus",
@@ -500,11 +498,11 @@ aislamiento %>%
   group_by(viral) %>% 
   summarise(n = n(),
             prevalencia = round(n/nrow(filmarray2 %>% 
-                                                      filter(FECHA >="2024-01-01"))*100,1),
+                                                      filter(FECHA >="2026-01-01"))*100,1),
             IC95inf = round(binom::binom.wilson(n,nrow(filmarray2 %>% 
-                                                      filter(FECHA >="2024-01-01")))[,5]*100,2),
+                                                      filter(FECHA >="2026-01-01")))[,5]*100,2),
             sup = round(binom::binom.wilson(n,nrow(filmarray2%>% 
-                                                      filter(FECHA >="2024-01-01")))[,6]*100,2)) %>% 
+                                                      filter(FECHA >="2026-01-01")))[,6]*100,2)) %>%  
   arrange(desc(n)) %>% 
   left_join(epi_viral, by = "viral") %>% 
   mutate(across(6:7, replace_na, 0)) %>% 
@@ -529,13 +527,17 @@ aislamiento %>%
   width(j = 1:3, width = 1)
 ```
 
-Entre los demás virus respiratorios, Adenovirus (4,1%; IC95%: 3,22–5,26) y Virus Parainfluenza 1–3 (4,0%; IC95%: 3,11–5,11) mostraron proporciones intermedias, con variaciones semanales moderadas. Adenovirus presentó una leve reducción (18,8% a 13,3%), mientras que Parainfluenza evidenció un aumento relativo (3,1% a 13,3%), sin alcanzar niveles predominantes.
+En contraste, Influenza A presentó 15 aislamientos, con una proporción de incidencia de 10,9% (IC95%: 6,75–17,28), mostrando un leve descenso de 12,5% a 8,7% entre semanas. Por su parte, Adenovirus (8,8%; IC95%: 5,08–14,69) mantuvo una participación intermedia, con ligera variación ascendente (12,5% a 13,0%). El Virus Parainfluenza 1–3 (6,6%; IC95%: 3,49–12,01) mostró incremento desde ausencia de casos (0,0%) en la primera semana hasta 13,0% en la segunda, indicando reaparición reciente en el periodo evaluado.
 
 \newpage
 
-En conjunto, el patrón observado refleja una circulación predominantemente sostenida de virus respiratorios no influenza, con Rhinovirus y Enterovirus como los principales agentes dominantes, ambos con incrementos claros en la última semana evaluada. El VSR, aunque presente, no muestra por el momento una tendencia ascendente sostenida, mientras que influenza y SARS-CoV-2 permanecen en niveles bajos.
+El Virus Sincitial Respiratorio (VSR) registró 9 aislamientos, con una proporción de incidencia de 6,6% (IC95%: 3,49–12,01), sin detección en ambas semanas evaluadas (0,0% en semana 6–5a y 0,0% en semana 7–8a), lo que sugiere ausencia de circulación activa en este corte temporal específico.
 
-Este comportamiento sugiere un escenario de alta presión viral por agentes no influenza, lo cual puede contribuir de manera significativa a la morbilidad respiratoria ambulatoria. Se recomienda mantener la vigilancia virológica activa, con seguimiento semanal de tendencias y especial atención a la evolución de Rhinovirus, Enterovirus y VSR en las próximas semanas.
+Otros virus como Coronavirus (5,8%; IC95%: 2,99–11,10) mostraron incremento de 6,2% a 13,0%, mientras que Influenza AH1N1 (5,8%; IC95%: 2,99–11,10) descendió de 12,5% a 0,0%. Finalmente, SARS-CoV-2 y Metaneumovirus presentaron proporciones bajas (0,7% cada uno), sin detección en las semanas analizadas.
+
+En conjunto, el patrón observado refleja una circulación predominantemente sostenida y en ascenso de virus respiratorios no influenza, con claro liderazgo de Rhinovirus y Enterovirus, ambos con incrementos importantes en la segunda semana evaluada. Influenza A mantiene una circulación moderada sin tendencia ascendente marcada, mientras que VSR no evidencia actividad en el periodo analizado.
+
+Este comportamiento sugiere un escenario de alta contribución de virus respiratorios distintos a influenza en la morbilidad respiratoria actual.
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2026"}
 aislamiento %>% 
@@ -569,7 +571,7 @@ aislamiento %>%
                            str_detect(value,regex("Parainfluenza( virus( [1-4])?)?", ignore_case = TRUE)) == TRUE~"Parainfluenza Virus (1,2,3)",
                            str_detect(value, pattern = regex("Coronavirus\\sN\\w*|Coronavirus")) == TRUE ~ "Coronavirus")) %>%
   replace_na(list(viral = "Otras")) %>% 
-  filter(year(FECHA) == 2025) %>% # filtra AÑO
+  #filter(year(FECHA) == 2025) %>% # filtra AÑO
   group_by(semana, viral) %>% 
   summarise(Aislamientos = n(), .groups = "keep") %>% 
   ggplot(aes(x = semana, y = Aislamientos,
@@ -605,12 +607,12 @@ Para las diferentes enfermedades transmitidas por vectores el reporte de casos p
 ajuste <- casos_sem2['210',(length(casos_sem2['210',])-4):(length(casos_sem2['210',])-1)]
 p <- data.frame(t = as.numeric(names(ajuste)),ajuste)
 model <- glm(ajuste~t, family = "poisson", data = p)
-valor <- predict.glm(model, newdata = data.frame(t= c(5)),type = "response") #cambiar a cada semana
+valor <- predict.glm(model, newdata = data.frame(t= c(8)),type = "response") #cambiar a cada semana
 plot(canalend$semana, canalend$p25, type='l', ylim=c(0,52), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(canalend$p75, col="red",lwd=2, cex=0.7)
 lines(canalend$p50, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 6, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 8, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2025","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
