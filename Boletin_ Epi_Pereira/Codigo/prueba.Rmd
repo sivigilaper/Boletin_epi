@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 08 - 2026} 
+  Semana 09 - 2026} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 8
+epiweek <- 9
 #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -66,6 +66,7 @@ varicela <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/2026_831_Repor
 c_viral <- readRDS("/cloud/project/Boletin_ Epi_Pereira/Datos/c_viral.rds")
 filmarray <- read_sheet("https://docs.google.com/spreadsheets/d/1W9bwlXzatRVZKkwsaVo2i91fs_RcpSAQ77Ks99ykyRc/edit#gid=1910681332", sheet = "Muestras2023") %>% 
   mutate(`N IDENTIFICACION` = as.character(`N IDENTIFICACION`))
+2
 filmarray2 <- add_case(filmarray,c_viral) # consolidado total de filmarray PEREIRA
 saveRDS(filmarray2,"/cloud/project/Boletin_ Epi_Pereira/Datos/filmarray2.rds")
 aislamiento2 <- readRDS("/cloud/project/Boletin_ Epi_Pereira/Datos/aislamiento2.rds")
@@ -189,7 +190,7 @@ En relación a la notificación segun servicio y comparando la semana notificada
 | Hospitalizacion UCI        |           `r sum(histoira[1:ncol(casos_sem),"ira_uci"])`            |            `r sum(ira2018[1:ncol(casos_sem),"c_uci"])`             |  `r round((sum(ira2018[1:ncol(casos_sem),"c_uci"])- sum(histoira[1:ncol(casos_sem),"ira_uci"]))/sum(histoira[1:ncol(casos_sem),"ira_uci"])*100,digits=1)`   |
 | Consulta Externa-Urgencias | `r format(sum(histoira[1:ncol(casos_sem),"ira_ext"]),scientific=F)` | `r format(sum(ira2018[1:ncol(casos_sem),"c_ext"]), scientific=F)`  |  `r round((sum(ira2018[1:ncol(casos_sem),"c_ext"])- sum(histoira[1:ncol(casos_sem),"ira_ext"]))/sum(histoira[1:ncol(casos_sem),"ira_ext"])*100,digits=1)`   |
 
-Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general se reporta sobre el umbral estacional. La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
+Para la semana `r ncol(casos_sem)` la hospitalización por IRA en sala general se reporta por encima del  umbral estacional, en una zona de brote. Datos que seran verificados para la proxima semana epidemiologica. La proporción acumulada de hospitalización por IRA es de  `r round(sum(evento_995$tot_irag)/sum(evento_995$tot_cau_h)*100,digits=2)`%.
 
 ```{r, echo=FALSE, fig.cap="Canal endémico Hospitalizaciones por IRA en sala general , Pereira 2026", fig.height=3.3, fig.width=7}
 plot(ira$semana, ira$icinfhosp, type='l', ylim=c(1,250), xlim=c(1,52), col="green",lwd=3, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
@@ -293,7 +294,7 @@ lines(ira2018$c_ext, col="black", lwd=3, cex=0.7, type = "p")
 legend(25,3800, c("IC Inf 95%","IC Sup 95%", "Umbral estacional", "2026"), col=c("green","red","yellow","black"), lty = c(1,1), lwd = c(2,2), bty="n", cex=0.6)
 ```
 
-En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se muestra en la tabla. El canal endemico general para IRA esta sobre  el umbral estacional.
+En cuanto a la edad, en las consultas por IRA en servicio de consulta externa y urgencias, la proporción de consultas por IRA en cada grupo de edad se muestra en la tabla. El canal endemico general para IRA esta por del umbral estacional en zona de brote.
 
 ```{r, echo=FALSE, warning=FALSE}
 con_tot <- evento_995  %>% 
@@ -612,7 +613,7 @@ plot(canalend$semana, canalend$p25, type='l', ylim=c(0,52), xlim=c(1,52), col="g
 lines(canalend$p75, col="red",lwd=2, cex=0.7)
 lines(canalend$p50, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 8, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 9, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2025","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
