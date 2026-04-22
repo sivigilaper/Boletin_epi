@@ -18,7 +18,7 @@ header-includes:
   \fancyhead[R]{
   Secretaria de Salud Pública y Seguridad Social \\ 
   Vigilancia en Salud Pública \\ 
-  Semana 14 - 2026} 
+  Semana 15 - 2026} 
 geometry: "left=2cm,right=2cm,top=3cm,bottom=3cm"
 output: bookdown::pdf_book
 classoption:
@@ -50,7 +50,7 @@ library(binom)
 library(ggpp)
 library(rio)
 library(scales)
-epiweek <- 14
+epiweek <- 15
 #lubridate::epiweek(today()-7)
 canalend <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/canalend.xlsx")
 histo <- read_excel("/cloud/project/Boletin_ Epi_Pereira/Datos/histo.xlsx")
@@ -462,7 +462,7 @@ epi_viral <- aislamiento %>%
 ```
 
 
-Durante el periodo comprendido entre las semanas epidemiológicas 11 y 13, la dinámica de circulación viral muestra un predominio marcado de los virus pertenecientes a la familia Picornaviridae. El Rhinovirus se posiciona como el principal agente etiológico con una proporción de incidencia global del 43.9% ($IC95\%: 38.17 - 49.76$), aunque se observa una tendencia a la disminución progresiva al comparar el primer intervalo (SE 11-10) donde registró un 60.0%, frente al segundo intervalo (SE 12-13) donde descendió al 52.2%. De manera similar, el Enterovirus mantuvo una presencia importante pero con una reducción moderada, pasando de una incidencia semanal del 31.4% a un 26.1%. En contraste con este descenso de los virus predominantes, se advierte un incremento epidemiológicamente relevante de Influenza A, que experimentó un repunte significativo al elevarse de un 5.7% en la medición inicial a un 17.4% en el cierre del periodo, consolidándose como la tercera causa de aislamiento con un total de 32 casos.
+Durante el periodo comprendido entre las semanas epidemiológicas 11 y 14, la dinámica de circulación viral muestra un predominio marcado de los virus pertenecientes a la familia Picornaviridae. El Rhinovirus se posiciona como el principal agente etiológico con una proporción de incidencia global del 43% ($IC95\%: 38 - 48$), aunque se observa una tendencia a la disminución progresiva al comparar el primer intervalo (SE 11-10) donde registró un 53.3%, frente al segundo intervalo (SE 12-13) donde descendió al 47.4%. De manera similar, el Enterovirus mantuvo una presencia importante pero con una reducción moderada, pasando de una incidencia semanal del 36.7% a un 31.6%. En contraste con este descenso de los virus predominantes, se advierte un incremento epidemiológicamente relevante de Influenza A, que experimentó un repunte significativo al elevarse de un 3.3% en la medición inicial a un 13.2% en el cierre del periodo, consolidándose como la tercera causa de aislamiento con un total de 33 casos.
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -530,7 +530,7 @@ aislamiento %>%
   width(j = 1:3, width = 1)
 ```
 
-Por otro lado, agentes como el Virus Sincitial Respiratorio (VSR) y la Influenza AH1N1 mostraron un comportamiento de cese en su detección hacia las semanas 12-13, cayendo ambos a una incidencia del 0.0% tras haber iniciado el periodo con un 5.7% y 2.9% respectivamente. Esta ausencia de detecciones finales contrasta con el comportamiento de otros virus emergentes o estables en la vigilancia, como el Adenovirus, que incrementó su actividad del 2.9% al 8.7%, y el Parainfluenza, que tras un silencio inicial alcanzó una incidencia del 8.7% al cierre del reporte. Finalmente, se identifica una circulación marginal y esporádica de Coronavirus (4.0%), Metaneumovirus (1.1%) y SARS-CoV-2 (0.4%), este último con un único aislamiento registrado, lo que sugiere una baja presión de este patógeno en el perfil epidemiológico actual frente al resto de virus respiratorios estacionales.
+Por otro lado, agentes como el Virus Sincitial Respiratorio (VSR) y la Influenza AH1N1 mostraron un comportamiento de cese en su detección hacia las semanas 12-13, cayendo ambos en su incidencia. Esta ausencia de detecciones finales contrasta con el comportamiento de otros virus estables en la vigilancia, como el Adenovirus, que incrementó su actividad del 3.3% al 7.9%, y el Parainfluenza, que tras un silencio inicial alcanzó una incidencia del 7.9% al cierre del reporte. Finalmente, se identifica una circulación marginal y esporádica de Coronavirus, Metaneumovirus  y SARS-CoV-2, este último con dos aislamientos registrados, lo que sugiere una baja presión de este patógeno en el perfil epidemiológico actual frente al resto de virus respiratorios estacionales.
 
 
 ```{r, echo=FALSE, warning=FALSE, fig.height=2.5 , fig.width=7, fig.cap="Circulación virus respiratorios, Pereira 2026"}
@@ -601,12 +601,12 @@ Para las diferentes enfermedades transmitidas por vectores el reporte de casos p
 ajuste <- casos_sem2['210',(length(casos_sem2['210',])-4):(length(casos_sem2['210',])-1)]
 p <- data.frame(t = as.numeric(names(ajuste)),ajuste)
 model <- glm(ajuste~t, family = "poisson", data = p)
-valor <- predict.glm(model, newdata = data.frame(t= c(14)),type = "response") #cambiar a cada semana
+valor <- predict.glm(model, newdata = data.frame(t= c(15)),type = "response") #cambiar a cada semana
 plot(canalend$semana, canalend$p25, type='l', ylim=c(0,52), xlim=c(1,52), col="green",lwd=2, xlab="Semana epidemiológica", ylab="Casos", cex=0.6, main = "")
 lines(canalend$p75, col="red",lwd=2, cex=0.7)
 lines(canalend$p50, col="yellow",lwd=2, cex=0.7)
 lines(casos_sem2['210',], col="black",lwd=2, cex=0.7, type = "p")
-lines(x = 14, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
+lines(x = 15, y = valor, col = "blue", type = "p", lwd=4, pch = 18) # ajuste por rezago en la notificaicon por media movil de los ultimas 5 semanas
 legend(1,240, c("IC inf 95%","Media", "IC sup 95%", "2025","Ajuste por rezago"), col=c("green","yellow","red","black","blue"), lty = c(1,1,1,1,1), lwd = c(1,1), bty="n", cex=0.6)
 ```
 
